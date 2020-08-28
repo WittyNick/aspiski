@@ -1,4 +1,7 @@
 package by.gomselmash.aspiski.model.dao;
 
-public class DeveloperDao {
+import by.gomselmash.aspiski.model.entity.Developer;
+
+public interface DeveloperDao extends GenericDao<Developer> {
+
 }

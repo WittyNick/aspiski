@@ -2,13 +2,13 @@ package by.gomselmash.aspiski.model.entity;
 
 import java.time.LocalDate;
 
-public class NcProgram {
-    private int ncProgramId;
+public class Program {
+    private int programId;
     private String partNumber;
     private String position;
-    private String ncProgramNumber;
+    private String programNumber;
     private Developer developer;
-    private MachineTool machineTool;
+    private Machine machine;
     private LocalDate date;
     private String info;
 }
