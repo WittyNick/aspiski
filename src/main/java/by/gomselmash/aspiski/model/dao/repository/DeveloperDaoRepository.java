@@ -1,10 +1,11 @@
-package by.gomselmash.aspiski.model.dao;
+package by.gomselmash.aspiski.model.dao.repository;
 
+import by.gomselmash.aspiski.model.dao.DeveloperDao;
 import by.gomselmash.aspiski.model.entity.Developer;
 
 import java.util.List;
 
-public class DeveloperDaoImpl implements DeveloperDao {
+public class DeveloperDaoRepository implements DeveloperDao {
     @Override
     public void create(Developer developer) {
 
