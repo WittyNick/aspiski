@@ -1,6 +1,11 @@
-package by.gomselmash.aspiski.model.entity;
+package by.gomselmash.aspiski.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class MachineType {
+    @Id
     private int machineTypeId;
     private String typeName;
 

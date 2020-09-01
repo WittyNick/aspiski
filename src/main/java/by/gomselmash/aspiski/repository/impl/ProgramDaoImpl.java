@@ -1,11 +1,11 @@
-package by.gomselmash.aspiski.model.dao.repository;
+package by.gomselmash.aspiski.repository.impl;
 
-import by.gomselmash.aspiski.model.dao.ProgramDao;
-import by.gomselmash.aspiski.model.entity.Program;
+import by.gomselmash.aspiski.model.Program;
+import by.gomselmash.aspiski.repository.ProgramDao;
 
 import java.util.List;
 
-public class ProgramDaoRepository implements ProgramDao {
+public class ProgramDaoImpl implements ProgramDao {
     @Override
     public void create(Program program) {
 

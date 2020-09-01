@@ -1,4 +1,6 @@
-package by.gomselmash.aspiski.model.dao;
+package by.gomselmash.aspiski.repository;
+
+import by.gomselmash.aspiski.model.Program;
 
 import java.util.List;
 

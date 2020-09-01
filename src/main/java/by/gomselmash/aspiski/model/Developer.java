@@ -1,6 +1,13 @@
-package by.gomselmash.aspiski.model.entity;
+package by.gomselmash.aspiski.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "developers")
 public class Developer {
+    @Id
     private int developerId;
     private String developerName;
 

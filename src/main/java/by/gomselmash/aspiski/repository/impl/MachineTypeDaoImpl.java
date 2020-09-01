@@ -1,11 +1,11 @@
-package by.gomselmash.aspiski.model.dao.repository;
+package by.gomselmash.aspiski.repository.impl;
 
-import by.gomselmash.aspiski.model.dao.MachineTypeDao;
-import by.gomselmash.aspiski.model.entity.MachineType;
+import by.gomselmash.aspiski.model.MachineType;
+import by.gomselmash.aspiski.repository.MachineTypeDao;
 
 import java.util.List;
 
-public class MachineTypeDaoRepository implements MachineTypeDao {
+public class MachineTypeDaoImpl implements MachineTypeDao {
     @Override
     public void create(MachineType machineType) {
 

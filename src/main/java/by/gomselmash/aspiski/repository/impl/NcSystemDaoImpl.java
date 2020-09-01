@@ -1,11 +1,11 @@
-package by.gomselmash.aspiski.model.dao.repository;
+package by.gomselmash.aspiski.repository.impl;
 
-import by.gomselmash.aspiski.model.dao.NcSystemDao;
-import by.gomselmash.aspiski.model.entity.NcSystem;
+import by.gomselmash.aspiski.model.NcSystem;
+import by.gomselmash.aspiski.repository.NcSystemDao;
 
 import java.util.List;
 
-public class NcSystemDaoRepository implements NcSystemDao {
+public class NcSystemDaoImpl implements NcSystemDao {
     @Override
     public void create(NcSystem ncSystem) {
 

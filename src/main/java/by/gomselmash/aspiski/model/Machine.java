@@ -1,9 +1,19 @@
-package by.gomselmash.aspiski.model.entity;
+package by.gomselmash.aspiski.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+@Entity
 public class Machine {
+    @Id
     private int machineId;
     private String machineName;
+
+    @OneToOne
     private NcSystem ncSystem;
+
+    @OneToOne
     private MachineType machineType;
 
     public int getMachineId() {
