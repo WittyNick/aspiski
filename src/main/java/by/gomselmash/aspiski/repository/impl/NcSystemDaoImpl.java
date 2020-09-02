@@ -1,28 +1,28 @@
 package by.gomselmash.aspiski.repository.impl;
 
-import by.gomselmash.aspiski.model.NcSystem;
+import by.gomselmash.aspiski.model.ControlSystem;
 import by.gomselmash.aspiski.repository.NcSystemDao;
 
 import java.util.List;
 
 public class NcSystemDaoImpl implements NcSystemDao {
     @Override
-    public void create(NcSystem ncSystem) {
+    public void create(ControlSystem controlSystem) {
 
     }
 
     @Override
-    public void update(NcSystem ncSystem) {
+    public void update(ControlSystem controlSystem) {
 
     }
 
     @Override
-    public List<NcSystem> readAll() {
+    public List<ControlSystem> readAll() {
         return null;
     }
 
     @Override
-    public NcSystem readById(int ncSystemId) {
+    public ControlSystem readById(int ncSystemId) {
         return null;
     }
 

@@ -1,27 +1,31 @@
 package by.gomselmash.aspiski.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "MACHINE_TYPES")
 public class MachineType {
     @Id
-    private int machineTypeId;
-    private String typeName;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
+    private int id;
 
-    public int getMachineTypeId() {
-        return machineTypeId;
+    @Column(name = "NAME")
+    private String name;
+
+    public int getId() {
+        return id;
     }
 
-    public void setMachineTypeId(int machineTypeId) {
-        this.machineTypeId = machineTypeId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getTypeName() {
-        return typeName;
+    public String getName() {
+        return name;
     }
 
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
+    public void setName(String name) {
+        this.name = name;
     }
 }

@@ -1,43 +1,36 @@
 package by.gomselmash.aspiski.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "MACHINES")
 public class Machine {
     @Id
-    private int machineId;
-    private String machineName;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
+    private int id;
 
-    @OneToOne
-    private NcSystem ncSystem;
+    @Column(name = "NAME")
+    private String name;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "MACHINE_TYPE_ID")
     private MachineType machineType;
 
-    public int getMachineId() {
-        return machineId;
+    public int getId() {
+        return id;
     }
 
-    public void setMachineId(int machineId) {
-        this.machineId = machineId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getMachineName() {
-        return machineName;
+    public String getName() {
+        return name;
     }
 
-    public void setMachineName(String machineName) {
-        this.machineName = machineName;
-    }
-
-    public NcSystem getNcSystem() {
-        return ncSystem;
-    }
-
-    public void setNcSystem(NcSystem ncSystem) {
-        this.ncSystem = ncSystem;
+    public void setName(String machineName) {
+        this.name = machineName;
     }
 
     public MachineType getMachineType() {

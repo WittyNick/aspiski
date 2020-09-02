@@ -3,11 +3,11 @@ package by.gomselmash.aspiski.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "DEVELOPERS")
-public class Developer {
+@Table(name = "CONTROL_SYSTEMS")
+public class ControlSystem {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
+    @GeneratedValue
     private int id;
 
     @Column(name = "NAME")
