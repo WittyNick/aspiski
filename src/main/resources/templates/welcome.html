@@ -1,28 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Welcome</title>
+    <link rel="stylesheet" href="css/main.css" />
+    <script src="js/main.js"></script>
+
+    <link rel="stylesheet" href="webjars/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <script src="webjars/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="webjars/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-    This is welcome page!
-    <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab ad atque distinctio dolores eius eum eveniet,
-        minima nihil nulla odio possimus quibusdam quod, reiciendis repellendus similique tenetur velit! Rerum!
+    <div class="container">
+        <h1>Bootstrap 4 Example</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First name</th>
+                    <th scope="col">Last name</th>
+                    <th scope="col">Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Pavel</td>
+                    <td>Krivosheev</td>
+                    <td>support@gmail.com</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <div>Facere, sunt, vel? Ab accusamus accusantium alias at autem commodi, dolor eos in natus, perspiciatis quibusdam
-        quidem recusandae rem sint unde. Dolores esse facere maiores minima nam nemo praesentium repellat!
-    </div>
-    <div>Aperiam, assumenda at ea explicabo facilis impedit incidunt iste odio sapiente. Dicta laboriosam magnam magni
-        temporibus. A adipisci aliquam dolorum est, itaque laudantium magni modi molestias nesciunt nihil numquam
-        reprehenderit.
-    </div>
-    <div>Aliquid at atque autem cupiditate distinctio dolorem ea exercitationem explicabo hic, itaque necessitatibus
-        neque non numquam obcaecati odio optio possimus repellat sapiente voluptas voluptatem. Deleniti eos in ipsam
-        omnis quos?
-    </div>
-    <div>At delectus dolore dolores eius laudantium nesciunt similique. Adipisci, architecto debitis facilis, laboriosam
-        minus molestias nisi nulla numquam pariatur porro possimus, praesentium recusandae rem sapiente sunt tenetur
-        voluptate voluptates voluptatum?
-    </div>
+
 </body>
 </html>
