@@ -1,37 +1,38 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
-    <meta charset="UTF-8">
     <title>Welcome</title>
-    <link rel="stylesheet" href="css/main.css" />
-    <script src="js/main.js"></script>
 
-    <link rel="stylesheet" href="webjars/bootstrap/4.5.2/css/bootstrap.min.css" />
-    <script src="webjars/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="webjars/jquery/3.5.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script th:src="@{webjars/jquery/3.5.1/jquery.min.js}"></script>
+    <script th:src="@{webjars/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" th:href="@{webjars/bootstrap/4.5.2/css/bootstrap.min.css}"/>
+
+    <!-- Add user css and js here after bootstrap and jquery frameworks. -->
+    <script th:src="@{js/main.js}"></script>
+    <link rel="stylesheet" th:href="@{css/main.css}"/>
 </head>
 <body>
-    <div class="container">
-        <h1>Bootstrap 4 Example</h1>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First name</th>
-                    <th scope="col">Last name</th>
-                    <th scope="col">Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Pavel</td>
-                    <td>Krivosheev</td>
-                    <td>support@gmail.com</td>
-                </tr>
-            </tbody>
-        </table>
+<!-- https://thecode.media/bootstrap/ Bootstrap grid layout simple example. -->
+<div class="container d-flex h-100">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <h2>Welcome page</h2>
+        </div>
     </div>
-
+    <div class="row align-self-center justify-content-center">
+        <div class="col-12">
+            <div role="group" class="btn-group-vertical">
+                <button class="btn btn-primary">Станок</button>
+                <button class="btn btn-primary">Цех</button>
+                <button class="btn btn-primary">Номер детали</button>
+                <button class="btn btn-primary">Система ЧПУ</button>
+                <button class="btn btn-primary">Номер программы</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
