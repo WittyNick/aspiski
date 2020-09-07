@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
     <title>Welcome</title>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -10,26 +9,34 @@
     <script th:src="@{webjars/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
     <link rel="stylesheet" th:href="@{webjars/bootstrap/4.5.2/css/bootstrap.min.css}"/>
 
-    <!-- Add user css and js here after bootstrap and jquery frameworks. -->
+    <!--/* Add user css and js here after bootstrap and jquery frameworks. */-->
     <script th:src="@{js/main.js}"></script>
     <link rel="stylesheet" th:href="@{css/main.css}"/>
+
+    <script th:src="@{js/welcome.js}"></script>
+    <link rel="stylesheet" th:href="@{css/welcome.css}"/>
 </head>
 <body>
-<!-- https://thecode.media/bootstrap/ Bootstrap grid layout simple example. -->
-<div class="container d-flex h-100">
-    <div class="row justify-content-center">
+<!--/* https://thecode.media/bootstrap/ Bootstrap grid layout simple example. */-->
+<div class="container text-center">
+    <div class="row">
         <div class="col-12">
-            <h2>Welcome page</h2>
+            <h2>Чего изволите?</h2>
         </div>
     </div>
-    <div class="row align-self-center justify-content-center">
+    <div class="row">
+        <div class="col-12 pb-5">
+            <button class="btn btn-primary" onclick="goAddProgram()">Добавить программу</button>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-12">
             <div role="group" class="btn-group-vertical">
-                <button class="btn btn-primary">Станок</button>
-                <button class="btn btn-primary">Цех</button>
-                <button class="btn btn-primary">Номер детали</button>
-                <button class="btn btn-primary">Система ЧПУ</button>
-                <button class="btn btn-primary">Номер программы</button>
+                <button class="btn btn-outline-primary">Станок</button>
+                <button class="btn btn-outline-primary">Цех</button>
+                <button class="btn btn-outline-primary">Номер детали</button>
+                <button class="btn btn-outline-primary">Система ЧПУ</button>
+                <button class="btn btn-outline-primary">Номер программы</button>
             </div>
         </div>
     </div>
