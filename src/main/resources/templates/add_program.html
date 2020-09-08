@@ -18,29 +18,76 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-4"></div>
-            <div class="col-4">
-                <form method="post" >
-                    <div class="form-group">
+            <div class="col-12 text-center">
+                <h2>Добавить программу</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-6">
+                <div class="form-row pt-4">
+                    <div class="form-group col-9">
                         <label for="partNumber">Номер детали</label>
                         <input type="text" class="form-control" id="partNumber" aria-describedby="partNumberHelp">
-                        <small id="partNumberHelp" class="form-text text-muted">Номер детали русскими символами как в чертеже</small>
+                        <small id="partNumberHelp" class="form-text text-muted">Пример: АБВ-1415-2А-0123456Б ВИ2</small>
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
+                    <div class="form-group col-3">
+                        <label for="set">Установ</label>
+                        <input type="text" class="form-control" id="set">
                     </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                    </div >
-                    <div class="text-center">
-                        <button type="button" class="btn btn-primary mt-3 mr-1" onclick="goWelcomePage()">Отмена</button>
-                        <button type="submit" class="btn btn-primary mt-3 ml-1">OK</button>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-6">
+                        <label for="machine">Станок</label>
+                        <select class="form-control" id="machine">
+                            <option>ГФ2171</option>
+                            <option>ИР-500</option>
+                        </select>
                     </div>
-                </form>
+                    <div class="form-group col-6">
+                        <label for="controlSystem">Система ЧПУ</label>
+                        <select class="form-control" id="controlSystem">
+                            <option>2C-42</option>
+                            <option>Sinumerik</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-8">
+                        <label for="programNumber">Номер программы</label>
+                        <input type="text" class="form-control" id="programNumber">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="workShop">Цех</label>
+                        <select class="form-control" id="workShop">
+                            <option>MCК-1</option>
+                            <option>MC-3</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-8">
+                        <label for="developer">Разработчик</label>
+                        <select class="form-control" id="developer">
+                            <option>КПЕ</option>
+                            <option>ГВА</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="date">Дата разработки</label>
+                        <input type="date" class="form-control" id="date">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="info">Примечание</label>
+                    <textarea class="form-control" id="info" rows="3" maxlength="255"></textarea>
+                </div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary mt-3 mr-2" onclick="goWelcomePage()">Отмена</button>
+                    <button type="button" class="btn btn-primary mt-3 ml-2">OK</button>
+                </div>
             </div>
-            <div class="col-4"></div>
+            <div class="col-3"></div>
         </div>
     </div>
 </body>

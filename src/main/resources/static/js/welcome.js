@@ -1,3 +1,3 @@
 function goAddProgram() {
-    location.href = "add-program";
+    location.href = 'add-program';
 }
