@@ -1,5 +1,7 @@
 package by.gomselmash.aspiski.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -21,6 +23,10 @@ public class Program {
     private String position;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "WORKSHOP_ID")
+    private Workshop workshop;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "DEVELOPER_ID")
     private Developer developer;
 
@@ -32,6 +38,7 @@ public class Program {
     @JoinColumn(name = "CONTROL_SYSTEM")
     private ControlSystem controlSystem;
 
+//    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "DATE")
     private LocalDate date;
 
@@ -68,6 +75,14 @@ public class Program {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public Workshop getWorkshop() {
+        return workshop;
+    }
+
+    public void setWorkshop(Workshop workshop) {
+        this.workshop = workshop;
     }
 
     public Developer getDeveloper() {

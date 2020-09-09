@@ -3,8 +3,8 @@ package by.gomselmash.aspiski.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "CONTROL_SYSTEMS")
-public class ControlSystem {
+@Table(name = "WORKSHOP")
+public class Workshop {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
