@@ -1,14 +1,12 @@
-$doc.ready(function () {
+$(document).ready(function () {
     let today = new Date().toISOString().split('T')[0];
     $('#date').val(today);
 });
 
 function goWelcomePage() {
-    location.href='/';
+    $(location).prop('href', '/');
 }
 
-
-// TODO: needs to be checked
 function getProgram() {
     return {
         'id': +$('#programId').val(),
@@ -32,9 +30,14 @@ function getProgram() {
     };
 }
 
-// TODO: change stub method
 function saveProgram() {
     let program = getProgram();
-    let jsonProgram = JSON.stringify(program);
-    alert(jsonProgram);
+    $.ajax({
+        type: 'POST',
+        url: 'programSave',
+        data: JSON.stringify(program),
+        contentType: 'application/json; charset=UTF-8',
+        success: goWelcomePage
+    });
 }
+

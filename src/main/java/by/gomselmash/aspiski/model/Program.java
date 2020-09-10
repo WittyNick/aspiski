@@ -124,4 +124,20 @@ public class Program {
     public void setInfo(String info) {
         this.info = info;
     }
+
+    @Override
+    public String toString() {
+        return "Program{" +
+                "id=" + id +
+                ", partNumber='" + partNumber + '\'' +
+                ", programNumber='" + programNumber + '\'' +
+                ", position='" + position + '\'' +
+                ", workshop=" + workshop +
+                ", developer=" + developer +
+                ", machine=" + machine +
+                ", controlSystem=" + controlSystem +
+                ", date=" + date +
+                ", info='" + info + '\'' +
+                '}';
+    }
 }

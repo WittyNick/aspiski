@@ -28,4 +28,12 @@ public class Developer {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "Developer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

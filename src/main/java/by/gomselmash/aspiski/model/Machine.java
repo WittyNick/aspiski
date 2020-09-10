@@ -40,4 +40,13 @@ public class Machine {
     public void setMachineType(MachineType machineType) {
         this.machineType = machineType;
     }
+
+    @Override
+    public String toString() {
+        return "Machine{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", machineType=" + machineType +
+                '}';
+    }
 }
