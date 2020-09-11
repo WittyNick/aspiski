@@ -3,7 +3,7 @@
 <head>
     <title>Welcome</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <script th:src="@{webjars/jquery/3.5.1/jquery.min.js}"></script>
     <script th:src="@{webjars/popper.js/1.16.0/umd/popper.min.js}"></script>
@@ -28,20 +28,22 @@
     <div class="row">
         <div class="col-12 pt-4">
             <div class="btn-group-vertical dropright" role="group">
-                <button class="btn btn-outline-primary" onclick="goAddProgram()">Добавить программа</button>
+                <button class="btn btn-outline-primary" onclick="goAddProgram()">Добавить программу</button>
                 <button class="btn btn-outline-primary" onclick="goAddMachine()">Добавить станок</button>
                 <button class="btn btn-outline-primary" onclick="goAddMachineType()">Добавить тип станка</button>
-                <button class="btn btn-outline-primary" onclick="goAddControlSystem()">Добавить система ЧПУ</button>
+                <button class="btn btn-outline-primary" onclick="goAddControlSystem()">Добавить систему ЧПУ</button>
                 <button class="btn btn-outline-primary" onclick="goAddWorkshop()">Добавить цех</button>
 
-                <button id="btnGroupDrop" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Найти</button>
-                <div class="dropdown-menu" aria-labelledby="btnGroupDrop">
-                    <a class="dropdown-item" href="#">номеру детали</a>
-                    <a class="dropdown-item" href="#">станку</a>
-                    <a class="dropdown-item" href="#">типу станка</a>
-                    <a class="dropdown-item" href="#">системе ЧПУ</a>
-                    <a class="dropdown-item" href="#">цеху</a>
-                    <a class="dropdown-item" href="#">номеру программы</a>
+                <button id="findDrop" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Поиск по
+                </button>
+                <div class="dropdown-menu" aria-labelledby="findDrop">
+                    <a class="dropdown-item" href="find-by-part">номеру детали</a>
+                    <a class="dropdown-item" href="find-by-machine">станку</a>
+                    <a class="dropdown-item" href="find-by-machine-type">типу станка</a>
+                    <a class="dropdown-item" href="find-by-control-system">системе ЧПУ</a>
+                    <a class="dropdown-item" href="find-by-workshop">цеху</a>
+                    <a class="dropdown-item" href="find-by-program">номеру программы</a>
                 </div>
             </div>
         </div>

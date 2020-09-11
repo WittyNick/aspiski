@@ -15,7 +15,7 @@ public class AddProgramController {
     }
 
     @GetMapping("/add-program")
-    public String getProgram() {
+    public String goAddProgram() {
         return "add_program";
     }
 
