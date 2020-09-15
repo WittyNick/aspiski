@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <script th:src="@{webjars/jquery/3.5.1/jquery.min.js}"></script>
-    <script src="webjars/popper.js/1.16.0/popper.min.js"></script>
+    <script th:src="@{webjars/popper.js/1.16.0/popper.min.js}"></script>
     <script th:src="@{webjars/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
     <link rel="stylesheet" th:href="@{webjars/bootstrap/4.5.2/css/bootstrap.min.css}"/>
 
@@ -18,82 +18,80 @@
 </head>
 <body>
     <div class="container">
-        <div class="row">
+        <div class="row pb-4">
             <div class="col-12 text-center">
                 <h2>Добавить программу</h2>
             </div>
         </div>
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-6">
-                <input type="hidden" id="programId" value="-1">
-                <div class="form-row pt-4">
-                    <div class="form-group col-9">
-                        <label for="partNumber">Номер детали</label>
-                        <input type="text" class="form-control" id="partNumber" aria-describedby="partNumberHelp" autofocus>
-                        <small id="partNumberHelp" class="form-text text-muted">Например: АБВ-1415-2А-0123456Б ВИ2</small>
-                    </div>
-                    <div class="form-group col-3">
-                        <label for="position">Установ</label>
-                        <input type="text" class="form-control" id="position">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-6">
-                        <label for="machine">Станок</label>
-                        <select class="form-control" id="machine">
-                            <option value="-1"></option>
-                            <option value="11">ГФ2171</option>
-                            <option value="12">ИР-500</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-6">
-                        <label for="controlSystem">Система ЧПУ</label>
-                        <select class="form-control" id="controlSystem">
-                            <option value="-1"></option>
-                            <option value="2">2C-42</option>
-                            <option value="3">Sinumerik</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-8">
-                        <label for="programNumber">Номер программы</label>
-                        <input type="text" class="form-control" id="programNumber">
-                    </div>
-                    <div class="form-group col-4">
-                        <label for="workshop">Цех</label>
-                        <select class="form-control" id="workshop">
-                            <option value="-1"></option>
-                            <option value="5">MCК-1</option>
-                            <option value="6">MC-3</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-8">
-                        <label for="developer">Разработчик</label>
-                        <select class="form-control" id="developer">
-                            <option value="-1"></option>
-                            <option value="9">КПЕ</option>
-                            <option value="10">ГВА</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-4">
-                        <label for="date">Дата разработки</label>
-                        <input type="date" class="form-control" id="date">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="info">Примечание</label>
-                    <textarea class="form-control" id="info" rows="3" maxlength="255"></textarea>
-                </div>
-                <div class="text-center">
-                    <button type="button" class="btn btn-primary mt-3 mr-2" onclick="goWelcomePage()">Отмена</button>
-                    <button type="button" class="btn btn-primary mt-3 ml-2" onclick="saveProgram()">OK</button>
-                </div>
+
+        <input type="hidden" id="programId" value="0">
+        <div class="form-row justify-content-center">
+            <div class="form-group col-4">
+                <label for="partNumber">Номер детали</label>
+                <input type="text" class="form-control" id="partNumber" aria-describedby="partNumberHelp" autofocus>
+                <small id="partNumberHelp" class="form-text text-muted">Например: АБВ-1415-2А-0123456Б ВИ2</small>
             </div>
-            <div class="col-3"></div>
+            <div class="form-group col-2">
+                <label for="position">Установ</label>
+                <input type="text" class="form-control" id="position">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-3">
+                <label for="machine">Станок</label>
+                <select class="form-control" id="machine">
+                    <option value="-1"></option>
+                    <option value="11">ГФ2171</option>
+                    <option value="12">ИР-500</option>
+                </select>
+            </div>
+            <div class="form-group col-3">
+                <label for="controlSystem">Система ЧПУ</label>
+                <select class="form-control" id="controlSystem">
+                    <option value="-1"></option>
+                    <option value="2">2C-42</option>
+                    <option value="3">Sinumerik</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-4">
+                <label for="programNumber">Номер программы</label>
+                <input type="text" class="form-control" id="programNumber">
+            </div>
+            <div class="form-group col-2">
+                <label for="workshop">Цех</label>
+                <select class="form-control" id="workshop">
+                    <option value="-1"></option>
+                    <option value="5">MCК-1</option>
+                    <option value="6">MC-3</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-4">
+                <label for="developer">Разработчик</label>
+                <select class="form-control" id="developer">
+                    <option value="-1"></option>
+                    <option value="9">КПЕ</option>
+                    <option value="10">ГВА</option>
+                </select>
+            </div>
+            <div class="form-group col-2">
+                <label for="date">Дата разработки</label>
+                <input type="date" class="form-control" id="date">
+            </div>
+        </div>
+        <div class="form-group col-6">
+            <label for="info">Примечание</label>
+            <textarea class="form-control" id="info" rows="3" maxlength="255"></textarea>
+        </div>
+
+        <div class="row justify-content-center mt-3">
+            <div class="col-auto">
+                <button type="button" class="btn btn-primary mr-2" onclick="goWelcomePage()">Отмена</button>
+                <button type="button" class="btn btn-primary ml-2" onclick="saveProgram()">OK</button>
+            </div>
         </div>
     </div>
 </body>
