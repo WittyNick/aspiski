@@ -1,7 +1,5 @@
 package by.gomselmash.aspiski.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -9,37 +7,37 @@ import java.time.LocalDate;
 @Table(name = "PROGRAMS")
 public class Program {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private int id;
 
-    @Column(name = "PART_NUMBER")
+    @Column(name = "PART_NUMBER", nullable = false)
     private String partNumber;
 
-    @Column(name = "PROGRAM_NUMBER")
+    @Column(name = "PROGRAM_NUMBER", nullable = false)
     private String programNumber;
 
-    @Column(name = "POSITION")
+    @Column(name = "POSITION", nullable = false)
     private String position;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "WORKSHOP_ID")
+    @JoinColumn(name = "WORKSHOP_ID", nullable = false)
     private Workshop workshop;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "DEVELOPER_ID")
+    @JoinColumn(name = "DEVELOPER_ID", nullable = false)
     private Developer developer;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "MACHINE_ID")
+    @JoinColumn(name = "MACHINE_ID", nullable = false)
     private Machine machine;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CONTROL_SYSTEM")
+    @JoinColumn(name = "CONTROL_SYSTEM", nullable = false)
     private ControlSystem controlSystem;
 
 //    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "DATE")
+    @Column(name = "DATE", nullable = false)
     private LocalDate date;
 
     @Column(name = "INFO")

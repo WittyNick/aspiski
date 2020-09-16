@@ -6,15 +6,15 @@ import javax.persistence.*;
 @Table(name = "MACHINES")
 public class Machine {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private int id;
 
-    @Column(name = "NAME")
+    @Column(name = "NAME", nullable = false)
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "MACHINE_TYPE_ID")
+    @JoinColumn(name = "MACHINE_TYPE_ID", nullable = false)
     private MachineType machineType;
 
     public int getId() {
