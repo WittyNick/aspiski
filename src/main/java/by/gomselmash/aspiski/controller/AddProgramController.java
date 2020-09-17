@@ -1,32 +1,27 @@
 package by.gomselmash.aspiski.controller;
 
 import by.gomselmash.aspiski.model.Program;
-import by.gomselmash.aspiski.service.AddProgramService;
+import by.gomselmash.aspiski.service.EditProgramsService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 public class AddProgramController {
-    private final AddProgramService addProgramService;
+    private final EditProgramsService editProgramsService;
 
-    public AddProgramController(AddProgramService addProgramService) {
-        this.addProgramService = addProgramService;
+    public AddProgramController(EditProgramsService editProgramsService) {
+        this.editProgramsService = editProgramsService;
     }
 
-    @GetMapping("/add-program")
-    public String goAddProgram(Model model) {
-        List<Program> programs = addProgramService.findAllPrograms();
-        model.addAttribute("programs", programs);
+    @GetMapping("/addProgram")
+    public String goAddProgram() {
         return "add_program";
     }
 
     @PostMapping("/programSave")
     @ResponseStatus(value = HttpStatus.OK)
     public void saveProgram(@RequestBody Program program) {
-        addProgramService.saveProgram(program);
+        editProgramsService.saveProgram(program);
     }
 }

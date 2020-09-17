@@ -4,10 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class AddWorkshopController {
+public class EditProgramsController {
 
-    @GetMapping("/add-workshop")
-    public String goAddWorkshop() {
-        return "add_workshop";
+    @GetMapping("/editPrograms")
+    public String goEditPrograms() {
+        return "edit_programs";
     }
 }

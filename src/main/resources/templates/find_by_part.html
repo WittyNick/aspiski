@@ -13,10 +13,54 @@
     <script th:src="@{js/main.js}"></script>
     <link rel="stylesheet" th:href="@{css/main.css}"/>
 
-    <script th:src="@{js/welcome.js}"></script>
-    <link rel="stylesheet" th:href="@{css/welcome.css}"/>
+    <script th:src="@{js/find_by_part.js}"></script>
+    <link rel="stylesheet" th:href="@{css/find_by_part.css}"/>
 </head>
 <body>
-    Это страница поиска по номеру детали.
+<div class="container">
+    <div class="row pb-4">
+        <div class="col-12 text-center">
+            <h2>Поиск по номеру детали</h2>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-auto m-2">
+            <button type="button" class="btn btn-primary" onclick="goAddProgram()">Добавить программу</button>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <table class="table table-bordered table-hover">
+                <thead class="thead-light text-center">
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Номер детали</th>
+                    <th scope="col">Номер программы</th>
+                    <th scope="col">Установ</th>
+                    <th scope="col">Цех</th>
+                    <th scope="col">Разработчик</th>
+                    <th scope="col">Станок</th>
+                    <th scope="col">Система ЧПУ</th>
+                    <th scope="col">Дата разработки</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="program : ${programs}">
+                    <td th:text="${program.id}"></td>
+                    <td th:text="${program.partNumber}"></td>
+                    <td th:text="${program.position}"></td>
+                    <td th:text="${program.workshop.name}"></td>
+                    <td th:text="${program.developer.name}"></td>
+                    <td th:text="${program.machine.name}"></td>
+                    <td th:text="${program.controlSystem.name}"></td>
+                    <td th:text="${program.date.toString()}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 </body>
 </html>

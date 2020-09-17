@@ -28,22 +28,15 @@
     <div class="row">
         <div class="col-12">
             <div class="btn-group-vertical dropright" role="group">
-                <button class="btn btn-outline-primary" onclick="goAddProgram()">Редактировать программы</button>
-                <button class="btn btn-outline-primary" onclick="goAddMachine()">Редактировать станки</button>
-                <button class="btn btn-outline-primary" onclick="goAddMachineType()">Редактировать типы станков</button>
-                <button class="btn btn-outline-primary" onclick="goAddControlSystem()">Редактировать системы ЧПУ</button>
-                <button class="btn btn-outline-primary" onclick="goAddWorkshop()">Редактировать цеха</button>
+                <button class="btn btn-primary" onclick="goFindByPart()" autofocus>Искать по НОМЕРУ ДЕТАЛИ</button>
+                <button class="btn btn-outline-primary" onclick="goFindByControlSystem()">Искать по СИСТЕМЕ ЧПУ</button>
 
                 <button id="findDrop" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Поиск по
+                    Добавить
                 </button>
                 <div class="dropdown-menu" aria-labelledby="findDrop">
-                    <a class="dropdown-item" href="find-by-part">номеру детали</a>
-                    <a class="dropdown-item" href="find-by-machine">станку</a>
-                    <a class="dropdown-item" href="find-by-machine-type">типу станка</a>
-                    <a class="dropdown-item" href="find-by-control-system">системе ЧПУ</a>
-                    <a class="dropdown-item" href="find-by-workshop">цеху</a>
-                    <a class="dropdown-item" href="find-by-program">номеру программы</a>
+                    <a class="dropdown-item" href="/editPrograms">программу</a>
+                    <a class="dropdown-item" href="/editControlSystems">систему ЧПУ</a>
                 </div>
             </div>
         </div>

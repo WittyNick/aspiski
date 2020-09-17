@@ -13,8 +13,8 @@
     <script th:src="@{js/main.js}"></script>
     <link rel="stylesheet" th:href="@{css/main.css}"/>
 
-    <script th:src="@{js/add_control_system.js}"></script>
-    <link rel="stylesheet" th:href="@{css/add_control_system.css}"/>
+    <script th:src="@{js/edit_control_systems.js}"></script>
+    <link rel="stylesheet" th:href="@{css/edit_control_systems.css}"/>
 </head>
 <body>
 <div class="container">
@@ -48,7 +48,7 @@
                     <th scope="col">Системы ЧПУ</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody  id="controlSystemsTbody">
                 <tr th:each="controlSystem : ${controlSystems}">
                     <td th:text="${controlSystem.id}"></td>
                     <td th:text="${controlSystem.name}"></td>

@@ -21,4 +21,8 @@ public class AddControlSystemService {
     public ControlSystem saveControlSystem(ControlSystem controlSystem) {
         return controlSystemRepository.save(controlSystem);
     }
+
+    public void deleteControlSystemById(int id) {
+        controlSystemRepository.deleteById(id);
+    }
 }

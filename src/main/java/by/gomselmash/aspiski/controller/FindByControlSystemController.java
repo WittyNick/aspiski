@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class FindByControlSystemController {
 
-    @GetMapping("/find-by-control-system")
+    @GetMapping("/findByControlSystem")
     public String goFindByControlSystem() {
         return "find_by_control_system";
     }

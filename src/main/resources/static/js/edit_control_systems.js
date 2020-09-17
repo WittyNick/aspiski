@@ -3,7 +3,7 @@ function goWelcomePage() {
 }
 
 function saveControlSystem() {
-    let controlSystem = getControlSystem();
+    let controlSystem = getControlSystemFromInput();
     $.ajax({
         type: 'POST',
         url: 'controlSystemSave',
@@ -15,18 +15,36 @@ function saveControlSystem() {
 }
 
 function addControlSystemToTable(controlSystem) {
-    console.log('control system: id=' + controlSystem.id + ', name=' + controlSystem.name);
+    let $row = getTableRow(controlSystem);
+    $('#controlSystemsTbody').prepend($row);
     clearEditField();
-
-
-
 }
+
+function getTableRow(controlSystem) {
+    let row = '<tr><td>' + controlSystem.id +'</td><td>' + controlSystem.name + '</td></tr>';
+    return $(row);
+}
+
+
+
 
 function editControlSystem() {
 
 }
 
 function deleteControlSystem() {
+    let controlSystem = getSelectedControlSystem();
+    $.ajax({
+        type: 'POST',
+        url: 'controlSystemDelete',
+        data: JSON.stringify(controlSystem),
+        contentType: 'application/json; charset=UTF-8',
+        dataType: 'json',
+        success: addControlSystemToTable
+    });
+}
+
+function getSelectedControlSystem() {
 
 }
 
@@ -35,7 +53,7 @@ function clearEditField() {
     $('#name').val('');
 }
 
-function getControlSystem() {
+function getControlSystemFromInput() {
     return {
         'id': +$('#controlSystemId').val(),
         'name': $('#name').val()

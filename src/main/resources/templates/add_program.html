@@ -6,13 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <script th:src="@{webjars/jquery/3.5.1/jquery.min.js}"></script>
-    <script th:src="@{webjars/popper.js/1.16.0/popper.min.js}"></script>
+    <script th:src="@{webjars/popper.js/1.16.0/umd/popper.min.js}"></script>
     <script th:src="@{webjars/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
     <link rel="stylesheet" th:href="@{webjars/bootstrap/4.5.2/css/bootstrap.min.css}"/>
 
     <script th:src="@{js/main.js}"></script>
     <link rel="stylesheet" th:href="@{css/main.css}"/>
-
     <script th:src="@{js/add_program.js}"></script>
     <link rel="stylesheet" th:href="@{css/add_program.css}"/>
 </head>
@@ -95,73 +94,6 @@
                 <button type="button" class="btn btn-primary m-2" onclick="saveProgram()">OK</button>
             </div>
         </div>
-
-
-        <div class="row justify-content-center mt-3">
-            <div class="col-8">
-                <table class="table table-bordered table-hover">
-<!--                    <thead class="thead-light text-center">-->
-                    <thead class="thead-light">
-                    <tr>
-                        <th scope="col">id</th>
-                        <th scope="col">Номер детали</th>
-                        <th scope="col">Номер программы</th>
-                        <th scope="col">Установ</th>
-
-                        <th scope="col">workshopId</th>
-                        <th scope="col">Цех</th>
-
-                        <th scope="col">developerId</th>
-                        <th scope="col">Разработчик</th>
-
-                        <th scope="col">machineId</th>
-                        <th scope="col">Станок</th>
-
-                        <th scope="col">controlSystemId</th>
-                        <th scope="col">Система ЧПУ</th>
-
-                        <th scope="col">Дата разработки</th>
-                        <th scope="col">Примечание</th>
-
-
-                        String programNumber;
-                        String position;
-                        Workshop workshop;
-                        Developer developer;
-                        Machine machine;
-                        ControlSystem controlSystem;
-                        LocalDate date;
-                        String info;
-
-
-
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="controlSystem : ${controlSystems}">
-                        <td th:text="${controlSystem.id}"></td>
-                        <td th:text="${controlSystem.name}"></td>
-
-                        id;
-                        String partNumber;
-                        String programNumber;
-                        String position;
-                        Workshop workshop;
-                        Developer developer;
-                        Machine machine;
-                        ControlSystem controlSystem;
-                        LocalDate date;
-                        String info;
-
-
-
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-
     </div>
 </body>
 </html>
