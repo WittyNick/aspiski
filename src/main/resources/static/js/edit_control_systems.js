@@ -1,3 +1,7 @@
+const SELECTED_ROW_CLASS = 'table-primary';
+
+let $selectedRow = $('<tr>');
+
 function goWelcomePage() {
     $(location).prop('href', '/');
 }
@@ -21,36 +25,53 @@ function addControlSystemToTable(controlSystem) {
 }
 
 function getTableRow(controlSystem) {
-    let row = '<tr><td>' + controlSystem.id +'</td><td>' + controlSystem.name + '</td></tr>';
-    return $(row);
+    return $(
+        '<tr onclick="handleRowClick(this)">' +
+            '<td>' + controlSystem.id + '</td>' +
+            '<td>' + controlSystem.name + '</td>' +
+        '</tr>'
+    );
+    // $row.on('click', function () { // variant how to add handler
+    //     handleRowClick(this);
+    // });
 }
-
-
-
 
 function editControlSystem() {
 
 }
 
 function deleteControlSystem() {
-    let controlSystem = getSelectedControlSystem();
+    if (isNothingSelected()) {
+        return;
+    }
     $.ajax({
         type: 'POST',
         url: 'controlSystemDelete',
-        data: JSON.stringify(controlSystem),
-        contentType: 'application/json; charset=UTF-8',
-        dataType: 'json',
-        success: addControlSystemToTable
+        data: getSelectedControlSystemId(), // (String) controlSystemId
+        contentType: 'text/plain; charset=UTF-8',
+        success: removeSelectedRow
     });
 }
 
-function getSelectedControlSystem() {
+function removeSelectedRow() {
+    $selectedRow.remove();
+    $selectedRow = $('<tr>');
+}
 
+// Returns id in String format
+function getSelectedControlSystemId() {
+    return $selectedRow.children(':first-child').html();
+}
+
+function isNothingSelected() {
+    return  $selectedRow.is(':empty');
 }
 
 function clearEditField() {
     $('#controlSystemId').val('0');
-    $('#name').val('');
+    let $name = $('#name');
+    $name.val('');
+    $name.focus();
 }
 
 function getControlSystemFromInput() {
@@ -58,4 +79,10 @@ function getControlSystemFromInput() {
         'id': +$('#controlSystemId').val(),
         'name': $('#name').val()
     };
+}
+
+function handleRowClick(row) {
+    $selectedRow.removeClass(SELECTED_ROW_CLASS);
+    $selectedRow = $(row);
+    $selectedRow.addClass(SELECTED_ROW_CLASS);
 }

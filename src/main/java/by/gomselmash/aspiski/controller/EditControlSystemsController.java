@@ -30,9 +30,11 @@ public class EditControlSystemsController {
         return addControlSystemService.saveControlSystem(controlSystem);
     }
 
+    // TODO: return boolean false when get exception or check possibility to delete
     @PostMapping("/controlSystemDelete")
     @ResponseStatus(value = HttpStatus.OK)
-    public void deleteControlSystem(@RequestBody Integer id) {
+    public void deleteControlSystem(@RequestBody String stringId) {
+        int id = Integer.parseInt(stringId);
         addControlSystemService.deleteControlSystemById(id);
     }
 }
