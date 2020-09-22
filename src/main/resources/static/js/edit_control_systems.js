@@ -1,3 +1,5 @@
+// TODO: add input validation before save
+
 const SELECTED_ROW_CLASS = 'table-primary';
 
 let $selectedRow = $('<tr>');
@@ -18,12 +20,26 @@ function saveControlSystem() {
     });
 }
 
+/*
+check if (!isNothingSelected()) { removeSelectedRow() }
+- true - when we update selected row (existing control system).
+- false - when we save new control system.
+ */
 function addControlSystemToTable(controlSystem) {
     let $row = getTableRow(controlSystem);
     $('#controlSystemsTbody').prepend($row);
     clearEditField();
+    if (!isNothingSelected()) {
+        removeSelectedRow();
+    }
 }
 
+/*
+Another way to add row click handler:
+$row.on('click', function () {
+    handleRowClick(this);
+});
+ */
 function getTableRow(controlSystem) {
     return $(
         '<tr onclick="handleRowClick(this)">' +
@@ -31,13 +47,27 @@ function getTableRow(controlSystem) {
             '<td>' + controlSystem.name + '</td>' +
         '</tr>'
     );
-    // $row.on('click', function () { // variant how to add handler
-    //     handleRowClick(this);
-    // });
 }
 
 function editControlSystem() {
+    if (isNothingSelected()) {
+        return;
+    }
+    clearEditField();
+    let controlSystem = getSelectedControlSystem();
+    setControlSystemToInput(controlSystem);
+}
 
+function setControlSystemToInput(controlSystem) {
+    $('#controlSystemId').val(controlSystem.id);
+    $('#name').val(controlSystem.name);
+}
+
+function getSelectedControlSystem() {
+    return {
+        'id': $selectedRow.children(':nth-child(1)').html(),
+        'name': $selectedRow.children(':nth-child(2)').html()
+    };
 }
 
 function deleteControlSystem() {
@@ -68,10 +98,11 @@ function isNothingSelected() {
 }
 
 function clearEditField() {
-    $('#controlSystemId').val('0');
-    let $name = $('#name');
-    $name.val('');
-    $name.focus();
+    setControlSystemToInput({
+        'id': 0,
+        'name': ''
+    });
+    $('#name').focus();
 }
 
 function getControlSystemFromInput() {
