@@ -2,16 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <title>Поиск по номеру прграммы</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script th:src="@{webjars/jquery/3.5.1/jquery.min.js}"></script>
-    <script th:src="@{webjars/popper.js/1.16.0/umd/popper.min.js}"></script>
-    <script th:src="@{webjars/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
-    <link rel="stylesheet" th:href="@{webjars/bootstrap/4.5.2/css/bootstrap.min.css}"/>
-
-    <script th:src="@{js/main.js}"></script>
-    <link rel="stylesheet" th:href="@{css/main.css}"/>
+    <th:block th:replace="welcome :: head_import"/>
 
     <script th:src="@{js/find_by_part.js}"></script>
     <link rel="stylesheet" th:href="@{css/find_by_part.css}"/>

@@ -2,17 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
     <title>Welcome</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script th:src="@{webjars/jquery/3.5.1/jquery.min.js}"></script>
-    <script th:src="@{webjars/popper.js/1.16.0/umd/popper.min.js}"></script>
-    <script th:src="@{webjars/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
-    <link rel="stylesheet" th:href="@{webjars/bootstrap/4.5.2/css/bootstrap.min.css}"/>
+    <th:block th:fragment="head_import">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!--/* Add user css and js here after bootstrap and jquery frameworks. */-->
-    <script th:src="@{js/main.js}"></script>
-    <link rel="stylesheet" th:href="@{css/main.css}"/>
+        <script th:src="@{webjars/jquery/3.5.1/jquery.min.js}"></script>
+        <script th:src="@{webjars/popper.js/1.16.0/umd/popper.min.js}"></script>
+        <script th:src="@{webjars/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
+        <link rel="stylesheet" th:href="@{webjars/bootstrap/4.5.2/css/bootstrap.min.css}"/>
+
+        <!--/* Add user css and js here after bootstrap and jquery frameworks. */-->
+        <script th:src="@{js/main.js}"></script>
+        <link rel="stylesheet" th:href="@{css/main.css}"/>
+    </th:block>
 
     <script th:src="@{js/welcome.js}"></script>
     <link rel="stylesheet" th:href="@{css/welcome.css}"/>
@@ -35,7 +38,7 @@
                     Добавить
                 </button>
                 <div class="dropdown-menu" aria-labelledby="addDrop">
-                    <a class="dropdown-item" href="/editPrograms">программу</a>
+                    <a class="dropdown-item" href="/addProgram">программу</a>
                     <a class="dropdown-item" href="/editControlSystems">систему ЧПУ</a>
                 </div>
             </div>
