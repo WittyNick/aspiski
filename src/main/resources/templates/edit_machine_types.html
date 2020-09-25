@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>Редактировать системы ЧПУ</title>
+    <title>Редактировать типы станков</title>
 
     <th:block th:replace="welcome :: head_fragment"/>
 
-    <script th:src="@{js/edit_control_systems.js}"></script>
-    <link rel="stylesheet" th:href="@{css/edit_control_systems.css}"/>
+    <script th:src="@{js/edit_machine_types.js}"></script>
+    <link rel="stylesheet" th:href="@{css/edit_machine_types.css}"/>
 </head>
 <body>
 <div class="container">
     <div class="row pb-4 text-center">
         <div class="col-12">
-            <h2>Редактировать систему ЧПУ</h2>
+            <h2>Редактировать типы станков</h2>
         </div>
     </div>
 
-    <input type="hidden" id="controlSystemId" value="0">
+    <input type="hidden" id="machineTypeId" value="0">
     <div class="form-row align-items-end justify-content-center">
         <div class="input-group col-5">
-            <input type="text" class="form-control" id="name" placeholder="Система ЧПУ" aria-label="Система ЧПУ">
+            <input type="text" class="form-control" id="name" placeholder="Тип станка" aria-label="Тип станка">
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary" type="button" onclick="clearEditField()">&#10060;</button>
             </div>
@@ -35,13 +35,13 @@
                 <thead class="thead-light text-center">
                 <tr>
                     <th scope="col">id</th>
-                    <th scope="col">Системы ЧПУ</th>
+                    <th scope="col">Тип станка</th>
                 </tr>
                 </thead>
-                <tbody  id="controlSystemsTbody">
-                <tr th:each="controlSystem : ${controlSystems}" onclick="handleRowClick(this)">
-                    <td th:text="${controlSystem.id}"></td>
-                    <td th:text="${controlSystem.name}"></td>
+                <tbody  id="machineTypesTbody">
+                <tr th:each="type : ${machineTypes}" onclick="handleRowClick(this)">
+                    <td th:text="${type.id}"></td>
+                    <td th:text="${type.name}"></td>
                 </tr>
                 </tbody>
             </table>

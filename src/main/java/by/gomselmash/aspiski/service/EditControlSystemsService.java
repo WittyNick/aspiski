@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class AddControlSystemService {
+public class EditControlSystemsService {
     private final ControlSystemRepository controlSystemRepository;
 
-    public AddControlSystemService(ControlSystemRepository controlSystemRepository) {
+    public EditControlSystemsService(ControlSystemRepository controlSystemRepository) {
         this.controlSystemRepository = controlSystemRepository;
     }
 

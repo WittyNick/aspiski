@@ -1,7 +1,7 @@
 package by.gomselmash.aspiski.controller;
 
 import by.gomselmash.aspiski.model.ControlSystem;
-import by.gomselmash.aspiski.service.AddControlSystemService;
+import by.gomselmash.aspiski.service.EditControlSystemsService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,15 +11,15 @@ import java.util.List;
 
 @Controller
 public class EditControlSystemsController {
-    private final AddControlSystemService addControlSystemService;
+    private final EditControlSystemsService editControlSystemsService;
 
-    public EditControlSystemsController(AddControlSystemService addControlSystemService) {
-        this.addControlSystemService = addControlSystemService;
+    public EditControlSystemsController(EditControlSystemsService editControlSystemsService) {
+        this.editControlSystemsService = editControlSystemsService;
     }
 
     @GetMapping("/editControlSystems")
     public String goEditControlSystems(Model model) {
-        List<ControlSystem> controlSystems = addControlSystemService.findAllControlSystems();
+        List<ControlSystem> controlSystems = editControlSystemsService.findAllControlSystems();
         model.addAttribute("controlSystems", controlSystems);
         return "edit_control_systems";
     }
@@ -27,7 +27,7 @@ public class EditControlSystemsController {
     @PostMapping("/controlSystemSave")
     @ResponseBody
     public ControlSystem saveControlSystem(@RequestBody ControlSystem controlSystem) {
-        return addControlSystemService.saveControlSystem(controlSystem);
+        return editControlSystemsService.saveControlSystem(controlSystem);
     }
 
     // TODO: return boolean false when get exception or check possibility to delete
@@ -35,6 +35,6 @@ public class EditControlSystemsController {
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteControlSystem(@RequestBody String stringId) {
         int id = Integer.parseInt(stringId);
-        addControlSystemService.deleteControlSystemById(id);
+        editControlSystemsService.deleteControlSystemById(id);
     }
 }

@@ -3,7 +3,7 @@
 <head>
     <title>Add Program</title>
 
-    <th:block th:replace="welcome :: head_import"/>
+    <th:block th:replace="welcome :: head_fragment"/>
 
     <script th:src="@{js/add_program.js}"></script>
     <link rel="stylesheet" th:href="@{css/add_program.css}"/>
@@ -34,8 +34,7 @@
                 <select class="form-control" id="machine">
                     <option value="0"></option>
                     <option th:each="machine : ${machines}"
-                            th:value="${machine.id}" th:text="${machine.name}">
-                    </option>
+                            th:value="${machine.id}" th:text="${machine.name}"></option>
                 </select>
             </div>
             <div class="form-group col-3">
@@ -43,8 +42,7 @@
                 <select class="form-control" id="controlSystem">
                     <option value="0"></option>
                     <option th:each="controlSystem : ${controlSystems}"
-                            th:value="${controlSystem.id}" th:text="${controlSystem.name}">
-                    </option>
+                            th:value="${controlSystem.id}" th:text="${controlSystem.name}"></option>
                 </select>
             </div>
         </div>
@@ -58,8 +56,7 @@
                 <select class="form-control" id="workshop">
                     <option value="0"></option>
                     <option th:each="workshop : ${workshops}"
-                            th:value="${workshop.id}" th:text="${workshop.name}">
-                    </option>
+                            th:value="${workshop.id}" th:text="${workshop.name}"></option>
                 </select>
             </div>
         </div>
@@ -69,8 +66,7 @@
                 <select class="form-control" id="developer">
                     <option value="0"></option>
                     <option th:each="developer : ${developers}"
-                            th:value="${developer.id}" th:text="${developer.name}">
-                    </option>
+                            th:value="${developer.id}" th:text="${developer.name}"></option>
                 </select>
             </div>
             <div class="form-group col-2">

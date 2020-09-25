@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Редактировать станок</title>
+
+    <th:block th:replace="welcome :: head_fragment" />
+
+    <script th:src="@{js/edit_machines.js}"></script>
+    <link rel="stylesheet" th:href="@{css/edit_machines.css}" />
+</head>
+<body>
+<div class="container">
+    <div class="row pb-4 text-center">
+        <div class="col-12">
+            <h2>Редактировать станки</h2>
+        </div>
+    </div>
+
+    <input type="hidden" id="machineId" value="0">
+    <div class="form-row align-items-end justify-content-center">
+        <div class="input-group col-4">
+            <input type="text" class="form-control" id="name" placeholder="Станок" aria-label="Станок">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" onclick="clearEditField()">&#10060;</button>
+            </div>
+        </div>
+
+        <div class="input-group col-4">
+            <select class="form-control" id="machineType">
+                <option value="0" disabled selected>Тип станка...</option>
+                <option th:each="type : ${machineTypes}"
+                        th:value="${type.id}" th:text="${type.name}"></option>
+            </select>
+        </div>
+
+        <div class="col-auto">
+            <button type="button" class="btn btn-primary" onclick="saveMachine()">Сохранить</button>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-3">
+        <div class="col-8">
+            <table class="table table-bordered table-hover">
+                <thead class="thead-light text-center">
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Станок</th>
+                    <th scope="col">machineTypeId</th>
+                    <th scope="col">Тип станка</th>
+                </tr>
+                </thead>
+                <tbody  id="controlSystemsTbody">
+                <tr th:each="machine : ${machines}" onclick="handleRowClick(this)">
+                    <td th:text="${machine.id}"></td>
+                    <td th:text="${machine.name}"></td>
+                    <td th:text="${machine.machineType.id}"></td>
+                    <td th:text="${machine.machineType.name}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <button type="button" class="btn btn-outline-primary m-2" onclick="goWelcomePage()">Назад</button>
+            <button type="button" class="btn btn-primary m-2" onclick="editMachine()">Редактировать</button>
+            <button type="button" class="btn btn-primary m-2" onclick="deleteMachine()">Удалить</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
