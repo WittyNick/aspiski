@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
-    <title>Welcome</title>
-
     <th:block th:fragment="head_fragment">
+        <title>Aspiski</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -35,13 +34,15 @@
                 <button class="btn btn-outline-primary" onclick="goFindByControlSystem()">Искать программу по СИСТЕМЕ ЧПУ</button>
 
                 <button id="addDrop" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Добавить
+                    Добавить или редактировать
                 </button>
                 <div class="dropdown-menu" aria-labelledby="addDrop">
                     <a class="dropdown-item" href="/addProgram">программу</a>
                     <a class="dropdown-item" href="/editControlSystems">систему ЧПУ</a>
                     <a class="dropdown-item" href="/editMachineTypes">тип станка</a>
                     <a class="dropdown-item" href="/editMachines">станок</a>
+                    <a class="dropdown-item" href="/editDevelopers">разработчика</a>
+                    <a class="dropdown-item" href="/editWorkshops">цех</a>
                 </div>
             </div>
         </div>

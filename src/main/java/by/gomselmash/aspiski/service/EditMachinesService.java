@@ -25,4 +25,12 @@ public class EditMachinesService {
     public List<MachineType> findAllMachineTypes() {
         return machineTypeRepository.findAll();
     }
+
+    public Machine saveMachine(Machine machine) {
+        return machineRepository.save(machine);
+    }
+
+    public void deleteMachineById(int id) {
+        machineRepository.deleteById(id);
+    }
 }

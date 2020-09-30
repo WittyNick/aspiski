@@ -1,8 +1,6 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>Поиск по номеру прграммы</title>
-
     <th:block th:replace="welcome :: head_fragment"/>
 
     <script th:src="@{js/find_by_part.js}"></script>
@@ -39,9 +37,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="program : ${programs}">
+                <tr th:each="program : ${programs}" onclick="handleRowClick(this)">
                     <td th:text="${program.id}"></td>
                     <td th:text="${program.partNumber}"></td>
+                    <td th:text="${program.programNumber}"></td>
                     <td th:text="${program.position}"></td>
                     <td th:text="${program.workshop.name}"></td>
                     <td th:text="${program.developer.name}"></td>
@@ -51,6 +50,14 @@
                 </tr>
                 </tbody>
             </table>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <button type="button" class="btn btn-outline-primary m-2" onclick="goWelcomePage()">Назад</button>
+            <button type="button" class="btn btn-primary m-2" onclick="editCNCProgram()">Редактировать</button>
+            <button type="button" class="btn btn-primary m-2" onclick="deleteCNCProgram()">Удалить</button>
         </div>
     </div>
 </div>

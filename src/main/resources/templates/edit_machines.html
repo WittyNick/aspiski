@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>Редактировать станок</title>
-
     <th:block th:replace="welcome :: head_fragment" />
 
     <script th:src="@{js/edit_machines.js}"></script>
@@ -49,7 +47,7 @@
                     <th scope="col">Тип станка</th>
                 </tr>
                 </thead>
-                <tbody  id="controlSystemsTbody">
+                <tbody  id="machinesTbody">
                 <tr th:each="machine : ${machines}" onclick="handleRowClick(this)">
                     <td th:text="${machine.id}"></td>
                     <td th:text="${machine.name}"></td>

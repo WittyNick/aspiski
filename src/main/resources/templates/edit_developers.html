@@ -3,27 +3,27 @@
 <head>
     <th:block th:replace="welcome :: head_fragment"/>
 
-    <script th:src="@{js/edit_control_systems.js}"></script>
-    <link rel="stylesheet" th:href="@{css/edit_control_systems.css}"/>
+    <script th:src="@{js/edit_developers.js}"></script>
+    <link rel="stylesheet" th:href="@{css/edit_developers.css}"/>
 </head>
 <body>
 <div class="container">
     <div class="row pb-4 text-center">
         <div class="col-12">
-            <h2>Редактировать систему ЧПУ</h2>
+            <h2>Редактировать список разработчиков</h2>
         </div>
     </div>
 
-    <input type="hidden" id="controlSystemId" value="0">
+    <input type="hidden" id="developerId" value="0">
     <div class="form-row align-items-end justify-content-center">
         <div class="input-group col-5">
-            <input type="text" class="form-control" id="name" placeholder="Система ЧПУ" aria-label="Система ЧПУ">
+            <input type="text" class="form-control" id="name" placeholder="Разработчик" aria-label="Разработчик">
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary" type="button" onclick="clearEditField()">&#10060;</button>
             </div>
         </div>
         <div class="col-auto">
-            <button type="button" class="btn btn-primary" onclick="saveControlSystem()">Сохранить</button>
+            <button type="button" class="btn btn-primary" onclick="saveWorkshop()">Сохранить</button>
         </div>
     </div>
 
@@ -33,13 +33,13 @@
                 <thead class="thead-light text-center">
                 <tr>
                     <th scope="col">id</th>
-                    <th scope="col">Системы ЧПУ</th>
+                    <th scope="col">Разработчик</th>
                 </tr>
                 </thead>
-                <tbody  id="controlSystemsTbody">
-                <tr th:each="controlSystem : ${controlSystems}" onclick="handleRowClick(this)">
-                    <td th:text="${controlSystem.id}"></td>
-                    <td th:text="${controlSystem.name}"></td>
+                <tbody  id="developersTbody">
+                <tr th:each="developer : ${developers}" onclick="handleRowClick(this)">
+                    <td th:text="${developer.id}"></td>
+                    <td th:text="${developer.name}"></td>
                 </tr>
                 </tbody>
             </table>
@@ -49,8 +49,8 @@
     <div class="row justify-content-center">
         <div class="col-auto">
             <button type="button" class="btn btn-outline-primary m-2" onclick="goWelcomePage()">Назад</button>
-            <button type="button" class="btn btn-primary m-2" onclick="editControlSystem()">Редактировать</button>
-            <button type="button" class="btn btn-primary m-2" onclick="deleteControlSystem()">Удалить</button>
+            <button type="button" class="btn btn-primary m-2" onclick="editWorkshop()">Редактировать</button>
+            <button type="button" class="btn btn-primary m-2" onclick="deleteWorkshop()">Удалить</button>
         </div>
     </div>
 </div>

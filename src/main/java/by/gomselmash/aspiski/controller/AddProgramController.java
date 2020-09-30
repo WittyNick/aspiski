@@ -23,7 +23,8 @@ public class AddProgramController {
         List<ControlSystem> controlSystems = addProgramService.findAllControlSystems();
         List<Workshop> workshops = addProgramService.findAllWorkshops();
         List<Developer> developers = addProgramService.findAllDevelopers();
-        model.addAttribute("machines", machines)
+        model
+                .addAttribute("machines", machines)
                 .addAttribute("controlSystems", controlSystems)
                 .addAttribute("workshops", workshops)
                 .addAttribute("developers", developers);
@@ -31,8 +32,10 @@ public class AddProgramController {
     }
 
     @PostMapping("/programSave")
-    @ResponseStatus(value = HttpStatus.OK)
+    @ResponseStatus(HttpStatus.OK)
     public void saveProgram(@RequestBody Program program) {
         addProgramService.saveProgram(program);
     }
+
+
 }
