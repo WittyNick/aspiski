@@ -10,6 +10,9 @@ function goWelcomePage() {
 
 function saveMachine() {
     let machine = getMachineFromInput();
+
+    console.log(machine);
+
     $.ajax({
         type: 'POST',
         url: 'machineSave',

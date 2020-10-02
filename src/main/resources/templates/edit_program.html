@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <th:block th:replace="welcome :: head_fragment"/>
+
+    <script th:src="@{js/add_edit_program.js}"></script>
+    <link rel="stylesheet" th:href="@{css/add_edit_program.css}"/>
+</head>
+<body>
+<div class="container">
+    <div class="row pb-4">
+        <div class="col-12 text-center">
+            <h2>Редактировать программу</h2>
+        </div>
+    </div>
+
+    <input type="hidden" id="programId" th:value="${program.id}">
+    <div class="form-row justify-content-center">
+        <div class="form-group col-4">
+            <label for="partNumber">Номер детали</label>
+            <input type="text" class="form-control" id="partNumber" th:value="${program.partNumber}">
+        </div>
+        <div class="form-group col-2">
+            <label for="position">Установ</label>
+            <input type="text" class="form-control" id="position" th:value="${program.position}">
+        </div>
+    </div>
+    <div class="form-row justify-content-center">
+        <div class="form-group col-3">
+            <label for="machine">Станок</label>
+            <select class="form-control" id="machine">
+                <option value="0"></option>
+                <th:block th:each="machine : ${machines}"
+                          th:with="id=${machine.id}, name=${machine.name}">
+                    <option selected
+                            th:if="${id} == ${program.machine.id}"
+                            th:value="${id}" th:text="${name}">
+                    </option>
+                    <option
+                            th:unless="${id} == ${program.machine.id}"
+                            th:value="${id}" th:text="${name}">
+                    </option>
+                </th:block>
+            </select>
+        </div>
+        <div class="form-group col-3">
+            <label for="controlSystem">Система ЧПУ</label>
+            <select class="form-control" id="controlSystem">
+                <option value="0"></option>
+                <th:block th:each="controlSystem : ${controlSystems}"
+                          th:with="id=${controlSystem.id}, name=${controlSystem.name}">
+                    <option selected
+                            th:if="${id} == ${program.controlSystem.id}"
+                            th:value="${id}" th:text="${name}">
+                    </option>
+                    <option
+                            th:unless="${id} == ${program.controlSystem.id}"
+                            th:value="${id}" th:text="${name}">
+                    </option>
+                </th:block>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row justify-content-center">
+        <div class="form-group col-4">
+            <label for="programNumber">Номер программы</label>
+            <input type="text" class="form-control" id="programNumber" th:value="${program.programNumber}">
+        </div>
+        <div class="form-group col-2">
+            <label for="workshop">Цех</label>
+            <select class="form-control" id="workshop">
+                <option value="0"></option>
+                <th:block th:each="workshop : ${workshops}"
+                          th:with="id=${workshop.id}, name=${workshop.name}">
+                    <option selected
+                            th:if="${id} == ${program.workshop.id}"
+                            th:value="${id}" th:text="${name}">
+                    </option>
+                    <option
+                            th:unless="${id} == ${program.workshop.id}"
+                            th:value="${id}" th:text="${name}">
+                    </option>
+                </th:block>
+            </select>
+        </div>
+    </div>
+    <div class="form-row justify-content-center">
+        <div class="form-group col-4">
+            <label for="developer">Разработчик</label>
+            <select class="form-control" id="developer">
+                <option value="0"></option>
+                <th:block th:each="developer : ${developers}"
+                          th:with="id=${developer.id}, name=${developer.name}">
+                    <option selected
+                            th:if="${id} == ${program.developer.id}"
+                            th:value="${id}" th:text="${name}">
+                    </option>
+                    <option
+                            th:unless="${id} == ${program.developer.id}"
+                            th:value="${id}" th:text="${name}">
+                    </option>
+                </th:block>
+            </select>
+        </div>
+        <div class="form-group col-2">
+            <label for="date">Дата разработки</label>
+            <input type="date" class="form-control" id="date" th:value="${program.date}">
+        </div>
+    </div>
+    <div class="form-row justify-content-center">
+        <div class="form-group col-6">
+            <label for="info">Примечание</label>
+            <textarea class="form-control" id="info" rows="3" maxlength="255" th:text="${program.info}"></textarea>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <button type="button" class="btn btn-primary m-2" onclick="goWelcomePage()">Отмена</button>
+            <button type="button" class="btn btn-primary m-2" onclick="updateProgram()">OK</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

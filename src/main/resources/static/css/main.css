@@ -7,3 +7,10 @@ html, body {
 img {
     max-width: 100%;
 }
+
+table {
+    cursor: default;
+}
+table ::selection {
+    background: transparent;
+}

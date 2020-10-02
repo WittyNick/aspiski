@@ -1,7 +1,7 @@
 function goFindByPart() {
-    $(location).prop('href', 'findByPart');
+    $(location).prop('href', '/findByPart');
 }
 
 function goFindByControlSystem() {
-    $(location).prop('href', 'findByControlSystem');
+    $(location).prop('href', '/findByControlSystem');
 }

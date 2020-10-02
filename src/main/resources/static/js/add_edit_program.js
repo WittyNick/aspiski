@@ -1,7 +1,7 @@
-$(document).ready(function () {
-    let today = new Date().toISOString().split('T')[0];
-    $('#date').val(today);
-});
+// $(document).ready(function() {
+//     let today = new Date().toISOString().split('T')[0]; // yyyy-MM-dd
+//     $('#date').val(today);
+// });
 
 function goWelcomePage() {
     $(location).prop('href', '/');
@@ -25,18 +25,28 @@ function getProgram() {
         'controlSystem': {
             'id': +$('#controlSystem').val()
         },
-        'date': $('#date').val(), // yyyy--MM-dd
+        'date': $('#date').val(), // yyyy-MM-dd
         'info': $('#info').val()
     };
 }
 
-function saveProgram() {
+function ajaxSave(onSuccess) {
     let program = getProgram();
     $.ajax({
         type: 'POST',
         url: 'programSave',
         data: JSON.stringify(program),
         contentType: 'application/json; charset=UTF-8',
-        success: goWelcomePage
+        success: onSuccess
+    });
+}
+
+function saveProgram() {
+    ajaxSave(goWelcomePage);
+}
+
+function updateProgram() {
+    ajaxSave(function() {
+        $(location).prop('href', '/findByPart');
     });
 }

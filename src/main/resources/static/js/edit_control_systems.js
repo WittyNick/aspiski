@@ -88,7 +88,6 @@ function removeSelectedRow() {
     $selectedRow = $('<tr>');
 }
 
-// Returns id in String format
 function getSelectedControlSystemId() {
     return $selectedRow.children(':first-child').html();
 }

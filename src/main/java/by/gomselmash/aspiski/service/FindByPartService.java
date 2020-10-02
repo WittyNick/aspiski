@@ -8,13 +8,17 @@ import java.util.List;
 
 @Service
 public class FindByPartService {
-    private final ProgramRepository programRepository;
+    private final ProgramRepository repository;
 
-    public FindByPartService(ProgramRepository programRepository) {
-        this.programRepository = programRepository;
+    public FindByPartService(ProgramRepository repository) {
+        this.repository = repository;
     }
 
     public List<Program> findAllPrograms() {
-        return programRepository.findAll();
+        return repository.findAll();
+    }
+
+    public void deleteProgramById(int id) {
+        repository.deleteById(id);
     }
 }

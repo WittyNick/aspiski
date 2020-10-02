@@ -4,7 +4,7 @@
     <th:block th:replace="welcome :: head_fragment" />
 
     <script th:src="@{js/edit_machines.js}"></script>
-    <link rel="stylesheet" th:href="@{css/edit_machines.css}" />
+    <link th:rel="stylesheet" th:href="@{css/edit_machines.css}" />
 </head>
 <body>
 <div class="container">
@@ -38,7 +38,7 @@
 
     <div class="row justify-content-center mt-3">
         <div class="col-8">
-            <table class="table table-bordered table-hover">
+            <table class="table table-bordered table-hover" id="machinesTable">
                 <thead class="thead-light text-center">
                 <tr>
                     <th scope="col">id</th>

@@ -3,8 +3,8 @@
 <head>
     <th:block th:replace="welcome :: head_fragment"/>
 
-    <script th:src="@{js/add_program.js}"></script>
-    <link rel="stylesheet" th:href="@{css/add_program.css}"/>
+    <script th:src="@{js/add_edit_program.js}"></script>
+    <link th:rel="stylesheet" th:href="@{css/add_edit_program.css}"/>
 </head>
 <body>
     <div class="container">
@@ -69,7 +69,7 @@
             </div>
             <div class="form-group col-2">
                 <label for="date">Дата разработки</label>
-                <input type="date" class="form-control" id="date">
+                <input type="date" class="form-control" id="date" th:value="${currentDate}">
             </div>
         </div>
         <div class="form-row justify-content-center">
