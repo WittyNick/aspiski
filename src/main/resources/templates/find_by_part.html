@@ -8,44 +8,61 @@
 </head>
 <body>
 <div class="container">
-    <div class="row pb-4">
+    <div class="row">
         <div class="col-12 text-center">
             <h2>Поиск по номеру детали</h2>
         </div>
     </div>
 
-    <div class="row justify-content-center">
-        <div class="col-auto m-2">
+    <div class="row justify-content-center mt-3">
+        <div class="col-auto">
             <button type="button" class="btn btn-primary" onclick="goAddProgram()">Добавить программу</button>
         </div>
     </div>
 
-    <div class="row justify-content-center">
+    <div class="form-row align-items-center justify-content-center mt-3">
+        <label for="filter" class="col-auto col-form-label">Найти:</label>
+        <div class="col-4 input-group">
+            <input type="text" class="form-control" id="filter" oninput="filterTable()" autofocus>
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" onclick="clearEditField()">&#10060;</button>
+            </div>
+        </div>
+
         <div class="col-auto">
-            <table class="table table-bordered table-hover">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="orderCheckbox" oninput="handleCheckbox()">
+                <label for="orderCheckbox" class="form-check-label">Содержит</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-3">
+        <div class="col-12">
+            <table class="table table-bordered table-hover" id="programsTable">
                 <thead class="thead-light text-center">
                 <tr>
                     <th scope="col">id</th>
-                    <th scope="col">Номер детали</th>
-                    <th scope="col">Номер программы</th>
+                    <th scope="col">Деталь</th>
                     <th scope="col">Установ</th>
-                    <th scope="col">Цех</th>
-                    <th scope="col">Разработчик</th>
                     <th scope="col">Станок</th>
                     <th scope="col">Система ЧПУ</th>
-                    <th scope="col">Дата разработки</th>
+                    <th scope="col">Программа</th>
+                    <th scope="col">Цех</th>
+                    <th scope="col">Разработал</th>
+                    <th scope="col">Дата</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="program : ${programs}" onclick="handleRowClick(this)">
                     <td th:text="${program.id}"></td>
                     <td th:text="${program.partNumber}"></td>
-                    <td th:text="${program.programNumber}"></td>
                     <td th:text="${program.position}"></td>
-                    <td th:text="${program.workshop.name}"></td>
-                    <td th:text="${program.developer.name}"></td>
                     <td th:text="${program.machine.name}"></td>
                     <td th:text="${program.controlSystem.name}"></td>
+                    <td th:text="${program.programNumber}"></td>
+                    <td th:text="${program.workshop.name}"></td>
+                    <td th:text="${program.developer.name}"></td>
                     <td th:text="${program.date.toString()}"></td>
                 </tr>
                 </tbody>

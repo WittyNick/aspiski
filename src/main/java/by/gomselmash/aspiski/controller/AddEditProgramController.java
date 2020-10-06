@@ -4,10 +4,14 @@ import by.gomselmash.aspiski.model.*;
 import by.gomselmash.aspiski.service.AddEditProgramService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Controller
 public class AddEditProgramController {
@@ -18,23 +22,24 @@ public class AddEditProgramController {
     }
 
     @GetMapping("/addProgram")
-    public ModelAndView goAddProgram() {
+    public String goAddProgram(Model model) {
         String currentDate = service.currentDate();
-        ModelAndView modelAndView = getModelAndViewWithAttributes("add_program");
-        modelAndView.addObject("currentDate", currentDate);
-        return modelAndView;
+        model
+                .addAllAttributes(getAttributeMap())
+                .addAttribute("currentDate", currentDate);
+        return "add_program";
     }
 
     @PostMapping("/editProgram")
-    public ModelAndView goEditProgram(@RequestParam String programId) {
-        int id = Integer.parseInt(programId);
-        Program program = service.findProgramById(id); // when program wasn't found returns new Program()
-        if (program.getId() == 0) {
-            return new ModelAndView("redirect:/findByPart");
+    public String goEditProgram(@RequestParam String programId, Model model) {
+        Optional<Program> optionalProgram = service.findProgramById(programId);
+        if (optionalProgram.isPresent()) {
+            model
+                    .addAllAttributes(getAttributeMap())
+                    .addAttribute("program", optionalProgram.get());
+            return "edit_program";
         }
-        ModelAndView modelAndView = getModelAndViewWithAttributes("edit_program");
-        modelAndView.addObject("program", program);
-        return modelAndView;
+        return "redirect:/findByPart";
     }
 
     @PostMapping("/programSave")
@@ -43,17 +48,16 @@ public class AddEditProgramController {
         service.saveProgram(program);
     }
 
-    private ModelAndView getModelAndViewWithAttributes(String viewName) {
+    private Map<String, Object> getAttributeMap() {
         List<Machine> machines = service.findAllMachines();
         List<ControlSystem> controlSystems = service.findAllControlSystems();
         List<Workshop> workshops = service.findAllWorkshops();
         List<Developer> developers = service.findAllDevelopers();
-        ModelAndView modelAndView = new ModelAndView(viewName);
-        modelAndView
-                .addObject("machines", machines)
-                .addObject("controlSystems", controlSystems)
-                .addObject("workshops", workshops)
-                .addObject("developers", developers);
-        return modelAndView;
+        Map<String, Object> map = new HashMap<>();
+        map.put("machines", machines);
+        map.put("controlSystems", controlSystems);
+        map.put("workshops", workshops);
+        map.put("developers", developers);
+        return map;
     }
 }

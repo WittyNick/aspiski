@@ -14,3 +14,7 @@ table {
 table ::selection {
     background: transparent;
 }
+
+.hidden {
+    display: none;
+}

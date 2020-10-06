@@ -47,6 +47,44 @@ function handleRowClick(row) {
     $selectedRow.addClass(SELECTED_ROW_CLASS);
 }
 
+function unselectRow() {
+    if (!isNothingSelected()) {
+        $selectedRow.removeClass(SELECTED_ROW_CLASS);
+        $selectedRow = $('<tr>');
+    }
+}
+
 function isNothingSelected() {
     return  $selectedRow.is(':empty');
 }
+
+function clearEditField() {
+    let $filter = $('#filter');
+    $filter.val('');
+    $('#programsTable tbody tr').removeClass('hidden');
+    $filter.focus();
+}
+
+// ----- Search filter -----
+
+function filterTable() {
+    unselectRow();
+    let isCheckboxChecked = $('#orderCheckbox').is(':checked');
+    let filterValue = $('#filter').val().toLowerCase();
+    $('#programsTable tbody tr').each(function(i, row) {
+        let $row = $(row);
+        let value = $row.children(':eq(1)').html().toLowerCase();
+        if (isCheckboxChecked) {
+            value.indexOf(filterValue) === -1 ? $row.addClass('hidden') : $row.removeClass('hidden');
+        } else {
+            value.indexOf(filterValue) !== 0 ? $row.addClass('hidden') : $row.removeClass('hidden');
+        }
+    });
+}
+
+function handleCheckbox() {
+    filterTable();
+    $('#filter').focus();
+}
+
+// ----- Form validation -----

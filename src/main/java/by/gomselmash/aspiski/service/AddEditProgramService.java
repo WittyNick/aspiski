@@ -49,14 +49,19 @@ public class AddEditProgramService {
         return developerRepository.findAll();
     }
 
-    public Program findProgramById(int id) {
-        Optional<Program> optionalProgram = programRepository.findById(id);
-        return optionalProgram.orElse(new Program());
+    public Optional<Program> findProgramById(int id) {
+        return programRepository.findById(id);
     }
 
+    public Optional<Program> findProgramById(String id) {
+        return findProgramById(Integer.parseInt(id));
+    }
+
+    /*
+     LocalDate currentDate = LocalDate.now();
+     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+     */
     public String currentDate() {
-//        LocalDate currentDate = LocalDate.now();
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return LocalDate.now().toString(); // yyyy-MM-dd
     }
 }
