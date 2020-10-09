@@ -1,52 +1,80 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <th:block th:fragment="head_fragment">
-        <title>Aspiski</title>
-        <!--/* Favicon works only when added right behind title. */-->
-        <link rel="icon" type="image/png" th:href="@{img/favicon.png}"/>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <script th:src="@{webjars/jquery/3.5.1/jquery.min.js}"></script>
-        <script th:src="@{webjars/popper.js/1.16.0/umd/popper.min.js}"></script>
-        <script th:src="@{webjars/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
-        <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.5.2/css/bootstrap.min.css}" />
-
-        <!--/* Add user css and js here after bootstrap and jquery frameworks. */-->
-        <script th:src="@{js/main.js}"></script>
-        <link th:rel="stylesheet" th:href="@{css/main.css}" />
-    </th:block>
+    <th:block th:replace="fragments :: head" />
 
     <script th:src="@{js/welcome.js}"></script>
-    <link th:rel="stylesheet" th:href="@{css/welcome.css}" />
+    <link th:rel="stylesheet" th:href="@{css/welcome.css}"/>
 </head>
 <body>
-<!--/* https://thecode.media/bootstrap/ Bootstrap grid layout simple example. */-->
+
+<th:block th:replace="fragments :: navbar(page='main')" />
+
 <div class="container">
-    <div class="row pb-4 text-center">
-        <div class="col-12">
-            <h2>Чего изволите?</h2>
+    <div class="row">
+        <div class="col-12 text-center">
+            <h2>Искать деталь</h2>
         </div>
     </div>
+
+    <div class="form-row align-items-center justify-content-center mt-3">
+        <label for="filter" class="col-auto col-form-label">Найти:</label>
+        <div class="col-4 input-group">
+            <input type="text" class="form-control" id="filter" oninput="filterTable()" autofocus>
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" onclick="clearEditField()">&#10060;</button>
+            </div>
+        </div>
+
+        <div class="col-auto">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="orderCheckbox" oninput="handleCheckbox()">
+                <label for="orderCheckbox" class="form-check-label">Содержит</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-3">
+        <div class="col-12">
+            <table class="table table-bordered table-hover" id="programsTable">
+                <thead class="thead-light text-center">
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Деталь</th>
+                    <th scope="col">Установ</th>
+                    <th scope="col">Станок</th>
+                    <th scope="col">Система ЧПУ</th>
+                    <th scope="col">Программа</th>
+                    <th scope="col">Цех</th>
+                    <th scope="col">Разработал</th>
+                    <th scope="col">Дата</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="program : ${programs}" onclick="handleRowClick(this)">
+                    <td th:text="${program.id}"></td>
+                    <td th:text="${program.partNumber}"></td>
+                    <td th:text="${program.position}"></td>
+                    <td th:text="${program.machine.name}"></td>
+                    <td th:text="${program.controlSystem.name}"></td>
+                    <td th:text="${program.programNumber}"></td>
+                    <td th:text="${program.workshop.name}"></td>
+                    <td th:text="${program.developer.name}"></td>
+                    <td th:text="${program.date.toString()}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     <div class="row justify-content-center">
         <div class="col-auto">
-            <div class="btn-group-vertical dropright" role="group">
-                <button class="btn btn-primary" onclick="goFindByPart()" autofocus>Искать программу по НОМЕРУ ДЕТАЛИ</button>
-                <button class="btn btn-outline-primary" onclick="goFindByControlSystem()">Искать программу по СИСТЕМЕ ЧПУ</button>
-
-                <button id="addDrop" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Добавить или редактировать
-                </button>
-                <div class="dropdown-menu" aria-labelledby="addDrop">
-                    <a class="dropdown-item" href="/addProgram">программу</a>
-                    <a class="dropdown-item" href="/editControlSystems">систему ЧПУ</a>
-                    <a class="dropdown-item" href="/editMachineTypes">тип станка</a>
-                    <a class="dropdown-item" href="/editMachines">станок</a>
-                    <a class="dropdown-item" href="/editDevelopers">разработчика</a>
-                    <a class="dropdown-item" href="/editWorkshops">цех</a>
-                </div>
-            </div>
+            <form method="POST" action="/editProgram" id="editProgramById">
+                <input type="hidden" name="programId" id="programId">
+            </form>
+            <button type="button" class="btn btn-outline-primary m-2" onclick="goWelcomePage()">Назад</button>
+            <button type="button" class="btn btn-primary m-2" onclick="editCNCProgram()">Редактировать</button>
+            <button type="button" class="btn btn-primary m-2" onclick="deleteCNCProgram()">Удалить</button>
         </div>
     </div>
 </div>

@@ -4,10 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class FindByControlSystemController {
+public class StatController {
 
-    @GetMapping("/findByControlSystem")
-    public String goFindByControlSystem() {
-        return "find_by_control_system";
+    @GetMapping("/stat")
+    public String goStat() {
+        return "stat";
     }
 }

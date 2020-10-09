@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class FindByPartService {
+public class WelcomeService {
     private final ProgramRepository repository;
 
-    public FindByPartService(ProgramRepository repository) {
+    public WelcomeService(ProgramRepository repository) {
         this.repository = repository;
     }
 

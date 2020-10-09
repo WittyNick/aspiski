@@ -30,23 +30,13 @@ function getProgram() {
     };
 }
 
-function ajaxSave(onSuccess) {
+function saveProgram() {
     let program = getProgram();
     $.ajax({
         type: 'POST',
         url: 'programSave',
         data: JSON.stringify(program),
         contentType: 'application/json; charset=UTF-8',
-        success: onSuccess
-    });
-}
-
-function saveProgram() {
-    ajaxSave(goWelcomePage);
-}
-
-function updateProgram() {
-    ajaxSave(function() {
-        $(location).prop('href', '/findByPart');
+        success: goWelcomePage
     });
 }

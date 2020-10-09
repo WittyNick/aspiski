@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <th:block th:replace="welcome :: head_fragment"/>
+
+    <th:block th:replace="fragments :: head" />
 
     <script th:src="@{js/add_edit_program.js}"></script>
     <link th:rel="stylesheet" th:href="@{css/add_edit_program.css}"/>
 </head>
 <body>
+
+<th:block th:replace="fragments :: navbar(page='add')" />
+
     <div class="container">
         <div class="row pb-4">
             <div class="col-12 text-center">

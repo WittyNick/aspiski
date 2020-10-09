@@ -1,7 +1,0 @@
-#programsTable th:nth-child(1), #programsTable td:nth-child(1) {
-    display: none;
-}
-
-#programsTable th:nth-child(2), #programsTable td:nth-child(2) {
-    font-weight: bold;
-}

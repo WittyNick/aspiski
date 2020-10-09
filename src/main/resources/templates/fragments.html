@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <th:block th:fragment="head">
+        <title>spiski</title>
+        <!--/* Favicon works only when added right behind title. */-->
+        <link rel="icon" type="image/png" th:href="@{img/logo.png}"/>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script th:src="@{webjars/jquery/3.5.1/jquery.min.js}"></script>
+        <script th:src="@{webjars/popper.js/1.16.0/umd/popper.min.js}"></script>
+        <script th:src="@{webjars/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
+        <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.5.2/css/bootstrap.min.css}"/>
+
+        <!--/* Add user css and js here after bootstrap and jquery frameworks. */-->
+        <script th:src="@{js/main.js}"></script>
+        <link th:rel="stylesheet" th:href="@{css/main.css}"/>
+    </th:block>
+
+</head>
+<body>
+<nav th:fragment="navbar(page)" class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">
+        <img th:src="@{img/logo.png}" alt="A">spiski
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li th:with="isCurrent=${page == 'main'} ? true : false"
+                class="nav-item" th:classappend="${isCurrent} ? active : ''">
+                <a href="/" class="nav-link" th:classappend="${isCurrent} ? disabled : ''">главная</a>
+            </li>
+
+            <li th:with="isCurrent=${page == 'add'} ? true : false"
+                class="nav-item" th:classappend="${isCurrent} ? active : ''">
+                <a href="/addProgram" class="nav-link" th:classappend="${isCurrent} ? disabled : ''">добавить</a>
+            </li>
+
+            <li th:with="isCurrent=${page == 'stat'} ? true : false"
+                class="nav-item" th:classappend="${isCurrent} ? active : ''">
+                <a href="/stat" class="nav-link" th:classappend="${isCurrent} ? disabled : ''">статистика</a>
+            </li>
+
+            <li class="nav-item dropdown" th:classappend="${page == 'edit'} ? active : ''">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    редактировать
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/editControlSystems">системы ЧПУ</a>
+                    <a class="dropdown-item" href="/editMachineTypes">типы станков</a>
+                    <a class="dropdown-item" href="/editMachines">модели станоков</a>
+                    <a class="dropdown-item" href="/editDevelopers">разработчиков</a>
+                    <a class="dropdown-item" href="/editWorkshops">цеха</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+</body>
+</html>
