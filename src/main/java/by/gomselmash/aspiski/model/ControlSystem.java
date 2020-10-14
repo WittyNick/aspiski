@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "CONTROL_SYSTEMS")
 public class ControlSystem {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     private int id;
 

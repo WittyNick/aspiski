@@ -18,7 +18,7 @@ to suppress Jackson serialization exception.
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class MachineType {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     private int id;
 
