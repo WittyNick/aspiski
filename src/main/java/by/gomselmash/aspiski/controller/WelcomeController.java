@@ -1,6 +1,6 @@
 package by.gomselmash.aspiski.controller;
 
-import by.gomselmash.aspiski.model.Program;
+import by.gomselmash.aspiski.model.*;
 import by.gomselmash.aspiski.service.WelcomeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class WelcomeController {
@@ -23,7 +25,16 @@ public class WelcomeController {
     @GetMapping("/")
     public String goFindByPart(Model model) {
         List<Program> programs = service.findAllPrograms();
-        model.addAttribute("programs", programs);
+        List<Machine> machines = service.findAllMachines();
+        List<ControlSystem> controlSystems = service.findAllControlSystems();
+        List<Workshop> workshops = service.findAllWorkshops();
+        List<Developer> developers = service.findAllDevelopers();
+        model
+                .addAttribute("programs", programs)
+                .addAttribute("machines", machines)
+                .addAttribute("controlSystems", controlSystems)
+                .addAttribute("workshops", workshops)
+                .addAttribute("developers", developers);
         return "welcome";
     }
 

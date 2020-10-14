@@ -24,8 +24,7 @@
     <a class="navbar-brand" href="/">
         <img th:src="@{img/logo.png}" alt="A">spiski
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -57,6 +56,11 @@
                     <a class="dropdown-item" href="/editDevelopers">разработчиков</a>
                     <a class="dropdown-item" href="/editWorkshops">цеха</a>
                 </div>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a href="#" class="nav-link" onclick="alert('Не работает пока!')">вход</a>
             </li>
         </ul>
     </div>

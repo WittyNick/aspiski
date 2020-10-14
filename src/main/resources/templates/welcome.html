@@ -1,40 +1,82 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <th:block th:replace="fragments :: head" />
+    <th:block th:replace="fragments :: head"/>
 
     <script th:src="@{js/welcome.js}"></script>
     <link th:rel="stylesheet" th:href="@{css/welcome.css}"/>
 </head>
 <body>
+<!--/* Modal */-->
+<div class="modal" id="infoModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Примечание</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div id="modalBodyInfo" class="modal-body"></div>
+        </div>
+    </div>
+</div>
 
-<th:block th:replace="fragments :: navbar(page='main')" />
+<th:block th:replace="fragments :: navbar(page='main')"/>
 
 <div class="container">
-    <div class="row">
+    <div class="row mb-3">
         <div class="col-12 text-center">
-            <h2>Искать деталь</h2>
+            <h2>Искать программу</h2>
         </div>
     </div>
 
-    <div class="form-row align-items-center justify-content-center mt-3">
-        <label for="filter" class="col-auto col-form-label">Найти:</label>
-        <div class="col-4 input-group">
-            <input type="text" class="form-control" id="filter" oninput="filterTable()" autofocus>
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" onclick="clearEditField()">&#10060;</button>
+    <form class="mb-3" id="filter">
+        <div class="form-group row align-items-center">
+            <label for="part" class="col-2 col-form-label">Номер детали</label>
+            <div class="col-4">
+                <input type="text" class="form-control" id="part" autofocus>
+            </div>
+            <div class="col-6">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="orderCheckbox">
+                    <label for="orderCheckbox" class="form-check-label">точно совпадает</label>
+                </div>
             </div>
         </div>
-
-        <div class="col-auto">
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="orderCheckbox" oninput="handleCheckbox()">
-                <label for="orderCheckbox" class="form-check-label">Содержит</label>
+        <div class="form-group row">
+            <label class="col-2 col-form-label" for="machine">Станок</label>
+            <div class="col-4">
+                <select class="form-control" id="machine">
+                    <option value="0"></option>
+                    <option th:each="machine : ${machines}"
+                            th:value="${machine.id}" th:text="${machine.name}"></option>
+                </select>
+            </div>
+            <label class="col-2 col-form-label" for="controlSystem">Система ЧПУ</label>
+            <div class="col-4">
+                <select class="form-control" id="controlSystem">
+                    <option value="0"></option>
+                    <option th:each="controlSystem : ${controlSystems}"
+                            th:value="${controlSystem.id}" th:text="${controlSystem.name}"></option>
+                </select>
             </div>
         </div>
-    </div>
+        <div class="form-group row">
+            <label class="col-2 col-form-label" for="programNumber">Номер программы</label>
+            <div class="col-4">
+                <input type="text" class="form-control" id="programNumber">
+            </div>
+            <label class="col-2 col-form-label" for="workshop">Цех</label>
+            <div class="col-4">
+                <select class="form-control" id="workshop">
+                    <option value="0"></option>
+                    <option th:each="workshop : ${workshops}"
+                            th:value="${workshop.id}" th:text="${workshop.name}"></option>
+                </select>
+            </div>
+        </div>
+    </form>
 
-    <div class="row justify-content-center mt-3">
+    <div class="row justify-content-center">
         <div class="col-12">
             <table class="table table-bordered table-hover" id="programsTable">
                 <thead class="thead-light text-center">
@@ -42,25 +84,33 @@
                     <th scope="col">id</th>
                     <th scope="col">Деталь</th>
                     <th scope="col">Установ</th>
+                    <th scope="col">machineId</th>
                     <th scope="col">Станок</th>
+                    <th scope="col">systemId</th>
                     <th scope="col">Система ЧПУ</th>
                     <th scope="col">Программа</th>
+                    <th scope="col">workshopId</th>
                     <th scope="col">Цех</th>
                     <th scope="col">Разработал</th>
                     <th scope="col">Дата</th>
+                    <th scope="col">info</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="program : ${programs}" onclick="handleRowClick(this)">
+                <tr th:each="program : ${programs}">
                     <td th:text="${program.id}"></td>
                     <td th:text="${program.partNumber}"></td>
                     <td th:text="${program.position}"></td>
+                    <td th:text="${program.machine.id}"></td>
                     <td th:text="${program.machine.name}"></td>
+                    <td th:text="${program.controlSystem.id}"></td>
                     <td th:text="${program.controlSystem.name}"></td>
                     <td th:text="${program.programNumber}"></td>
+                    <td th:text="${program.workshop.id}"></td>
                     <td th:text="${program.workshop.name}"></td>
                     <td th:text="${program.developer.name}"></td>
                     <td th:text="${program.date.toString()}"></td>
+                    <td th:text="${program.info}"></td>
                 </tr>
                 </tbody>
             </table>
@@ -72,9 +122,9 @@
             <form method="POST" action="/editProgram" id="editProgramById">
                 <input type="hidden" name="programId" id="programId">
             </form>
-            <button type="button" class="btn btn-outline-primary m-2" onclick="goWelcomePage()">Назад</button>
-            <button type="button" class="btn btn-primary m-2" onclick="editCNCProgram()">Редактировать</button>
-            <button type="button" class="btn btn-primary m-2" onclick="deleteCNCProgram()">Удалить</button>
+            <button type="button" id="info" class="btn btn-outline-primary m-2">Инфо</button>
+            <button type="button" id="edit" class="btn btn-primary m-2">Редактировать</button>
+            <button type="button" id="delete" class="btn btn-primary m-2">Удалить</button>
         </div>
     </div>
 </div>
