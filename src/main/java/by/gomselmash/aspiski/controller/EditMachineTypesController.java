@@ -11,15 +11,15 @@ import java.util.List;
 
 @Controller
 public class EditMachineTypesController {
-    private final EditMachineTypesService editMachineTypesService;
+    private final EditMachineTypesService service;
 
-    public EditMachineTypesController(EditMachineTypesService editMachineTypesService) {
-        this.editMachineTypesService = editMachineTypesService;
+    public EditMachineTypesController(EditMachineTypesService service) {
+        this.service = service;
     }
 
     @GetMapping("/editMachineTypes")
     public String goEditControlSystems(Model model) {
-        List<MachineType> machineTypes = editMachineTypesService.findAllMachineTypes();
+        List<MachineType> machineTypes = service.findAllMachineTypesSorted();
         model.addAttribute("machineTypes", machineTypes);
         return "edit_machine_types";
     }
@@ -27,7 +27,7 @@ public class EditMachineTypesController {
     @PostMapping("/machineTypeSave")
     @ResponseBody
     public MachineType saveMachineType(@RequestBody MachineType machineType) {
-        return editMachineTypesService.saveMachineType(machineType);
+        return service.saveMachineType(machineType);
     }
 
     // TODO: return boolean false when get exception or check possibility to delete
@@ -35,6 +35,6 @@ public class EditMachineTypesController {
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteControlSystem(@RequestBody String stringId) {
         int id = Integer.parseInt(stringId);
-        editMachineTypesService.deleteMachineTypeById(id);
+        service.deleteMachineTypeById(id);
     }
 }

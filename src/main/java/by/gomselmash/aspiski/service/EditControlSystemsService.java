@@ -14,8 +14,8 @@ public class EditControlSystemsService {
         this.controlSystemRepository = controlSystemRepository;
     }
 
-    public List<ControlSystem> findAllControlSystems() {
-        return controlSystemRepository.findAll(); // when nothing was found returns empty List
+    public List<ControlSystem> findAllControlSystemsSorted() {
+        return controlSystemRepository.findAllByOrderByNameAsc(); // when nothing was found returns empty List
     }
 
     public ControlSystem saveControlSystem(ControlSystem controlSystem) {

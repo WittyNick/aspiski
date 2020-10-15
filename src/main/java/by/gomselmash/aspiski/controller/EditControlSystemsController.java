@@ -11,15 +11,15 @@ import java.util.List;
 
 @Controller
 public class EditControlSystemsController {
-    private final EditControlSystemsService editControlSystemsService;
+    private final EditControlSystemsService service;
 
-    public EditControlSystemsController(EditControlSystemsService editControlSystemsService) {
-        this.editControlSystemsService = editControlSystemsService;
+    public EditControlSystemsController(EditControlSystemsService service) {
+        this.service = service;
     }
 
     @GetMapping("/editControlSystems")
     public String goEditControlSystems(Model model) {
-        List<ControlSystem> controlSystems = editControlSystemsService.findAllControlSystems();
+        List<ControlSystem> controlSystems = service.findAllControlSystemsSorted();
         model.addAttribute("controlSystems", controlSystems);
         return "edit_control_systems";
     }
@@ -27,7 +27,7 @@ public class EditControlSystemsController {
     @PostMapping("/controlSystemSave")
     @ResponseBody
     public ControlSystem saveControlSystem(@RequestBody ControlSystem controlSystem) {
-        return editControlSystemsService.saveControlSystem(controlSystem);
+        return service.saveControlSystem(controlSystem);
     }
 
     // TODO: return boolean false when get exception or check possibility to delete
@@ -35,6 +35,6 @@ public class EditControlSystemsController {
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteControlSystem(@RequestBody String stringId) {
         int id = Integer.parseInt(stringId);
-        editControlSystemsService.deleteControlSystemById(id);
+        service.deleteControlSystemById(id);
     }
 }

@@ -14,8 +14,8 @@ public class EditDevelopersService {
         this.developerRepository = developerRepository;
     }
 
-    public List<Developer> findAllDevelopers() {
-        return developerRepository.findAll();
+    public List<Developer> findAllDevelopersSorted() {
+        return developerRepository.findAllByOrderByNameAsc();
     }
 
     public Developer saveDeveloper(Developer developer) {

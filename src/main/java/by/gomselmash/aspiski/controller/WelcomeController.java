@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class WelcomeController {
@@ -24,11 +22,11 @@ public class WelcomeController {
 
     @GetMapping("/")
     public String goFindByPart(Model model) {
-        List<Program> programs = service.findAllPrograms();
-        List<Machine> machines = service.findAllMachines();
-        List<ControlSystem> controlSystems = service.findAllControlSystems();
-        List<Workshop> workshops = service.findAllWorkshops();
-        List<Developer> developers = service.findAllDevelopers();
+        List<Program> programs = service.findAllProgramsSorted();
+        List<Machine> machines = service.findAllMachinesSorted();
+        List<ControlSystem> controlSystems = service.findAllControlSystemsSorted();
+        List<Workshop> workshops = service.findAllWorkshopsSorted();
+        List<Developer> developers = service.findAllDevelopersSorted();
         model
                 .addAttribute("programs", programs)
                 .addAttribute("machines", machines)

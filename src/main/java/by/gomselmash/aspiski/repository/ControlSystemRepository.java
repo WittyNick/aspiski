@@ -4,6 +4,9 @@ import by.gomselmash.aspiski.model.ControlSystem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ControlSystemRepository extends JpaRepository<ControlSystem, Integer> {
+    List<ControlSystem> findAllByOrderByNameAsc();
 }

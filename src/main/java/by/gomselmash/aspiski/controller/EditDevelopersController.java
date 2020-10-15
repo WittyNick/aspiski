@@ -11,15 +11,15 @@ import java.util.List;
 
 @Controller
 public class EditDevelopersController {
-    private final EditDevelopersService editDevelopersService;
+    private final EditDevelopersService service;
 
     public EditDevelopersController(EditDevelopersService editDevelopersService) {
-        this.editDevelopersService = editDevelopersService;
+        this.service = editDevelopersService;
     }
 
     @GetMapping("/editDevelopers")
     public String goEditDevelopers(Model model) {
-        List<Developer> developers = editDevelopersService.findAllDevelopers();
+        List<Developer> developers = service.findAllDevelopersSorted();
         model.addAttribute("developers", developers);
         return "edit_developers";
     }
@@ -27,13 +27,13 @@ public class EditDevelopersController {
     @PostMapping("/developerSave")
     @ResponseBody
     public Developer saveDeveloper(@RequestBody Developer developer) {
-        return editDevelopersService.saveDeveloper(developer);
+        return service.saveDeveloper(developer);
     }
 
     @PostMapping("/developerDelete")
     @ResponseStatus(HttpStatus.OK)
     public void deleteDeveloper(@RequestBody String stringId) {
         int id = Integer.parseInt(stringId);
-        editDevelopersService.deleteDeveloperById(id);
+        service.deleteDeveloperById(id);
     }
 }

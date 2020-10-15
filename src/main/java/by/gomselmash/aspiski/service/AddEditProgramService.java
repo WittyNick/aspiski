@@ -33,20 +33,20 @@ public class AddEditProgramService {
         programRepository.save(programToSave);
     }
 
-    public List<Machine> findAllMachines() {
-        return machineRepository.findAll();
+    public List<Machine> findAllMachinesSorted() {
+        return machineRepository.findAllByOrderByNameAsc();
     }
 
-    public List<ControlSystem> findAllControlSystems() {
-        return controlSystemRepository.findAll();
+    public List<ControlSystem> findAllControlSystemsSorted() {
+        return controlSystemRepository.findAllByOrderByNameAsc();
     }
 
-    public List<Workshop> findAllWorkshops() {
-        return workshopRepository.findAll();
+    public List<Workshop> findAllWorkshopsSorted() {
+        return workshopRepository.findAllByOrderByNameAsc();
     }
 
-    public List<Developer> findAllDevelopers() {
-        return developerRepository.findAll();
+    public List<Developer> findAllDevelopersSorted() {
+        return developerRepository.findAllByOrderByNameAsc();
     }
 
     public Optional<Program> findProgramById(int id) {

@@ -6,6 +6,7 @@ import by.gomselmash.aspiski.repository.MachineRepository;
 import by.gomselmash.aspiski.repository.MachineTypeRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -18,8 +19,8 @@ public class EditMachinesService {
         this.machineTypeRepository = machineTypeRepository;
     }
 
-    public List<Machine> findAllMachines() {
-        return machineRepository.findAll();
+    public List<Machine> findAllMachinesSorted() {
+        return machineRepository.findAllByOrderByNameAsc();
     }
 
     public List<MachineType> findAllMachineTypes() {

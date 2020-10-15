@@ -14,8 +14,8 @@ public class EditMachineTypesService {
         this.machineTypeRepository = machineTypeRepository;
     }
 
-    public List<MachineType> findAllMachineTypes() {
-        return machineTypeRepository.findAll();
+    public List<MachineType> findAllMachineTypesSorted() {
+        return machineTypeRepository.findAllByOrderByNameAsc();
     }
 
     public MachineType saveMachineType(MachineType machineType) {

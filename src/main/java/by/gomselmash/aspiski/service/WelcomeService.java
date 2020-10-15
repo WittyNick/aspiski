@@ -4,7 +4,6 @@ import by.gomselmash.aspiski.model.*;
 import by.gomselmash.aspiski.repository.*;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -27,27 +26,27 @@ public class WelcomeService {
         this.developerRepository = developerRepository;
     }
 
-    public List<Program> findAllPrograms() {
-        return programRepository.findAll();
+    public List<Program> findAllProgramsSorted() {
+        return programRepository.findAllByOrderByPartNumberAsc();
     }
 
     public void deleteProgramById(int id) {
         programRepository.deleteById(id);
     }
 
-    public List<Machine> findAllMachines() {
-        return machineRepository.findAll();
+    public List<Machine> findAllMachinesSorted() {
+        return machineRepository.findAllByOrderByNameAsc();
     }
 
-    public List<ControlSystem> findAllControlSystems() {
-        return controlSystemRepository.findAll();
+    public List<ControlSystem> findAllControlSystemsSorted() {
+        return controlSystemRepository.findAllByOrderByNameAsc();
     }
 
-    public List<Workshop> findAllWorkshops() {
-        return workshopRepository.findAll();
+    public List<Workshop> findAllWorkshopsSorted() {
+        return workshopRepository.findAllByOrderByNameAsc();
     }
 
-    public List<Developer> findAllDevelopers() {
-        return developerRepository.findAll();
+    public List<Developer> findAllDevelopersSorted() {
+        return developerRepository.findAllByOrderByNameAsc();
     }
 }

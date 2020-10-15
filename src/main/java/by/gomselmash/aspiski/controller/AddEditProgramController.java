@@ -39,7 +39,7 @@ public class AddEditProgramController {
                     .addAttribute("program", optionalProgram.get());
             return "edit_program";
         }
-        return "redirect:/findByPart";
+        return "redirect:/";
     }
 
     @PostMapping("/programSave")
@@ -49,10 +49,10 @@ public class AddEditProgramController {
     }
 
     private Map<String, Object> getAttributeMap() {
-        List<Machine> machines = service.findAllMachines();
-        List<ControlSystem> controlSystems = service.findAllControlSystems();
-        List<Workshop> workshops = service.findAllWorkshops();
-        List<Developer> developers = service.findAllDevelopers();
+        List<Machine> machines = service.findAllMachinesSorted();
+        List<ControlSystem> controlSystems = service.findAllControlSystemsSorted();
+        List<Workshop> workshops = service.findAllWorkshopsSorted();
+        List<Developer> developers = service.findAllDevelopersSorted();
         Map<String, Object> map = new HashMap<>();
         map.put("machines", machines);
         map.put("controlSystems", controlSystems);
