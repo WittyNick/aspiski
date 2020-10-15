@@ -54,8 +54,8 @@ function setDeveloperToInput(developer) {
 
 function getSelectedDeveloper() {
     return {
-        'id': $selectedRow.children(':nth-child(1)').html(),
-        'name': $selectedRow.children(':nth-child(2)').html()
+        id: $selectedRow.children(':nth-child(1)').html(),
+        name: $selectedRow.children(':nth-child(2)').html()
     };
 }
 
@@ -87,16 +87,16 @@ function isNothingSelected() {
 
 function clearEditField() {
     setDeveloperToInput({
-        'id': 0,
-        'name': ''
+        id: 0,
+        name: ''
     });
     $('#name').focus();
 }
 
 function getDeveloperFromInput() {
     return {
-        'id': +$('#developerId').val(),
-        'name': $('#name').val()
+        id: +$('#developerId').val(),
+        name: $('#name').val()
     };
 }
 

@@ -2,6 +2,7 @@ package by.gomselmash.aspiski.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name = "PROGRAMS")
@@ -121,6 +122,11 @@ public class Program {
 
     public void setInfo(String info) {
         this.info = info;
+    }
+
+    public String getParsedDate(String pattern) { // pattern RU - "dd.MM.yyyy"
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        return date.format(formatter);
     }
 
     @Override

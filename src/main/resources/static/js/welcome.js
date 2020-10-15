@@ -101,25 +101,36 @@ function filterTable() {
 }
 
 function isMatches($tableRow) {
-    let isCheckboxChecked = $filterCheckbox.is(':checked');
-    let filterPart = $inputPart.val().toLowerCase();
-    let filterMachine = +$inputMachine.val();
-    let filterSystem = +$inputSystem.val();
-    let filterProgram = $inputProgram.val().toLowerCase();
-    let filterWorkshop = +$inputWorkshop.val();
+    let filter = parseFilterOptions();
+    let row = parseTableRowOptions($tableRow);
 
-    let part = $tableRow.children(':eq(1)').html().toLowerCase();
-    let machineId = +$tableRow.children(':eq(3)').html();
-    let systemId = +$tableRow.children(':eq(5)').html();
-    let program = $tableRow.children(':eq(7)').html().toLowerCase();
-    let workshopId = +$tableRow.children(':eq(8)').html();
+    let partCompareIndex = row.part.indexOf(filter.part);
+    return (filter.isExactSearchChecked && partCompareIndex === 0 || partCompareIndex !== -1) &&
+        (filter.machineId === 0 || row.machineId === filter.machineId) &&
+        (filter.systemId === 0 || row.systemId === filter.systemId) &&
+        row.program.indexOf(filter.program) !== -1 &&
+        (filter.workshopId === 0 || row.workshopId === filter.workshopId);
+}
 
-    let partCompareIndex = part.indexOf(filterPart);
-    return (isCheckboxChecked && partCompareIndex === 0 || partCompareIndex !== -1) &&
-        (filterMachine === 0 || machineId === filterMachine) &&
-        (filterSystem === 0 || systemId === filterSystem) &&
-        program.indexOf(filterProgram) !== -1 &&
-        (filterWorkshop === 0 || workshopId === filterWorkshop);
+function parseFilterOptions() {
+    return {
+        isExactSearchChecked: $filterCheckbox.is(':checked'),
+        part: $inputPart.val().toLowerCase(),
+        machineId: +$inputMachine.val(),
+        systemId: +$inputSystem.val(),
+        program: $inputProgram.val().toLowerCase(),
+        workshopId: +$inputWorkshop.val()
+    };
+}
+
+function parseTableRowOptions($tableRow) {
+    return {
+        part: $tableRow.children(':eq(1)').html().toLowerCase(),
+        machineId: +$tableRow.children(':eq(3)').html(),
+        systemId: +$tableRow.children(':eq(5)').html(),
+        program: $tableRow.children(':eq(7)').html().toLowerCase(),
+        workshopId: +$tableRow.children(':eq(8)').html()
+    };
 }
 
 function handleCheckbox() {

@@ -1,4 +1,4 @@
-// $(document).ready(function() {
+// $(function() {
 //     let today = new Date().toISOString().split('T')[0]; // yyyy-MM-dd
 //     $('#date').val(today);
 // });
@@ -9,24 +9,24 @@ function goWelcomePage() {
 
 function getProgram() {
     return {
-        'id': +$('#programId').val(),
-        'partNumber': $('#partNumber').val(),
-        'programNumber': $('#programNumber').val(),
-        'position': $('#position').val(),
-        'workshop': {
-            'id': +$('#workshop').val()
+        id: +$('#programId').val(),
+        partNumber: $('#partNumber').val(),
+        programNumber: $('#programNumber').val(),
+        position: $('#position').val(),
+        workshop: {
+            id: +$('#workshop').val()
         },
-        'developer': {
-            'id': +$('#developer').val()
+        developer: {
+            id: +$('#developer').val()
         },
-        'machine': {
-            'id': +$('#machine').val()
+        machine: {
+            id: +$('#machine').val()
         },
-        'controlSystem': {
-            'id': +$('#controlSystem').val()
+        controlSystem: {
+            id: +$('#controlSystem').val()
         },
-        'date': $('#date').val(), // yyyy-MM-dd
-        'info': $('#info').val()
+        date: $('#date').val(), // yyyy-MM-dd
+        info: $('#info').val()
     };
 }
 

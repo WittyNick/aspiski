@@ -54,8 +54,8 @@ function setMachineTypeToInput(machineType) {
 
 function getSelectedMachineType() {
     return {
-        'id': $selectedRow.children(':nth-child(1)').html(),
-        'name': $selectedRow.children(':nth-child(2)').html()
+        id: $selectedRow.children(':nth-child(1)').html(),
+        name: $selectedRow.children(':nth-child(2)').html()
     };
 }
 
@@ -87,16 +87,16 @@ function isNothingSelected() {
 
 function clearEditField() {
     setMachineTypeToInput({
-        'id': 0,
-        'name': ''
+        id: 0,
+        name: ''
     });
     $('#name').focus();
 }
 
 function getMachineTypeFromInput() {
     return {
-        'id': +$('#machineTypeId').val(),
-        'name': $('#name').val()
+        id: +$('#machineTypeId').val(),
+        name: $('#name').val()
     };
 }
 

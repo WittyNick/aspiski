@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-
     <th:block th:replace="fragments :: head" />
 
     <script th:src="@{js/stat.js}"></script>
-    <link rel="stylesheet" th:href="@{css/stat.css}"/>
+    <link rel="stylesheet" th:href="@{css/stat.css}" />
 </head>
 <body>
-
 <th:block th:replace="fragments :: navbar('stat')" />
 
 <div class="container">

@@ -60,9 +60,9 @@ function setMachineToInput(machine) {
 
 function getSelectedMachine() {
     return {
-        'id': $selectedRow.children(':nth-child(1)').html(),
-        'name': $selectedRow.children(':nth-child(2)').html(),
-        'typeId': $selectedRow.children(':nth-child(3)').html()
+        id: $selectedRow.children(':nth-child(1)').html(),
+        name: $selectedRow.children(':nth-child(2)').html(),
+        typeId: $selectedRow.children(':nth-child(3)').html()
     };
 }
 
@@ -106,11 +106,11 @@ function clearAllFields() {
 
 function getMachineFromInput() {
     return {
-        'id': +$('#machineId').val(),
-        'name': $('#name').val(),
-        'machineType': {
-            'id': $('#machineType').val(),
-            'name': $('#machineType option:selected').html()
+        id: +$('#machineId').val(),
+        name: $('#name').val(),
+        machineType: {
+            id: $('#machineType').val(),
+            name: $('#machineType option:selected').html()
         }
     };
 }

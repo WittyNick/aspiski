@@ -65,8 +65,8 @@ function setControlSystemToInput(controlSystem) {
 
 function getSelectedControlSystem() {
     return {
-        'id': $selectedRow.children(':nth-child(1)').html(),
-        'name': $selectedRow.children(':nth-child(2)').html()
+        id: $selectedRow.children(':nth-child(1)').html(),
+        name: $selectedRow.children(':nth-child(2)').html()
     };
 }
 
@@ -98,16 +98,16 @@ function isNothingSelected() {
 
 function clearEditField() {
     setControlSystemToInput({
-        'id': 0,
-        'name': ''
+        id: 0,
+        name: ''
     });
     $('#name').focus();
 }
 
 function getControlSystemFromInput() {
     return {
-        'id': +$('#controlSystemId').val(),
-        'name': $('#name').val()
+        id: +$('#controlSystemId').val(),
+        name: $('#name').val()
     };
 }
 

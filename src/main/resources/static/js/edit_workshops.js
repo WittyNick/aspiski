@@ -54,8 +54,8 @@ function setWorkshopToInput(workshop) {
 
 function getSelectedWorkshop() {
     return {
-        'id': $selectedRow.children(':nth-child(1)').html(),
-        'name': $selectedRow.children(':nth-child(2)').html()
+        id: $selectedRow.children(':nth-child(1)').html(),
+        name: $selectedRow.children(':nth-child(2)').html()
     };
 }
 
@@ -87,16 +87,16 @@ function isNothingSelected() {
 
 function clearEditField() {
     setWorkshopToInput({
-        'id': 0,
-        'name': ''
+        id: 0,
+        name: ''
     });
     $('#name').focus();
 }
 
 function getWorkshopFromInput() {
     return {
-        'id': +$('#workshopId').val(),
-        'name': $('#name').val()
+        id: +$('#workshopId').val(),
+        name: $('#name').val()
     };
 }
 
