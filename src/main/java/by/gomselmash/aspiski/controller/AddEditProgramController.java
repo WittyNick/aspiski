@@ -2,11 +2,9 @@ package by.gomselmash.aspiski.controller;
 
 import by.gomselmash.aspiski.model.*;
 import by.gomselmash.aspiski.service.AddEditProgramService;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 
 import java.util.HashMap;
 import java.util.List;
@@ -43,9 +41,15 @@ public class AddEditProgramController {
     }
 
     @PostMapping("/programSave")
-    @ResponseStatus(HttpStatus.OK)
-    public void saveProgram(@RequestBody Program program) {
-        service.saveProgram(program);
+    @ResponseBody
+    public Boolean saveProgram(@RequestBody Program program) {
+        return service.saveProgram(program);
+    }
+
+    @PostMapping("/programUpdate")
+    @ResponseBody
+    public Boolean updateProgram(@RequestBody Program program) {
+        return service.updateProgram(program);
     }
 
     private Map<String, Object> getAttributeMap() {

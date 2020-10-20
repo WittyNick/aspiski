@@ -3,6 +3,7 @@ package by.gomselmash.aspiski.service;
 import by.gomselmash.aspiski.model.ControlSystem;
 import by.gomselmash.aspiski.repository.ControlSystemRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,7 +19,12 @@ public class EditControlSystemsService {
         return controlSystemRepository.findAllByOrderByNameAsc(); // when nothing was found returns empty List
     }
 
+    @Transactional
     public ControlSystem saveControlSystem(ControlSystem controlSystem) {
+        String name = controlSystem.getName();
+        if (controlSystemRepository.existsByNameIgnoreCase(name)) {
+            return controlSystem;
+        }
         return controlSystemRepository.save(controlSystem);
     }
 

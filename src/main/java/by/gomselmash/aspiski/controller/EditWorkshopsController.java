@@ -1,6 +1,5 @@
 package by.gomselmash.aspiski.controller;
 
-import by.gomselmash.aspiski.model.Developer;
 import by.gomselmash.aspiski.model.Workshop;
 import by.gomselmash.aspiski.service.EditWorkshopsService;
 import org.springframework.http.HttpStatus;
@@ -12,15 +11,15 @@ import java.util.List;
 
 @Controller
 public class EditWorkshopsController {
-    private final EditWorkshopsService editWorkshopsService;
+    private final EditWorkshopsService service;
 
-    public EditWorkshopsController(EditWorkshopsService editWorkshopsService) {
-        this.editWorkshopsService = editWorkshopsService;
+    public EditWorkshopsController(EditWorkshopsService service) {
+        this.service = service;
     }
 
     @GetMapping("/editWorkshops")
     public String goEditWorkshops(Model model) {
-        List<Workshop> workshops = editWorkshopsService.findAllWorkshopsSorted();
+        List<Workshop> workshops = service.findAllWorkshopsSorted();
         model.addAttribute("workshops", workshops);
         return "edit_workshops";
     }
@@ -28,13 +27,13 @@ public class EditWorkshopsController {
     @PostMapping("/workshopSave")
     @ResponseBody
     public Workshop saveWorkshop(@RequestBody Workshop workshop) {
-        return editWorkshopsService.saveWorkshop(workshop);
+        return service.saveWorkshop(workshop);
     }
 
     @PostMapping("/workshopDelete")
     @ResponseStatus(HttpStatus.OK)
     public void deleteDeveloper(@RequestBody String stringId) {
         int id = Integer.parseInt(stringId);
-        editWorkshopsService.deleteWorkshopById(id);
+        service.deleteWorkshopById(id);
     }
 }

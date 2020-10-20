@@ -3,6 +3,7 @@ package by.gomselmash.aspiski.service;
 import by.gomselmash.aspiski.model.MachineType;
 import by.gomselmash.aspiski.repository.MachineTypeRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,7 +19,12 @@ public class EditMachineTypesService {
         return machineTypeRepository.findAllByOrderByNameAsc();
     }
 
+    @Transactional
     public MachineType saveMachineType(MachineType machineType) {
+        String name = machineType.getName();
+        if (machineTypeRepository.existsByNameIgnoreCase(name)) {
+            return machineType;
+        }
         return machineTypeRepository.save(machineType);
     }
 

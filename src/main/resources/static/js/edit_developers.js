@@ -21,6 +21,10 @@ function saveDeveloper() {
 }
 
 function addDeveloperToTable(developer) {
+    if (developer.id === 0) {
+        alert('Невозможно добавить. "' + developer.name + '" уже существует!');
+        return;
+    }
     let $row = getTableRow(developer);
     $('#developersTbody').prepend($row);
     clearEditField();

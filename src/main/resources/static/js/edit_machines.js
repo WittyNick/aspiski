@@ -10,9 +10,6 @@ function goWelcomePage() {
 
 function saveMachine() {
     let machine = getMachineFromInput();
-
-    console.log(machine);
-
     $.ajax({
         type: 'POST',
         url: 'machineSave',
@@ -24,6 +21,10 @@ function saveMachine() {
 }
 
 function addMachineToTable(machine) {
+    if (machine.id === 0) {
+        alert('Невозможно добавить. "' + machine.name + '" уже существует!');
+        return;
+    }
     let $row = getTableRow(machine);
     $('#machinesTbody').prepend($row);
     clearAllFields();

@@ -13,8 +13,8 @@ import java.util.List;
 public class EditDevelopersController {
     private final EditDevelopersService service;
 
-    public EditDevelopersController(EditDevelopersService editDevelopersService) {
-        this.service = editDevelopersService;
+    public EditDevelopersController(EditDevelopersService service) {
+        this.service = service;
     }
 
     @GetMapping("/editDevelopers")

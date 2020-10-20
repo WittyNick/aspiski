@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface DeveloperRepository extends JpaRepository<Developer, Integer> {
     List<Developer> findAllByOrderByNameAsc();
+    boolean existsByNameIgnoreCase(String name);
 }

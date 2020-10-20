@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface ControlSystemRepository extends JpaRepository<ControlSystem, Integer> {
     List<ControlSystem> findAllByOrderByNameAsc();
+    boolean existsByNameIgnoreCase(String name);
 }

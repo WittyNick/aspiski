@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface ProgramRepository extends JpaRepository<Program, Integer> {
     List<Program> findAllByOrderByPartNumberAsc();
+    boolean existsByProgramNumberIgnoreCase(String programNumber);
 }

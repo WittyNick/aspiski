@@ -26,6 +26,10 @@ check if (!isNothingSelected()) { removeSelectedRow() }
 - false - when we save new control system.
  */
 function addControlSystemToTable(controlSystem) {
+    if (controlSystem.id === 0) {
+        alert('Невозможно добавить. "' + controlSystem.name + '" уже существует!');
+        return;
+    }
     let $row = getTableRow(controlSystem);
     $('#controlSystemsTbody').prepend($row);
     clearEditField();

@@ -21,6 +21,10 @@ function saveMachineType() {
 }
 
 function addMachineTypeToTable(machineType) {
+    if (machineType.id === 0) {
+        alert('Невозможно добавить. "' + machineType.name + '" уже существует!');
+        return;
+    }
     let $row = getTableRow(machineType);
     $('#machineTypesTbody').prepend($row);
     clearEditField();

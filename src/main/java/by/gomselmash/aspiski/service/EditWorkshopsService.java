@@ -2,9 +2,8 @@ package by.gomselmash.aspiski.service;
 
 import by.gomselmash.aspiski.model.Workshop;
 import by.gomselmash.aspiski.repository.WorkshopRepository;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,23 +19,16 @@ public class EditWorkshopsService {
         return workshopRepository.findAllByOrderByNameAsc();
     }
 
+    @Transactional
     public Workshop saveWorkshop(Workshop workshop) {
+        String name = workshop.getName();
+        if (workshopRepository.existsByNameIgnoreCase(name)) {
+            return workshop;
+        }
         return workshopRepository.save(workshop);
     }
 
     public void deleteWorkshopById(int id) {
-        workshopRepository.count(new Example<Workshop>() {
-
-            @Override
-            public Workshop getProbe() {
-                return null;
-            }
-
-            @Override
-            public ExampleMatcher getMatcher() {
-                return null;
-            }
-        });
         workshopRepository.deleteById(id);
     }
 }

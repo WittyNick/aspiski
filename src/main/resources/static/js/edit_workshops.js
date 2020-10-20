@@ -21,6 +21,10 @@ function saveWorkshop() {
 }
 
 function addWorkshopToTable(workshop) {
+    if (workshop.id === 0) {
+        alert('Невозможно добавить. "' + workshop.name + '" уже существует!');
+        return;
+    }
     let $row = getTableRow(workshop);
     $('#workshopsTbody').prepend($row);
     clearEditField();

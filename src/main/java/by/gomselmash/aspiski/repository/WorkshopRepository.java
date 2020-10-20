@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface WorkshopRepository extends JpaRepository<Workshop, Integer> {
     List<Workshop> findAllByOrderByNameAsc();
+    boolean existsByNameIgnoreCase(String name);
 }

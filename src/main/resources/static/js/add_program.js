@@ -3,6 +3,11 @@
 //     $('#date').val(today);
 // });
 
+$(function () {
+    $('#cancel').on('click', goWelcomePage);
+    $('#save').on('click', saveProgram);
+});
+
 function goWelcomePage() {
     $(location).prop('href', '/');
 }
@@ -37,6 +42,15 @@ function saveProgram() {
         url: 'programSave',
         data: JSON.stringify(program),
         contentType: 'application/json; charset=UTF-8',
-        success: goWelcomePage
+        dataType: 'json',
+        success: onSaveAction
     });
+}
+
+function onSaveAction(wasSaved) {
+    if (wasSaved) {
+        goWelcomePage();
+    } else {
+        alert('Невозможно сохранить! Программа с таким номером уже существует.');
+    }
 }

@@ -3,9 +3,9 @@ package by.gomselmash.aspiski.service;
 import by.gomselmash.aspiski.model.*;
 import by.gomselmash.aspiski.repository.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,8 +29,24 @@ public class AddEditProgramService {
         this.developerRepository = developerRepository;
     }
 
-    public void saveProgram(Program programToSave) {
-        programRepository.save(programToSave);
+    @Transactional
+    public boolean saveProgram(Program program) {
+        String programNumber = program.getProgramNumber();
+        if (programRepository.existsByProgramNumberIgnoreCase(programNumber)) {
+            return false;
+        }
+        programRepository.save(program);
+        return true;
+    }
+
+    @Transactional
+    public boolean updateProgram(Program program) {
+        Integer id = program.getId();
+        if (programRepository.existsById(id)) {
+            programRepository.save(program);
+            return true;
+        }
+        return false;
     }
 
     public List<Machine> findAllMachinesSorted() {
