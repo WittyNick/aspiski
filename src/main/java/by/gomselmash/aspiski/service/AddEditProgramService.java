@@ -49,26 +49,32 @@ public class AddEditProgramService {
         return false;
     }
 
+    @Transactional(readOnly = true)
     public List<Machine> findAllMachinesSorted() {
         return machineRepository.findAllByOrderByNameAsc();
     }
 
+    @Transactional(readOnly = true)
     public List<ControlSystem> findAllControlSystemsSorted() {
         return controlSystemRepository.findAllByOrderByNameAsc();
     }
 
+    @Transactional(readOnly = true)
     public List<Workshop> findAllWorkshopsSorted() {
         return workshopRepository.findAllByOrderByNameAsc();
     }
 
+    @Transactional(readOnly = true)
     public List<Developer> findAllDevelopersSorted() {
         return developerRepository.findAllByOrderByNameAsc();
     }
 
+    @Transactional(readOnly = true)
     public Optional<Program> findProgramById(int id) {
         return programRepository.findById(id);
     }
 
+    @Transactional(readOnly = true)
     public Optional<Program> findProgramById(String id) {
         return findProgramById(Integer.parseInt(id));
     }

@@ -1,70 +1,111 @@
 // TODO: add input validation before save
-
-const SELECTED_ROW_CLASS = 'table-primary';
-
+let isUpdateModeActive = false;
 let $selectedRow = $('<tr>');
+let $save;
+let $edit;
+let $delete;
+let $controlSystemsTbody;
+let $controlSystemId;
+let $name;
 
-function goWelcomePage() {
-    $(location).prop('href', '/');
+$(function () {
+    $save = $('#save');
+    $edit = $('#edit');
+    $delete = $('#delete');
+    $controlSystemsTbody = $('#controlSystemsTable tbody');
+    $controlSystemId = $('#controlSystemId');
+    $name = $('#name');
+    addActionHandlers();
+});
+
+function addActionHandlers() {
+    $controlSystemsTbody.find('tr').on('click', selectRow);
+    $save.on('click', onSaveButtonClick);
+    $('#clear').on('click', clearInput);
+    $edit.on('click', editControlSystem);
+    $delete.on('click', deleteControlSystem);
 }
 
-function saveControlSystem() {
+function onSaveButtonClick() {
     let controlSystem = getControlSystemFromInput();
+    isUpdateModeActive ? updateControlSystem(controlSystem) : saveControlSystem(controlSystem);
+}
+
+function setMode(isUpdateRequired) {
+    isUpdateModeActive = isUpdateRequired;
+    isUpdateModeActive ? $save.html('Обновить') : $save.html('Сохранить');
+    $edit.prop('disabled', isUpdateModeActive);
+    $delete.prop('disabled', isUpdateModeActive);
+}
+
+function saveControlSystem(controlSystemToSave) {
     $.ajax({
         type: 'POST',
         url: 'controlSystemSave',
-        data: JSON.stringify(controlSystem),
+        data: JSON.stringify(controlSystemToSave),
         contentType: 'application/json; charset=UTF-8',
         dataType: 'json',
-        success: addControlSystemToTable
+        success: function (savedControlSystem) {
+            let wasNotSaved = savedControlSystem.id === 0;
+            if (wasNotSaved) {
+                alert(`Невозможно добавить.\n"${savedControlSystem.name}" уже существует!`);
+                return;
+            }
+            addRowToTable(savedControlSystem);
+        }
     });
 }
 
-/*
-check if (!isNothingSelected()) { removeSelectedRow() }
-- true - when we update selected row (existing control system).
-- false - when we save new control system.
- */
-function addControlSystemToTable(controlSystem) {
-    if (controlSystem.id === 0) {
-        alert('Невозможно добавить. "' + controlSystem.name + '" уже существует!');
-        return;
-    }
-    let $row = getTableRow(controlSystem);
-    $('#controlSystemsTbody').prepend($row);
-    clearEditField();
-    if (!isNothingSelected()) {
-        removeSelectedRow();
-    }
+function updateControlSystem(controlSystemToUpdate) {
+    $.ajax({
+        type: 'POST',
+        url: 'controlSystemUpdate',
+        data: JSON.stringify(controlSystemToUpdate),
+        contentType: 'application/json; charset=UTF-8',
+        dataType: 'json',
+        success: function (wasUpdated) {
+            if (!wasUpdated) {
+                alert(`Невозможно обновить!\n"${controlSystemToUpdate.name}" отсутствует в базе.`);
+                return;
+            }
+            removeSelectedRow();
+            addRowToTable(controlSystemToUpdate);
+            setMode(false);
+        }
+    });
 }
 
-/*
-Another way to add row click handler:
-$row.on('click', function () {
-    handleRowClick(this);
-});
- */
+function addRowToTable(controlSystem) {
+    let $row = getTableRow(controlSystem);
+    $controlSystemsTbody.prepend($row);
+    clearInput();
+}
+
 function getTableRow(controlSystem) {
-    return $(
-        '<tr onclick="handleRowClick(this)">' +
+    let $row = $(
+        '<tr>' +
             '<td>' + controlSystem.id + '</td>' +
             '<td>' + controlSystem.name + '</td>' +
         '</tr>'
     );
+    $row.on('click', selectRow);
+    $row.addClass(CHANGED_TEXT_CLASS);
+    return $row;
 }
 
 function editControlSystem() {
     if (isNothingSelected()) {
         return;
     }
-    clearEditField();
+    clearInput();
     let controlSystem = getSelectedControlSystem();
     setControlSystemToInput(controlSystem);
+    setMode(true);
 }
 
 function setControlSystemToInput(controlSystem) {
-    $('#controlSystemId').val(controlSystem.id);
-    $('#name').val(controlSystem.name);
+    $controlSystemId.val(controlSystem.id);
+    $name.val(controlSystem.name);
 }
 
 function getSelectedControlSystem() {
@@ -83,7 +124,13 @@ function deleteControlSystem() {
         url: 'controlSystemDelete',
         data: getSelectedControlSystemId(), // (String) controlSystemId
         contentType: 'text/plain; charset=UTF-8',
-        success: removeSelectedRow
+        success: function (wasDeleted) {
+            if (wasDeleted) {
+                removeSelectedRow();
+            } else {
+                alert('Не удалось удалить, т.к. данная систему ЧПУ используется.')
+            }
+        }
     });
 }
 
@@ -97,26 +144,30 @@ function getSelectedControlSystemId() {
 }
 
 function isNothingSelected() {
-    return  $selectedRow.is(':empty');
+    return $selectedRow.is(':empty');
 }
 
-function clearEditField() {
+function clearInput() {
     setControlSystemToInput({
         id: 0,
         name: ''
     });
-    $('#name').focus();
+    setMode(false);
+    $name.focus();
 }
 
 function getControlSystemFromInput() {
     return {
-        id: +$('#controlSystemId').val(),
-        name: $('#name').val()
+        id: +$controlSystemId.val(),
+        name: $name.val()
     };
 }
 
-function handleRowClick(row) {
+function selectRow() {
+    if (isUpdateModeActive) {
+        return;
+    }
     $selectedRow.removeClass(SELECTED_ROW_CLASS);
-    $selectedRow = $(row);
+    $selectedRow = $(this);
     $selectedRow.addClass(SELECTED_ROW_CLASS);
 }

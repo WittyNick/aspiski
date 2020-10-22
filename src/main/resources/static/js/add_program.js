@@ -1,8 +1,3 @@
-// $(function() {
-//     let today = new Date().toISOString().split('T')[0]; // yyyy-MM-dd
-//     $('#date').val(today);
-// });
-
 $(function () {
     $('#cancel').on('click', goWelcomePage);
     $('#save').on('click', saveProgram);
@@ -43,14 +38,12 @@ function saveProgram() {
         data: JSON.stringify(program),
         contentType: 'application/json; charset=UTF-8',
         dataType: 'json',
-        success: onSaveAction
+        success: function (wasSaved) {
+            if (wasSaved) {
+                goWelcomePage();
+            } else {
+                alert('Невозможно сохранить! Программа с таким номером уже существует.');
+            }
+        }
     });
-}
-
-function onSaveAction(wasSaved) {
-    if (wasSaved) {
-        goWelcomePage();
-    } else {
-        alert('Невозможно сохранить! Программа с таким номером уже существует.');
-    }
 }

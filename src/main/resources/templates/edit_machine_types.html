@@ -18,28 +18,28 @@
 
     <input type="hidden" id="machineTypeId" value="0">
     <div class="form-row align-items-end justify-content-center">
-        <div class="input-group col-5">
+        <div class="input-group col-4">
             <input type="text" class="form-control" id="name" placeholder="Тип станка" aria-label="Тип станка">
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" onclick="clearEditField()">&#10060;</button>
+                <button class="btn btn-outline-secondary" type="button" id="clear">&#10060;</button>
             </div>
         </div>
         <div class="col-auto">
-            <button type="button" class="btn btn-primary" onclick="saveMachineType()">Сохранить</button>
+            <button type="button" id="save" class="btn btn-primary">Сохранить</button>
         </div>
     </div>
 
     <div class="row justify-content-center mt-3">
         <div class="col-5">
-            <table class="table table-bordered table-hover">
+            <table class="table table-bordered table-hover" id="machineTypesTable">
                 <thead class="thead-light text-center">
                 <tr>
                     <th scope="col">id</th>
                     <th scope="col">Тип станка</th>
                 </tr>
                 </thead>
-                <tbody  id="machineTypesTbody">
-                <tr th:each="type : ${machineTypes}" onclick="handleRowClick(this)">
+                <tbody>
+                <tr th:each="type : ${machineTypes}">
                     <td th:text="${type.id}"></td>
                     <td th:text="${type.name}"></td>
                 </tr>
@@ -50,9 +50,8 @@
 
     <div class="row justify-content-center">
         <div class="col-auto">
-            <button type="button" class="btn btn-outline-primary m-2" onclick="goWelcomePage()">Назад</button>
-            <button type="button" class="btn btn-primary m-2" onclick="editMachineType()">Редактировать</button>
-            <button type="button" class="btn btn-primary m-2" onclick="deleteMachineType()">Удалить</button>
+            <button type="button" id="edit" class="btn btn-primary m-2">Редактировать</button>
+            <button type="button" id="delete" class="btn btn-primary m-2">Удалить</button>
         </div>
     </div>
 </div>

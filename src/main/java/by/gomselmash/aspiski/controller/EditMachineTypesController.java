@@ -2,10 +2,12 @@ package by.gomselmash.aspiski.controller;
 
 import by.gomselmash.aspiski.model.MachineType;
 import by.gomselmash.aspiski.service.EditMachineTypesService;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -30,11 +32,16 @@ public class EditMachineTypesController {
         return service.saveMachineType(machineType);
     }
 
-    // TODO: return boolean false when get exception or check possibility to delete
+    @PostMapping("/machineTypeUpdate")
+    @ResponseBody
+    public Boolean updateMachineType(@RequestBody MachineType machineType) {
+        return service.updateMachineType(machineType);
+    }
+
     @PostMapping("/machineTypeDelete")
-    @ResponseStatus(value = HttpStatus.OK)
-    public void deleteControlSystem(@RequestBody String stringId) {
+    @ResponseBody
+    public Boolean deleteControlSystem(@RequestBody String stringId) {
         int id = Integer.parseInt(stringId);
-        service.deleteMachineTypeById(id);
+        return service.deleteMachineTypeById(id);
     }
 }
