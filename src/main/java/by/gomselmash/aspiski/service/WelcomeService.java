@@ -3,6 +3,7 @@ package by.gomselmash.aspiski.service;
 import by.gomselmash.aspiski.model.*;
 import by.gomselmash.aspiski.repository.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -26,26 +27,36 @@ public class WelcomeService {
         this.developerRepository = developerRepository;
     }
 
+    @Transactional(readOnly = true)
     public List<Program> findAllProgramsSorted() {
         return programRepository.findAllByOrderByPartNumberAsc();
     }
 
-    public void deleteProgramById(int id) {
-        programRepository.deleteById(id);
+    @Transactional
+    public boolean deleteProgramById(int id) {
+        if (programRepository.existsById(id)) {
+            programRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 
+    @Transactional(readOnly = true)
     public List<Machine> findAllMachinesSorted() {
         return machineRepository.findAllByOrderByNameAsc();
     }
 
+    @Transactional(readOnly = true)
     public List<ControlSystem> findAllControlSystemsSorted() {
         return controlSystemRepository.findAllByOrderByNameAsc();
     }
 
+    @Transactional(readOnly = true)
     public List<Workshop> findAllWorkshopsSorted() {
         return workshopRepository.findAllByOrderByNameAsc();
     }
 
+    @Transactional(readOnly = true)
     public List<Developer> findAllDevelopersSorted() {
         return developerRepository.findAllByOrderByNameAsc();
     }

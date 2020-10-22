@@ -1,15 +1,7 @@
+const SELECTED_ROW_CLASS = 'table-primary'; // blue
+const CHANGED_TEXT_CLASS = 'text-primary'; // blue
+const HIDE_CLASS = 'd-none'; // Bootstrap ccs class
+
 function isStringEmpty(string) {
     return string.trim() === '';
-}
-
-function isUndefined(value) {
-    return typeof value === 'undefined';
-}
-
-/*
-Convert String from "yyyy-MM-dd" to "dd.MM.yyyy" format.
- */
-function toStringDateRu(stringDateEn) {
-    let elements = stringDateEn.split('-');
-    return elements[2] + '.' + elements[1] + '.' + elements[0];
 }

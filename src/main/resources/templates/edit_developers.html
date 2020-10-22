@@ -21,25 +21,25 @@
         <div class="input-group col-5">
             <input type="text" class="form-control" id="name" placeholder="Разработчик" aria-label="Разработчик">
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" onclick="clearEditField()">&#10060;</button>
+                <button class="btn btn-outline-secondary" type="button" id="clear">&#10060;</button>
             </div>
         </div>
         <div class="col-auto">
-            <button type="button" class="btn btn-primary" onclick="saveDeveloper()">Сохранить</button>
+            <button type="button" class="btn btn-primary" id="save">Сохранить</button>
         </div>
     </div>
 
     <div class="row justify-content-center mt-3">
         <div class="col-5">
-            <table class="table table-bordered table-hover">
+            <table class="table table-bordered table-hover" id="developersTable">
                 <thead class="thead-light text-center">
                 <tr>
                     <th scope="col">id</th>
                     <th scope="col">Разработчик</th>
                 </tr>
                 </thead>
-                <tbody  id="developersTbody">
-                <tr th:each="developer : ${developers}" onclick="handleRowClick(this)">
+                <tbody>
+                <tr th:each="developer : ${developers}">
                     <td th:text="${developer.id}"></td>
                     <td th:text="${developer.name}"></td>
                 </tr>
@@ -50,9 +50,8 @@
 
     <div class="row justify-content-center">
         <div class="col-auto">
-            <button type="button" class="btn btn-outline-primary m-2" onclick="goWelcomePage()">Назад</button>
-            <button type="button" class="btn btn-primary m-2" onclick="editDeveloper()">Редактировать</button>
-            <button type="button" class="btn btn-primary m-2" onclick="deleteDeveloper()">Удалить</button>
+            <button type="button" class="btn btn-primary m-2" id="edit">Редактировать</button>
+            <button type="button" class="btn btn-primary m-2" id="delete">Удалить</button>
         </div>
     </div>
 </div>

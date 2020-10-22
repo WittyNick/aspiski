@@ -29,17 +29,17 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
-            <li th:with="isCurrent=${page == 'main'} ? true : false"
+            <li th:with="isCurrent=${page == 'main'}"
                 class="nav-item" th:classappend="${isCurrent} ? active : ''">
                 <a href="/" class="nav-link" th:classappend="${isCurrent} ? disabled : ''">главная</a>
             </li>
 
-            <li th:with="isCurrent=${page == 'add'} ? true : false"
+            <li th:with="isCurrent=${page == 'add'}"
                 class="nav-item" th:classappend="${isCurrent} ? active : ''">
                 <a href="/addProgram" class="nav-link" th:classappend="${isCurrent} ? disabled : ''">добавить</a>
             </li>
 
-            <li th:with="isCurrent=${page == 'stat'} ? true : false"
+            <li th:with="isCurrent=${page == 'stat'}"
                 class="nav-item" th:classappend="${isCurrent} ? active : ''">
                 <a href="/stat" class="nav-link" th:classappend="${isCurrent} ? disabled : ''">статистика</a>
             </li>

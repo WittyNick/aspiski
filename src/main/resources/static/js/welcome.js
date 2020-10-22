@@ -1,5 +1,3 @@
-const SELECTED_ROW_CLASS = 'table-primary';
-
 let $selectedRow = $('<tr>');
 
 let $programsTbody;
@@ -18,16 +16,16 @@ $(function () {
     $inputSystem = $('#controlSystem');
     $inputProgram = $('#programNumber');
     $inputWorkshop = $('#workshop');
-    addActionListeners();
+    addActionHandlers();
 });
 
-function addActionListeners() {
+function addActionHandlers() {
     $('#filter').on('input', filterTable);
     $filterCheckbox.on('input', handleCheckbox);
     $('#info').on('click', showInfo);
     $('#edit').on('click', editCNCProgram);
     $('#delete').on('click', deleteCNCProgram);
-    $programsTbody.find('tr').on('click', handleRowClick);
+    $programsTbody.find('tr').on('click', selectRow);
 }
 
 function showInfo() {
@@ -60,7 +58,13 @@ function deleteCNCProgram() {
         url: 'programDelete',
         data: getSelectedProgramId(), // String
         contentType: 'text/plain; charset=UTF-8',
-        success: removeSelectedRow
+        success: function (wasDeleted) {
+            if (wasDeleted) {
+                removeSelectedRow();
+            } else {
+                alert('Не удалось удалить!\nКто-то её уже успел удалить до тебя.');
+            }
+        }
     });
 }
 
@@ -73,7 +77,7 @@ function removeSelectedRow() {
     $selectedRow = $('<tr>');
 }
 
-function handleRowClick() {
+function selectRow() {
     $selectedRow.removeClass(SELECTED_ROW_CLASS);
     $selectedRow = $(this);
     $selectedRow.addClass(SELECTED_ROW_CLASS);
@@ -96,7 +100,7 @@ function filterTable() {
     unselectRow();
     $programsTbody.find('tr').each(function (i, row) {
         let $row = $(row);
-        isMatches($row) ? $row.removeClass('hidden') : $row.addClass('hidden');
+        isMatches($row) ? $row.removeClass(HIDE_CLASS) : $row.addClass(HIDE_CLASS);
     });
 }
 
@@ -105,7 +109,8 @@ function isMatches($tableRow) {
     let row = parseTableRowOptions($tableRow);
 
     let partCompareIndex = row.part.indexOf(filter.part);
-    return (filter.isExactSearchChecked && partCompareIndex === 0 || partCompareIndex !== -1) &&
+
+    return (filter.isExactSearchChecked && partCompareIndex === 0 || !filter.isExactSearchChecked && partCompareIndex !== -1) &&
         (filter.machineId === 0 || row.machineId === filter.machineId) &&
         (filter.systemId === 0 || row.systemId === filter.systemId) &&
         row.program.indexOf(filter.program) !== -1 &&

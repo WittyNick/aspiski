@@ -1,59 +1,111 @@
 // TODO: add input validation before save
-
-const SELECTED_ROW_CLASS = 'table-primary';
-
+let isUpdateModeActive = false;
 let $selectedRow = $('<tr>');
+let $developersTbody;
+let $save;
+let $edit;
+let $delete;
+let $developerId;
+let $name;
 
-function goWelcomePage() {
-    $(location).prop('href', '/');
+$(function () {
+    $save = $('#save');
+    $edit = $('#edit');
+    $delete = $('#delete');
+    $developersTbody = $('#developersTable tbody');
+    $developerId = $('#developerId');
+    $name = $('#name');
+    addActionHandlers();
+});
+
+function addActionHandlers() {
+    $('#clear').on('click', clearInput);
+    $save.on('click', onSaveButtonClick);
+    $edit.on('click', editDeveloper);
+    $delete.on('click', onDeleteClick);
+    $developersTbody.find('tr').on('click', selectRow);
 }
 
-function saveDeveloper() {
+function onSaveButtonClick() {
     let developer = getDeveloperFromInput();
+    isUpdateModeActive ? updateDeveloper(developer) : saveDeveloper(developer);
+}
+
+function setMode(isUpdateRequired) {
+    isUpdateModeActive = isUpdateRequired;
+    isUpdateModeActive ? $save.html('Обновить') : $save.html('Сохранить');
+    $edit.prop('disabled', isUpdateModeActive);
+    $delete.prop('disabled', isUpdateModeActive);
+}
+
+function saveDeveloper(developerToSave) {
     $.ajax({
         type: 'POST',
         url: 'developerSave',
-        data: JSON.stringify(developer),
+        data: JSON.stringify(developerToSave),
         contentType: 'application/json; charset=UTF-8',
         dataType: 'json',
-        success: addDeveloperToTable
+        success: function (savedDeveloper) {
+            let wasNotSaved = savedDeveloper.id === 0;
+            if (wasNotSaved) {
+                alert(`Невозможно добавить!\n"${savedDeveloper.name}" уже существует`);
+                return;
+            }
+            addRowToTable(savedDeveloper);
+        }
     });
 }
 
-function addDeveloperToTable(developer) {
-    if (developer.id === 0) {
-        alert('Невозможно добавить. "' + developer.name + '" уже существует!');
-        return;
-    }
+function updateDeveloper(developerToUpdate) {
+    $.ajax({
+        type: 'POST',
+        url: 'developerUpdate',
+        data: JSON.stringify(developerToUpdate),
+        contentType: 'application/json; charset=UTF-8',
+        dataType: 'json',
+        success: function (wasUpdated) {
+            if (!wasUpdated) {
+                alert(`Невозможно обновить!\n"${developerToUpdate.name}" отсутствует в базе.`);
+                return;
+            }
+            removeSelectedRow();
+            addRowToTable(developerToUpdate);
+            setMode(false);
+        }
+    });
+}
+
+function addRowToTable(developer) {
     let $row = getTableRow(developer);
-    $('#developersTbody').prepend($row);
-    clearEditField();
-    if (!isNothingSelected()) {
-        removeSelectedRow();
-    }
+    $developersTbody.prepend($row);
+    clearInput();
 }
 
 function getTableRow(developer) {
-    return $(
-        '<tr onclick="handleRowClick(this)">' +
+    let $row = $(
+        '<tr>' +
         '<td>' + developer.id + '</td>' +
         '<td>' + developer.name + '</td>' +
         '</tr>'
     );
+    $row.on('click', selectRow);
+    $row.addClass(CHANGED_TEXT_CLASS);
+    return $row;
 }
 
 function editDeveloper() {
     if (isNothingSelected()) {
         return;
     }
-    clearEditField();
+    clearInput();
     let developer = getSelectedDeveloper();
     setDeveloperToInput(developer);
+    setMode(true);
 }
 
 function setDeveloperToInput(developer) {
-    $('#developerId').val(developer.id);
-    $('#name').val(developer.name);
+    $developerId.val(developer.id);
+    $name.val(developer.name);
 }
 
 function getSelectedDeveloper() {
@@ -63,7 +115,7 @@ function getSelectedDeveloper() {
     };
 }
 
-function deleteDeveloper() {
+function onDeleteClick() {
     if (isNothingSelected()) {
         return;
     }
@@ -72,7 +124,13 @@ function deleteDeveloper() {
         url: 'developerDelete',
         data: getSelectedDeveloperId(), // String
         contentType: 'text/plain; charset=UTF-8',
-        success: removeSelectedRow
+        success: function (wasDeleted) {
+            if (wasDeleted) {
+                removeSelectedRow();
+            } else {
+                alert('Не удалось удалить, т.к. данный разработчик используется.');
+            }
+        }
     });
 }
 
@@ -89,23 +147,27 @@ function isNothingSelected() {
     return  $selectedRow.is(':empty');
 }
 
-function clearEditField() {
+function clearInput() {
     setDeveloperToInput({
         id: 0,
         name: ''
     });
-    $('#name').focus();
+    setMode(false);
+    $name.focus();
 }
 
 function getDeveloperFromInput() {
     return {
-        id: +$('#developerId').val(),
-        name: $('#name').val()
+        id: +$developerId.val(),
+        name: $name.val()
     };
 }
 
-function handleRowClick(row) {
+function selectRow() {
+    if (isUpdateModeActive) {
+        return;
+    }
     $selectedRow.removeClass(SELECTED_ROW_CLASS);
-    $selectedRow = $(row);
+    $selectedRow = $(this);
     $selectedRow.addClass(SELECTED_ROW_CLASS);
 }

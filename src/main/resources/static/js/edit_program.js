@@ -38,14 +38,12 @@ function updateProgram() {
         data: JSON.stringify(program),
         contentType: 'application/json; charset=UTF-8',
         dataType: 'json',
-        success: onUpdateAction
+        success: function (wasUpdated) {
+            if (wasUpdated) {
+                goWelcomePage();
+            } else {
+                alert('Невозможно обновить программу!');
+            }
+        }
     });
-}
-
-function onUpdateAction(wasUpdated) {
-    if (wasUpdated) {
-        goWelcomePage();
-    } else {
-        alert('Невозможно обновить программу!');
-    }
 }

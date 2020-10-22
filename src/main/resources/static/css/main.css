@@ -1,20 +1,21 @@
-html, body {
+html, body
+{
     height: 100%;
     margin: 0;
     padding: 0;
 }
 
-img {
+img
+{
     max-width: 100%;
 }
 
-table {
+table
+{
     cursor: default;
 }
-table ::selection {
-    background: transparent;
-}
 
-.hidden {
-    display: none;
+table ::selection
+{
+    background: transparent;
 }

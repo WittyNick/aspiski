@@ -10,4 +10,5 @@ import java.util.List;
 public interface MachineRepository extends JpaRepository<Machine, Integer> {
     List<Machine> findAllByOrderByNameAsc();
     boolean existsByNameIgnoreCase(String name);
+    boolean existsByMachineType_Id(int machineTypeId);
 }
