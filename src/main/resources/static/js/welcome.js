@@ -109,8 +109,7 @@ function isMatches($tableRow) {
     let row = parseTableRowOptions($tableRow);
 
     let partCompareIndex = row.part.indexOf(filter.part);
-
-    return (filter.isExactSearchChecked && partCompareIndex === 0 || !filter.isExactSearchChecked && partCompareIndex !== -1) &&
+    return (partCompareIndex === 0 || !filter.isExactSearch && partCompareIndex !== -1) &&
         (filter.machineId === 0 || row.machineId === filter.machineId) &&
         (filter.systemId === 0 || row.systemId === filter.systemId) &&
         row.program.indexOf(filter.program) !== -1 &&
@@ -119,7 +118,7 @@ function isMatches($tableRow) {
 
 function parseFilterOptions() {
     return {
-        isExactSearchChecked: $filterCheckbox.is(':checked'),
+        isExactSearch: $filterCheckbox.is(':checked'),
         part: $inputPart.val().toLowerCase(),
         machineId: +$inputMachine.val(),
         systemId: +$inputSystem.val(),
