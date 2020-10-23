@@ -109,7 +109,7 @@ function isMatches($tableRow) {
     let row = parseTableRowOptions($tableRow);
 
     let partCompareIndex = row.part.indexOf(filter.part);
-    return (partCompareIndex === 0 || !filter.isExactSearch && partCompareIndex !== -1) &&
+    return (partCompareIndex === 0 || partCompareIndex !== -1 && !filter.isExactSearch) &&
         (filter.machineId === 0 || row.machineId === filter.machineId) &&
         (filter.systemId === 0 || row.systemId === filter.systemId) &&
         row.program.indexOf(filter.program) !== -1 &&

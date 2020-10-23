@@ -6,3 +6,8 @@
 {
     display: none;
 }
+
+#modalBodyInfo
+{
+    white-space: pre-wrap;
+}

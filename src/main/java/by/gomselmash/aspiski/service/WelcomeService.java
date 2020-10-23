@@ -28,7 +28,7 @@ public class WelcomeService {
     }
 
     @Transactional(readOnly = true)
-    public List<Program> findAllProgramsSorted() {
+    public List<Program> findAllPrograms() {
         return programRepository.findAllByOrderByPartNumberAsc();
     }
 
@@ -42,22 +42,22 @@ public class WelcomeService {
     }
 
     @Transactional(readOnly = true)
-    public List<Machine> findAllMachinesSorted() {
+    public List<Machine> findAllMachines() {
         return machineRepository.findAllByOrderByNameAsc();
     }
 
     @Transactional(readOnly = true)
-    public List<ControlSystem> findAllControlSystemsSorted() {
+    public List<ControlSystem> findAllControlSystems() {
         return controlSystemRepository.findAllByOrderByNameAsc();
     }
 
     @Transactional(readOnly = true)
-    public List<Workshop> findAllWorkshopsSorted() {
+    public List<Workshop> findAllWorkshops() {
         return workshopRepository.findAllByOrderByNameAsc();
     }
 
     @Transactional(readOnly = true)
-    public List<Developer> findAllDevelopersSorted() {
+    public List<Developer> findAllDevelopers() {
         return developerRepository.findAllByOrderByNameAsc();
     }
 }

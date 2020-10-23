@@ -23,7 +23,7 @@ public class EditWorkshopsService {
     }
 
     @Transactional(readOnly = true)
-    public List<Workshop> findAllWorkshopsSorted() {
+    public List<Workshop> findAllWorkshops() {
         return workshopRepository.findAllByOrderByNameAsc();
     }
 

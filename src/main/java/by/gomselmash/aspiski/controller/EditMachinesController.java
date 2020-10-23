@@ -22,7 +22,7 @@ public class EditMachinesController {
 
     @GetMapping("/editMachines")
     public String goEditMachines(Model model) {
-        List<Machine> machines = service.findAllMachinesSorted();
+        List<Machine> machines = service.findAllMachines();
         List<MachineType> machineTypes = service.findAllMachineTypesSorted();
         model
                 .addAttribute("machines", machines)

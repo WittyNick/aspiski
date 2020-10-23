@@ -21,7 +21,7 @@ public class AddEditProgramController {
 
     @GetMapping("/addProgram")
     public String goAddProgram(Model model) {
-        String currentDate = service.currentDate();
+        String currentDate = service.getDateNow();
         model
                 .addAllAttributes(getAttributeMap())
                 .addAttribute("currentDate", currentDate);
@@ -53,10 +53,10 @@ public class AddEditProgramController {
     }
 
     private Map<String, Object> getAttributeMap() {
-        List<Machine> machines = service.findAllMachinesSorted();
-        List<ControlSystem> controlSystems = service.findAllControlSystemsSorted();
-        List<Workshop> workshops = service.findAllWorkshopsSorted();
-        List<Developer> developers = service.findAllDevelopersSorted();
+        List<Machine> machines = service.findAllMachines();
+        List<ControlSystem> controlSystems = service.findAllControlSystems();
+        List<Workshop> workshops = service.findAllWorkshops();
+        List<Developer> developers = service.findAllDevelopers();
         Map<String, Object> map = new HashMap<>();
         map.put("machines", machines);
         map.put("controlSystems", controlSystems);

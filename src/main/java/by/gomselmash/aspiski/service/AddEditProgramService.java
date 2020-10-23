@@ -50,22 +50,22 @@ public class AddEditProgramService {
     }
 
     @Transactional(readOnly = true)
-    public List<Machine> findAllMachinesSorted() {
+    public List<Machine> findAllMachines() {
         return machineRepository.findAllByOrderByNameAsc();
     }
 
     @Transactional(readOnly = true)
-    public List<ControlSystem> findAllControlSystemsSorted() {
+    public List<ControlSystem> findAllControlSystems() {
         return controlSystemRepository.findAllByOrderByNameAsc();
     }
 
     @Transactional(readOnly = true)
-    public List<Workshop> findAllWorkshopsSorted() {
+    public List<Workshop> findAllWorkshops() {
         return workshopRepository.findAllByOrderByNameAsc();
     }
 
     @Transactional(readOnly = true)
-    public List<Developer> findAllDevelopersSorted() {
+    public List<Developer> findAllDevelopers() {
         return developerRepository.findAllByOrderByNameAsc();
     }
 
@@ -83,7 +83,7 @@ public class AddEditProgramService {
      LocalDate currentDate = LocalDate.now();
      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
      */
-    public String currentDate() {
+    public String getDateNow() {
         return LocalDate.now().toString(); // yyyy-MM-dd
     }
 }

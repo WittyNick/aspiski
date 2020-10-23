@@ -23,7 +23,7 @@ public class EditControlSystemsService {
     }
 
     @Transactional(readOnly = true)
-    public List<ControlSystem> findAllControlSystemsSorted() {
+    public List<ControlSystem> findAllControlSystems() {
         return controlSystemRepository.findAllByOrderByNameAsc(); // when nothing was found returns empty List
     }
 

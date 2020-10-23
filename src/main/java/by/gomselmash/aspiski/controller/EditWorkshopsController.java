@@ -21,7 +21,7 @@ public class EditWorkshopsController {
 
     @GetMapping("/editWorkshops")
     public String goEditWorkshops(Model model) {
-        List<Workshop> workshops = service.findAllWorkshopsSorted();
+        List<Workshop> workshops = service.findAllWorkshops();
         model.addAttribute("workshops", workshops);
         return "edit_workshops";
     }

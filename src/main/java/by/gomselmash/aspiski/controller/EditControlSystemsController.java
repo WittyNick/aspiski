@@ -21,7 +21,7 @@ public class EditControlSystemsController {
 
     @GetMapping("/editControlSystems")
     public String goEditControlSystems(Model model) {
-        List<ControlSystem> controlSystems = service.findAllControlSystemsSorted();
+        List<ControlSystem> controlSystems = service.findAllControlSystems();
         model.addAttribute("controlSystems", controlSystems);
         return "edit_control_systems";
     }

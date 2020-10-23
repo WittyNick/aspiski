@@ -28,7 +28,7 @@ public class EditMachinesService {
     }
 
     @Transactional(readOnly = true)
-    public List<Machine> findAllMachinesSorted() {
+    public List<Machine> findAllMachines() {
         return machineRepository.findAllByOrderByNameAsc();
     }
 

@@ -23,7 +23,7 @@ public class EditDevelopersService {
     }
 
     @Transactional(readOnly = true)
-    public List<Developer> findAllDevelopersSorted() {
+    public List<Developer> findAllDevelopers() {
         return developerRepository.findAllByOrderByNameAsc();
     }
 

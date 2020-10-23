@@ -23,7 +23,7 @@ public class EditMachineTypesService {
     }
 
     @Transactional(readOnly = true)
-    public List<MachineType> findAllMachineTypesSorted() {
+    public List<MachineType> findAllMachineTypes() {
         return machineTypeRepository.findAllByOrderByNameAsc();
     }
 

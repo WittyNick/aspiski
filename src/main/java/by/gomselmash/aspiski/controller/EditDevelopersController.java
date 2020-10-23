@@ -21,7 +21,7 @@ public class EditDevelopersController {
 
     @GetMapping("/editDevelopers")
     public String goEditDevelopers(Model model) {
-        List<Developer> developers = service.findAllDevelopersSorted();
+        List<Developer> developers = service.findAllDevelopers();
         model.addAttribute("developers", developers);
         return "edit_developers";
     }
