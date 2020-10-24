@@ -44,10 +44,35 @@ function keyPressHandler(event) {
     }
     switch (event.keyCode) {
         case 40: // down
-            $selectedRow.next().click();
+            selectNextRow();
             break;
         case 38: // up
-            $selectedRow.prev().click();
+            selectPrevRow();
+            break;
+    }
+}
+
+function selectNextRow() {
+    let $row = $selectedRow.next();
+    while ($row !== null) {
+        if ($row.hasClass(HIDE_CLASS)) {
+            $row = $row.next();
+        } else {
+            $row.click();
+            break;
+        }
+    }
+}
+
+function selectPrevRow() {
+    let $row = $selectedRow.prev();
+    while ($row !== null) {
+        if ($row.hasClass(HIDE_CLASS)) {
+            $row = $row.prev();
+        } else {
+            $row.click();
+            break;
+        }
     }
 }
 

@@ -100,20 +100,20 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="program : ${programs}">
-                    <td th:text="${program.id}"></td>
-                    <td th:text="${program.partNumber}"></td>
-                    <td th:text="${program.position}"></td>
-                    <td th:text="${program.machine.id}"></td>
-                    <td th:text="${program.machine.name}"></td>
-                    <td th:text="${program.controlSystem.id}"></td>
-                    <td th:text="${program.controlSystem.name}"></td>
-                    <td th:text="${program.programNumber}"></td>
-                    <td th:text="${program.workshop.id}"></td>
-                    <td th:text="${program.workshop.name}"></td>
-                    <td th:text="${program.developer.name}"></td>
-                    <td th:text="${program.getParsedDate('dd.MM.yyyy')}"></td>
-                    <td th:text="${program.info}"></td>
+                <tr th:each="program : ${programs}" th:object="${program}">
+                    <td th:text="*{id}"></td>
+                    <td th:text="*{partNumber}"></td>
+                    <td th:text="*{position}"></td>
+                    <td th:text="*{machine.id}"></td>
+                    <td th:text="*{machine.name}"></td>
+                    <td th:text="*{controlSystem.id}"></td>
+                    <td th:text="*{controlSystem.name}"></td>
+                    <td th:text="*{programNumber}"></td>
+                    <td th:text="*{workshop.id}"></td>
+                    <td th:text="*{workshop.name}"></td>
+                    <td th:text="*{developer.name}"></td>
+                    <td th:text="*{getParsedDate('dd.MM.yyyy')}"></td>
+                    <td th:text="*{info}"></td>
                 </tr>
                 </tbody>
             </table>

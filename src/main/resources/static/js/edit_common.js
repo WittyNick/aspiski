@@ -104,6 +104,7 @@ function keyPressHandler(event) {
             break;
         case 38: // up
             $selectedRow.prev().click();
+            break;
     }
 }
 
