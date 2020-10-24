@@ -3,6 +3,7 @@
 <head>
     <th:block th:replace="fragments :: head" />
 
+    <script th:src="@{js/program_common.js}"></script>
     <script th:src="@{js/edit_program.js}"></script>
     <link th:rel="stylesheet" th:href="@{css/add_edit_program.css}" />
 </head>
@@ -92,8 +93,8 @@
 
     <div class="row justify-content-center">
         <div class="col-auto">
-            <button type="button" id="cancel" class="btn btn-primary m-2">Отмена</button>
-            <button type="button" id="update" class="btn btn-primary m-2">OK</button>
+            <button type="button" id="cancelBtn" class="btn btn-primary m-2">Отмена</button>
+            <button type="button" id="saveBtn" class="btn btn-primary m-2">OK</button>
         </div>
     </div>
 </div>

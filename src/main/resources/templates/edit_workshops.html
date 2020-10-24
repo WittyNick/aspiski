@@ -3,6 +3,7 @@
 <head>
     <th:block th:replace="fragments :: head" />
 
+    <script th:src="@{js/edit_common.js}"></script>
     <script th:src="@{js/edit_workshops.js}"></script>
     <link th:rel="stylesheet" th:href="@{css/edit_workshops.css}"/>
 </head>
@@ -16,22 +17,22 @@
         </div>
     </div>
 
-    <input type="hidden" id="workshopId" value="0">
+    <input type="hidden" id="hiddenId" value="0">
     <div class="form-row align-items-end justify-content-center">
         <div class="input-group col-5">
             <input type="text" class="form-control" id="name" placeholder="Цех" aria-label="Цех">
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="clear">&#10060;</button>
+                <button class="btn btn-outline-secondary" type="button" id="clearBtn">&#10060;</button>
             </div>
         </div>
         <div class="col-auto">
-            <button type="button" class="btn btn-primary" id="save">Сохранить</button>
+            <button type="button" class="btn btn-primary" id="saveBtn">Сохранить</button>
         </div>
     </div>
 
     <div class="row justify-content-center mt-3">
         <div class="col-5">
-            <table class="table table-bordered table-hover" id="workshopsTable">
+            <table class="table table-bordered table-hover" id="mainTable">
                 <thead class="thead-light text-center">
                 <tr>
                     <th scope="col">id</th>
@@ -48,12 +49,7 @@
         </div>
     </div>
 
-    <div class="row justify-content-center">
-        <div class="col-auto">
-            <button type="button" class="btn btn-primary m-2" id="edit">Редактировать</button>
-            <button type="button" class="btn btn-primary m-2" id="delete">Удалить</button>
-        </div>
-    </div>
+    <th:block th:replace="fragments :: editButtons" />
 </div>
 </body>
 </html>

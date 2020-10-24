@@ -3,6 +3,7 @@
 <head>
     <th:block th:replace="fragments :: head" />
 
+    <script th:src="@{js/edit_common.js}"></script>
     <script th:src="@{js/edit_machine_types.js}"></script>
     <link th:rel="stylesheet" th:href="@{css/edit_machine_types.css}" />
 </head>
@@ -16,22 +17,22 @@
         </div>
     </div>
 
-    <input type="hidden" id="machineTypeId" value="0">
+    <input type="hidden" id="hiddenId" value="0">
     <div class="form-row align-items-end justify-content-center">
         <div class="input-group col-4">
             <input type="text" class="form-control" id="name" placeholder="Тип станка" aria-label="Тип станка">
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="clear">&#10060;</button>
+                <button class="btn btn-outline-secondary" type="button" id="clearBtn">&#10060;</button>
             </div>
         </div>
         <div class="col-auto">
-            <button type="button" id="save" class="btn btn-primary">Сохранить</button>
+            <button type="button" id="saveBtn" class="btn btn-primary">Сохранить</button>
         </div>
     </div>
 
     <div class="row justify-content-center mt-3">
         <div class="col-5">
-            <table class="table table-bordered table-hover" id="machineTypesTable">
+            <table class="table table-bordered table-hover" id="mainTable">
                 <thead class="thead-light text-center">
                 <tr>
                     <th scope="col">id</th>
@@ -48,12 +49,7 @@
         </div>
     </div>
 
-    <div class="row justify-content-center">
-        <div class="col-auto">
-            <button type="button" id="edit" class="btn btn-primary m-2">Редактировать</button>
-            <button type="button" id="delete" class="btn btn-primary m-2">Удалить</button>
-        </div>
-    </div>
+    <th:block th:replace="fragments :: editButtons" />
 </div>
 </body>
 </html>
