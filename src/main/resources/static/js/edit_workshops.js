@@ -1,6 +1,6 @@
 // TODO: add input validation before save
 let isUpdateModeActive = false;
-let $selectedRow = $('<tr>');
+let $selectedRow = null;
 let $workshopsTbody;
 let $workshopId;
 let $name;
@@ -24,6 +24,20 @@ function addActionHandlers() {
     $workshopsTbody.find('tr').on('click', selectRow);
     $edit.on('click', editWorkshop);
     $delete.on('click', onDeleteClick);
+    $(document).on('keydown', keyPressHandler);
+}
+
+function keyPressHandler(event) {
+    if (isNothingSelected()) {
+        return;
+    }
+    switch (event.keyCode) {
+        case 40: // down
+            $selectedRow.next().click();
+            break;
+        case 38: // up
+            $selectedRow.prev().click();
+    }
 }
 
 function onSaveButtonClick() {
@@ -136,7 +150,7 @@ function onDeleteClick() {
 
 function removeSelectedRow() {
     $selectedRow.remove();
-    $selectedRow = $('<tr>');
+    $selectedRow = null;
 }
 
 function getSelectedWorkshopId() {
@@ -144,7 +158,7 @@ function getSelectedWorkshopId() {
 }
 
 function isNothingSelected() {
-    return $selectedRow.is(':empty');
+    return $selectedRow === null;
 }
 
 function clearInput() {
@@ -167,7 +181,9 @@ function selectRow() {
     if (isUpdateModeActive) {
         return;
     }
-    $selectedRow.removeClass(SELECTED_ROW_CLASS);
+    if (!isNothingSelected()) {
+        $selectedRow.removeClass(SELECTED_ROW_CLASS);
+    }
     $selectedRow = $(this);
     $selectedRow.addClass(SELECTED_ROW_CLASS);
 }

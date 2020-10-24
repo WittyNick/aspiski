@@ -1,7 +1,8 @@
-let $selectedRow = $('<tr>');
+let $selectedRow = null;
 
 let $programsTbody;
 let $filterCheckbox;
+let $filter;
 let $inputPart;
 let $inputMachine;
 let $inputSystem;
@@ -11,6 +12,7 @@ let $inputWorkshop;
 $(function () {
     $programsTbody = $('#programsTable tbody');
     $filterCheckbox = $('#orderCheckbox');
+    $filter = $('#filter');
     $inputPart = $('#part');
     $inputMachine = $('#machine');
     $inputSystem = $('#controlSystem');
@@ -20,12 +22,33 @@ $(function () {
 });
 
 function addActionHandlers() {
-    $('#filter').on('input', filterTable);
-    $filterCheckbox.on('input', handleCheckbox);
+    $filter.on('input', filterTable);
+    $filterCheckbox.on('input', checkboxHandler);
     $('#info').on('click', showInfo);
     $('#edit').on('click', editCNCProgram);
     $('#delete').on('click', deleteCNCProgram);
     $programsTbody.find('tr').on('click', selectRow);
+    $('#clear').on('click', clearHandler);
+    $(document).on('keydown', keyPressHandler);
+}
+
+function clearHandler() {
+    $filter.trigger('reset');
+    filterTable();
+    $inputPart.focus();
+}
+
+function keyPressHandler(event) {
+    if (isNothingSelected()) {
+        return;
+    }
+    switch (event.keyCode) {
+        case 40: // down
+            $selectedRow.next().click();
+            break;
+        case 38: // up
+            $selectedRow.prev().click();
+    }
 }
 
 function showInfo() {
@@ -74,11 +97,13 @@ function getSelectedProgramId() {
 
 function removeSelectedRow() {
     $selectedRow.remove();
-    $selectedRow = $('<tr>');
+    $selectedRow = null;
 }
 
 function selectRow() {
-    $selectedRow.removeClass(SELECTED_ROW_CLASS);
+    if (!isNothingSelected()) {
+        $selectedRow.removeClass(SELECTED_ROW_CLASS);
+    }
     $selectedRow = $(this);
     $selectedRow.addClass(SELECTED_ROW_CLASS);
 }
@@ -86,12 +111,12 @@ function selectRow() {
 function unselectRow() {
     if (!isNothingSelected()) {
         $selectedRow.removeClass(SELECTED_ROW_CLASS);
-        $selectedRow = $('<tr>');
+        $selectedRow = null;
     }
 }
 
 function isNothingSelected() {
-    return $selectedRow.is(':empty');
+    return $selectedRow === null;
 }
 
 // ----- Search filter -----
@@ -137,7 +162,7 @@ function parseTableRowOptions($tableRow) {
     };
 }
 
-function handleCheckbox() {
+function checkboxHandler() {
     $inputPart.focus();
 }
 

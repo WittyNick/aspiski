@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,11 +22,13 @@ public class AddEditProgramController {
     }
 
     @GetMapping("/addProgram")
-    public String goAddProgram(Model model) {
+    public String goAddProgram(@CookieValue(value = "userId", defaultValue = "0") String userId, Model model) {
         String currentDate = service.getDateNow();
+        Integer id = Integer.valueOf(userId);
         model
                 .addAllAttributes(getAttributeMap())
-                .addAttribute("currentDate", currentDate);
+                .addAttribute("currentDate", currentDate)
+                .addAttribute("userId", id);
         return "add_program";
     }
 
@@ -42,7 +46,12 @@ public class AddEditProgramController {
 
     @PostMapping("/programSave")
     @ResponseBody
-    public Boolean saveProgram(@RequestBody Program program) {
+    public Boolean saveProgram(@RequestBody Program program, HttpServletResponse response) {
+        String userId = String.valueOf(program.getDeveloper().getId());
+        Cookie cookie = new Cookie("userId", userId);
+        cookie.setMaxAge(7 * 24 * 60 * 60); // expires in 7 days
+        cookie.setHttpOnly(true);
+        response.addCookie(cookie);
         return service.saveProgram(program);
     }
 
