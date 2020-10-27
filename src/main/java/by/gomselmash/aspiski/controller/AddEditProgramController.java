@@ -23,11 +23,9 @@ public class AddEditProgramController {
 
     @GetMapping("/addProgram")
     public String goAddProgram(@CookieValue(value = "userId", defaultValue = "0") String userId, Model model) {
-        String currentDate = service.getDateNow();
         Integer id = Integer.valueOf(userId);
         model
                 .addAllAttributes(getAttributeMap())
-                .addAttribute("currentDate", currentDate)
                 .addAttribute("userId", id);
         return "add_program";
     }

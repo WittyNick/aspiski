@@ -44,17 +44,22 @@
                 <a href="/stat" class="nav-link" th:classappend="${isCurrent} ? disabled : ''">статистика</a>
             </li>
 
-            <li class="nav-item dropdown" th:classappend="${page == 'edit'} ? active : ''">
+            <li class="nav-item dropdown" th:classappend="${#strings.startsWith(page, 'edit')} ? active : ''">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     редактировать
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="/editControlSystems">системы ЧПУ</a>
-                    <a class="dropdown-item" href="/editMachineTypes">типы станков</a>
-                    <a class="dropdown-item" href="/editMachines">модели станоков</a>
-                    <a class="dropdown-item" href="/editDevelopers">разработчиков</a>
-                    <a class="dropdown-item" href="/editWorkshops">цеха</a>
+                    <a class="dropdown-item" href="/editControlSystems"
+                       th:classappend="${page == 'edit_cnc'} ? '' : 'text-muted'">системы ЧПУ</a>
+                    <a class="dropdown-item" href="/editMachineTypes"
+                       th:classappend="${page == 'edit_type'} ? '' : 'text-muted'">типы станков</a>
+                    <a class="dropdown-item" href="/editMachines"
+                       th:classappend="${page == 'edit_machine'} ? '' : 'text-muted'">модели станков</a>
+                    <a class="dropdown-item" href="/editDevelopers"
+                       th:classappend="${page == 'edit_dev'} ? '' : 'text-muted'">разработчиков</a>
+                    <a class="dropdown-item" href="/editWorkshops"
+                       th:classappend="${page == 'edit_workshop'} ? '' : 'text-muted'">цеха</a>
                 </div>
             </li>
         </ul>

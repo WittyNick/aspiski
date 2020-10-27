@@ -5,7 +5,6 @@ import by.gomselmash.aspiski.repository.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -77,13 +76,5 @@ public class AddEditProgramService {
     @Transactional(readOnly = true)
     public Optional<Program> findProgramById(String id) {
         return findProgramById(Integer.parseInt(id));
-    }
-
-    /*
-     LocalDate currentDate = LocalDate.now();
-     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-     */
-    public String getDateNow() {
-        return LocalDate.now().toString(); // yyyy-MM-dd
     }
 }
