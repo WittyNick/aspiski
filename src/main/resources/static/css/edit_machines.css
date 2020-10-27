@@ -1,5 +1,5 @@
-#machinesTable th:nth-child(1), #machinesTable td:nth-child(1),
-#machinesTable th:nth-child(3), #machinesTable td:nth-child(3)
+#mainTable th:nth-child(1), #mainTable td:nth-child(1),
+#mainTable th:nth-child(3), #mainTable td:nth-child(3)
 {
     display: none;
 }

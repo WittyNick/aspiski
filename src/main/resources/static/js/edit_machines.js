@@ -6,15 +6,19 @@ const AJAX_DELETE_URL = 'machineDelete';
 let $machineType;
 
 $(function () {
+    override();
     initCommon();
     $machineType = $('#machineType');
+});
+
+function override() {
     getDeleteErrorMsg = overrideDeleteErrorMsg;
     parseToRowHtml = overrideParseToRowHtml;
     setDataToInput = overrideSetDataToInput;
     getSelectedRowData = overrideGetSelectedRowData;
     clearInput = overrideClearInput;
     getDataFromInput = overrideGetDataFromInput;
-});
+}
 
 function overrideDeleteErrorMsg () {
     return 'Не удалось удалить, т.к. данный станок используется.';
@@ -42,7 +46,7 @@ function overrideGetSelectedRowData() {
 function overrideClearInput() {
     $hiddenId.val(0);
     $name.val('');
-    $machineType.find('option:first').prop('selected', true);
+    $machineType.children('option:first').prop('selected', true);
     setMode(false);
     $name.focus();
 }
@@ -53,7 +57,7 @@ function overrideGetDataFromInput() {
         name: $name.val(),
         machineType: {
             id: $machineType.val(),
-            name: $machineType.find('option:selected').html()
+            name: $machineType.children('option:selected').html()
         }
     };
 }

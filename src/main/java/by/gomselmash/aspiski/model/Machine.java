@@ -1,7 +1,5 @@
 package by.gomselmash.aspiski.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
 
 @Entity
@@ -15,7 +13,7 @@ public class Machine {
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "MACHINE_TYPE_ID", nullable = false)
     private MachineType machineType;
 

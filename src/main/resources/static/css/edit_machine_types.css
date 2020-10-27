@@ -1,4 +1,4 @@
-#machineTypesTable th:nth-child(1), #machineTypesTable td:nth-child(1)
+#mainTable th:nth-child(1), #mainTable td:nth-child(1)
 {
     display: none;
 }

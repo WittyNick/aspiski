@@ -4,8 +4,8 @@ const AJAX_UPDATE_URL = 'developerUpdate';
 const AJAX_DELETE_URL = 'developerDelete';
 
 $(function () {
-    initCommon();
     getDeleteErrorMsg = overrideDeleteErrorMsg;
+    initCommon();
 });
 
 function overrideDeleteErrorMsg () {

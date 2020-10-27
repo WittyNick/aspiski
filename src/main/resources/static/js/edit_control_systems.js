@@ -4,8 +4,8 @@ const AJAX_UPDATE_URL = 'controlSystemUpdate';
 const AJAX_DELETE_URL = 'controlSystemDelete';
 
 $(function () {
-    initCommon();
     getDeleteErrorMsg = overrideDeleteErrorMsg;
+    initCommon();
 });
 
 function overrideDeleteErrorMsg () {

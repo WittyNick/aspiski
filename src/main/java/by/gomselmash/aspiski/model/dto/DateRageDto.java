@@ -29,4 +29,12 @@ public class DateRageDto {
     public void setTo(LocalDate to) {
         this.to = to;
     }
+
+    @Override
+    public String toString() {
+        return "DateRageDto{" +
+                "from=" + from +
+                ", to=" + to +
+                '}';
+    }
 }

@@ -4,8 +4,8 @@ const AJAX_UPDATE_URL = 'machineTypeUpdate';
 const AJAX_DELETE_URL = 'machineTypeDelete';
 
 $(function () {
-    initCommon();
     getDeleteErrorMsg = overrideDeleteErrorMsg;
+    initCommon();
 });
 
 function overrideDeleteErrorMsg () {

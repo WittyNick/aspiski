@@ -1,6 +1,7 @@
 package by.gomselmash.aspiski.service;
 
 import by.gomselmash.aspiski.model.Program;
+import by.gomselmash.aspiski.model.dto.DateRageDto;
 import by.gomselmash.aspiski.repository.ProgramRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,14 +17,16 @@ public class StatService {
         this.programRepository = programRepository;
     }
 
-    @Transactional
-    public List<Program> getProgramsBetweenDates(LocalDate from, LocalDate to) {
-        return programRepository.findAllByDateIsBetweenOrderByPartNumberAsc(from, to);
+    @Transactional(readOnly = true)
+    public List<Program> getProgramsBetweenDates(DateRageDto dateRageDto) {
+        LocalDate from = dateRageDto.getFrom();
+        LocalDate to = dateRageDto.getTo();
+        return programRepository.findAllByDateIsBetweenOrderByDateAscDeveloperAscMachine_MachineType_NameAsc(from, to);
     }
 
-    public List<Program> getProgramsThisMonth() {
+    public DateRageDto getDateRageNow() {
         LocalDate to = LocalDate.now();
         LocalDate from = LocalDate.of(to.getYear(), to.getMonth(), 1);
-        return getProgramsBetweenDates(from, to);
+        return new DateRageDto(from, to);
     }
 }

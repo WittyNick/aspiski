@@ -21,19 +21,19 @@ public class Program {
     @Column(name = "POSITION", nullable = false)
     private String position;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "WORKSHOP_ID", nullable = false)
     private Workshop workshop;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "DEVELOPER_ID", nullable = false)
     private Developer developer;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "MACHINE_ID", nullable = false)
     private Machine machine;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "CONTROL_SYSTEM", nullable = false)
     private ControlSystem controlSystem;
 

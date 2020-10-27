@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface ProgramRepository extends JpaRepository<Program, Integer> {
     List<Program> findAllByOrderByPartNumberAsc();
-    List<Program> findAllByDateIsBetweenOrderByPartNumberAsc(LocalDate from, LocalDate to);
+    List<Program> findAllByDateIsBetweenOrderByDateAscDeveloperAscMachine_MachineType_NameAsc(LocalDate from, LocalDate to);
     boolean existsByProgramNumberIgnoreCase(String programNumber);
     boolean existsByWorkshop_Id(int workshopId);
     boolean existsByDeveloper_Id(int developerId);

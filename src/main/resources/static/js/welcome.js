@@ -27,7 +27,7 @@ function addActionHandlers() {
     $('#info').on('click', showInfo);
     $('#edit').on('click', editCNCProgram);
     $('#delete').on('click', deleteCNCProgram);
-    $programsTbody.find('tr').on('click', selectRow);
+    $programsTbody.children('tr').on('click', selectRow);
     $('#clear').on('click', clearHandler);
     $(document).on('keydown', keyPressHandler);
 }
@@ -148,7 +148,7 @@ function isNothingSelected() {
 
 function filterTable() {
     unselectRow();
-    $programsTbody.find('tr').each(function (i, row) {
+    $programsTbody.children('tr').each(function (i, row) {
         let $row = $(row);
         isMatches($row) ? $row.removeClass(HIDE_CLASS) : $row.addClass(HIDE_CLASS);
     });

@@ -19,7 +19,7 @@ function initCommon() {
 }
 
 function addCommonHandlers() {
-    $mainTbody.find('tr').on('click', selectRow);
+    $mainTbody.children('tr').on('click', selectRow);
     $saveBtn.on('click', saveButtonHandler);
     $('#clearBtn').on('click', clearInput);
     $editBtn.on('click', editHandler);
