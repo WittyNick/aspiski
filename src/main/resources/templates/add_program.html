@@ -1,68 +1,88 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <th:block th:replace="fragments :: head" />
+    <th:block th:replace="fragments :: head"/>
 
     <script th:src="@{js/program_common.js}"></script>
     <script th:src="@{js/add_program.js}"></script>
-    <link th:rel="stylesheet" th:href="@{css/add_edit_program.css}" />
+    <link th:rel="stylesheet" th:href="@{css/add_edit_program.css}"/>
 </head>
 <body>
-<th:block th:replace="fragments :: navbar(page='add')" />
+<th:block th:replace="fragments :: navbar(page='add')"/>
 
-    <div class="container">
-        <div class="row pb-4">
-            <div class="col-12 text-center">
-                <h2>Добавить программу</h2>
-            </div>
+<div class="container">
+    <div class="row pb-4">
+        <div class="col-12 text-center">
+            <h2>Добавить программу</h2>
         </div>
+    </div>
 
-        <input type="hidden" id="programId" value="0">
-        <div class="form-row justify-content-center">
-            <div class="form-group col-4">
+    <input type="hidden" id="programId" value="0">
+    <div class="form-row justify-content-center">
+        <div class="col-4">
+            <div class="form-group">
                 <label for="partNumber">Номер детали</label>
-                <input type="text" class="form-control" id="partNumber" aria-describedby="partNumberHelp" spellcheck="false" autofocus>
+                <input type="text" class="form-control" id="partNumber" aria-describedby="partNumberHelp"
+                       spellcheck="false" autofocus>
+                <div class="invalid-tooltip">Поле должно быть заполнено.</div>
                 <small id="partNumberHelp" class="form-text text-muted">Например: АБВ-1415-2А-0123456Б ВИ2</small>
             </div>
-            <div class="form-group col-2">
+        </div>
+        <div class="col-2">
+            <div class="form-group">
                 <label for="position">Установ</label>
                 <input type="number" class="form-control" id="position" min="1" value="1">
+                <div class="invalid-tooltip">Должно быть больше 0.</div>
             </div>
         </div>
-        <div class="form-row justify-content-center">
-            <div class="form-group col-3">
+    </div>
+    <div class="form-row justify-content-center">
+        <div class="col-3">
+            <div class="form-group">
                 <label for="machine">Станок</label>
                 <select class="form-control" id="machine">
                     <option value="0"></option>
                     <option th:each="machine : ${machines}"
                             th:value="${machine.id}" th:text="${machine.name}"></option>
                 </select>
+                <div class="invalid-tooltip">Выберите станок.</div>
             </div>
-            <div class="form-group col-3">
+        </div>
+        <div class="col-3">
+            <div class="form-group">
                 <label for="controlSystem">Система ЧПУ</label>
                 <select class="form-control" id="controlSystem">
                     <option value="0"></option>
                     <option th:each="controlSystem : ${controlSystems}"
                             th:value="${controlSystem.id}" th:text="${controlSystem.name}"></option>
                 </select>
+                <div class="invalid-tooltip">Выберите систему ЧПУ.</div>
             </div>
         </div>
-        <div class="form-row justify-content-center">
-            <div class="form-group col-4">
+    </div>
+    <div class="form-row justify-content-center">
+        <div class="col-4">
+            <div class="form-group">
                 <label for="programNumber">Номер программы</label>
                 <input type="text" class="form-control" id="programNumber" spellcheck="false">
+                <div class="invalid-tooltip">Поле должно быть заполнено.</div>
             </div>
-            <div class="form-group col-2">
+        </div>
+        <div class="col-2">
+            <div class="form-group">
                 <label for="workshop">Цех</label>
                 <select class="form-control" id="workshop">
                     <option value="0"></option>
                     <option th:each="workshop : ${workshops}"
                             th:value="${workshop.id}" th:text="${workshop.name}"></option>
                 </select>
+                <div class="invalid-tooltip">Выберите цех.</div>
             </div>
         </div>
-        <div class="form-row justify-content-center">
-            <div class="form-group col-4">
+    </div>
+    <div class="form-row justify-content-center">
+        <div class="col-4">
+            <div class="form-group">
                 <label for="developer">Разработчик</label>
                 <select class="form-control" id="developer">
                     <option value="0"></option>
@@ -70,26 +90,31 @@
                             th:value="${developer.id}" th:text="${developer.name}"
                             th:selected="${userId == developer.id}"></option>
                 </select>
+                <div class="invalid-tooltip">Выберите разработчика.</div>
             </div>
-            <div class="form-group col-2">
+        </div>
+        <div class="col-2">
+            <div class="form-group">
                 <label for="date">Дата разработки</label>
                 <input type="date" class="form-control" id="date"
                        th:value="${#dates.format(#dates.createToday(), 'yyyy-MM-dd')}">
-            </div>
-        </div>
-        <div class="form-row justify-content-center">
-            <div class="form-group col-6">
-                <label for="info">Примечание</label>
-                <textarea class="form-control" id="info" rows="4" maxlength="255"></textarea>
-            </div>
-        </div>
-
-        <div class="row justify-content-center">
-            <div class="col-auto">
-                <button type="button" id="cancelBtn" class="btn btn-primary m-2">Отмена</button>
-                <button type="button" id="saveBtn" class="btn btn-primary m-2">OK</button>
+                <div class="invalid-tooltip">Укажите дату разработки.</div>
             </div>
         </div>
     </div>
+    <div class="form-row justify-content-center">
+        <div class="form-group col-6">
+            <label for="info">Примечание</label>
+            <textarea class="form-control" id="info" rows="4" maxlength="255"></textarea>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <button type="button" id="cancelBtn" class="btn btn-primary m-2">Отмена</button>
+            <button type="button" id="saveBtn" class="btn btn-primary m-2">OK</button>
+        </div>
+    </div>
+</div>
 </body>
 </html>

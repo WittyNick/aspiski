@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <th:block th:replace="fragments :: head" />
+    <th:block th:replace="fragments :: head"/>
 
     <script th:src="@{js/edit_common.js}"></script>
     <script th:src="@{js/edit_machine_types.js}"></script>
-    <link th:rel="stylesheet" th:href="@{css/edit_machine_types.css}" />
+    <link th:rel="stylesheet" th:href="@{css/edit_machine_types.css}"/>
 </head>
 <body>
-<th:block th:replace="fragments :: navbar('edit_type')" />
+<th:block th:replace="fragments :: navbar('edit_type')"/>
 
 <div class="container">
-    <div class="row pb-4 text-center">
+    <div class="row mb-4 text-center">
         <div class="col-12">
             <h2>Редактировать типы станков</h2>
         </div>
     </div>
 
     <input type="hidden" id="hiddenId" value="0">
-    <div class="form-row align-items-end justify-content-center">
-        <div class="input-group col-4">
-            <input type="text" class="form-control" id="name" placeholder="Тип станка" aria-label="Тип станка">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="clearBtn">&#10060;</button>
+    <div class="form-row justify-content-center">
+        <div class="col-4">
+            <div class="input-group">
+                <input type="text" class="form-control" id="name" placeholder="Тип станка" aria-label="Тип станка">
+                <div class="invalid-tooltip">Поле должно быть заполнено</div>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="clearBtn">&times;</button>
+                </div>
             </div>
         </div>
         <div class="col-auto">
@@ -49,7 +52,7 @@
         </div>
     </div>
 
-    <th:block th:replace="fragments :: editButtons" />
+    <th:block th:replace="fragments :: editButtons"/>
 </div>
 </body>
 </html>
