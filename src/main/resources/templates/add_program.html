@@ -11,95 +11,82 @@
 <th:block th:replace="fragments :: navbar(page='add')"/>
 
 <div class="container">
-    <div class="row pb-4">
+    <div class="row mb-4">
         <div class="col-12 text-center">
             <h2>Добавить программу</h2>
         </div>
     </div>
 
     <input type="hidden" id="programId" value="0">
-    <div class="form-row justify-content-center">
+    <div class="form-row justify-content-center mb-3">
         <div class="col-4">
-            <div class="form-group">
-                <label for="partNumber">Номер детали</label>
-                <input type="text" class="form-control" id="partNumber" aria-describedby="partNumberHelp"
-                       spellcheck="false" autofocus>
-                <div class="invalid-tooltip">Поле должно быть заполнено.</div>
-                <small id="partNumberHelp" class="form-text text-muted">Например: АБВ-1415-2А-0123456Б ВИ2</small>
-            </div>
+            <label for="partNumber">Номер детали</label>
+            <input type="text" class="form-control" id="partNumber" aria-describedby="partNumberHelp"
+                   spellcheck="false" autofocus>
+            <div class="invalid-tooltip">Поле должно быть заполнено.</div>
         </div>
         <div class="col-2">
-            <div class="form-group">
-                <label for="position">Установ</label>
-                <input type="number" class="form-control" id="position" min="1" value="1">
-                <div class="invalid-tooltip">Должно быть больше 0.</div>
-            </div>
+            <label for="position">Установ</label>
+            <input type="number" class="form-control" id="position" min="1" value="1">
+            <div class="invalid-tooltip">Должно быть больше 0.</div>
         </div>
     </div>
-    <div class="form-row justify-content-center">
+    <div class="form-row justify-content-center mb-3">
         <div class="col-3">
-            <div class="form-group">
-                <label for="machine">Станок</label>
-                <select class="form-control" id="machine">
-                    <option value="0"></option>
-                    <option th:each="machine : ${machines}"
-                            th:value="${machine.id}" th:text="${machine.name}"></option>
-                </select>
-                <div class="invalid-tooltip">Выберите станок.</div>
-            </div>
+            <label for="machine">Станок</label>
+            <select class="form-control" id="machine">
+                <option value="0"></option>
+                <option th:each="machine : ${machines}"
+                        th:value="${machine.id}" th:text="${machine.name}">
+                </option>
+            </select>
+            <div class="invalid-tooltip">Выберите станок.</div>
         </div>
         <div class="col-3">
-            <div class="form-group">
-                <label for="controlSystem">Система ЧПУ</label>
-                <select class="form-control" id="controlSystem">
-                    <option value="0"></option>
-                    <option th:each="controlSystem : ${controlSystems}"
-                            th:value="${controlSystem.id}" th:text="${controlSystem.name}"></option>
-                </select>
-                <div class="invalid-tooltip">Выберите систему ЧПУ.</div>
-            </div>
+            <label for="controlSystem">Система ЧПУ</label>
+            <select class="form-control" id="controlSystem">
+                <option value="0"></option>
+                <option th:each="controlSystem : ${controlSystems}"
+                        th:value="${controlSystem.id}" th:text="${controlSystem.name}">
+                </option>
+            </select>
+            <div class="invalid-tooltip">Выберите систему ЧПУ.</div>
         </div>
     </div>
-    <div class="form-row justify-content-center">
+    <div class="form-row justify-content-center mb-3">
         <div class="col-4">
-            <div class="form-group">
-                <label for="programNumber">Номер программы</label>
-                <input type="text" class="form-control" id="programNumber" spellcheck="false">
-                <div class="invalid-tooltip">Поле должно быть заполнено.</div>
-            </div>
+            <label for="programNumber">Номер программы</label>
+            <input type="text" class="form-control" id="programNumber" spellcheck="false">
+            <div class="invalid-tooltip">Поле должно быть заполнено.</div>
         </div>
         <div class="col-2">
-            <div class="form-group">
-                <label for="workshop">Цех</label>
-                <select class="form-control" id="workshop">
-                    <option value="0"></option>
-                    <option th:each="workshop : ${workshops}"
-                            th:value="${workshop.id}" th:text="${workshop.name}"></option>
-                </select>
-                <div class="invalid-tooltip">Выберите цех.</div>
-            </div>
+            <label for="workshop">Цех</label>
+            <select class="form-control" id="workshop">
+                <option value="0"></option>
+                <option th:each="workshop : ${workshops}"
+                        th:value="${workshop.id}" th:text="${workshop.name}">
+                </option>
+            </select>
+            <div class="invalid-tooltip">Выберите цех.</div>
         </div>
     </div>
-    <div class="form-row justify-content-center">
+    <div class="form-row justify-content-center mb-3">
         <div class="col-4">
-            <div class="form-group">
-                <label for="developer">Разработчик</label>
-                <select class="form-control" id="developer">
-                    <option value="0"></option>
-                    <option th:each="developer : ${developers}"
-                            th:value="${developer.id}" th:text="${developer.name}"
-                            th:selected="${userId == developer.id}"></option>
-                </select>
-                <div class="invalid-tooltip">Выберите разработчика.</div>
-            </div>
+            <label for="developer">Разработчик</label>
+            <select class="form-control" id="developer">
+                <option value="0"></option>
+                <option th:each="developer : ${developers}"
+                        th:value="${developer.id}" th:text="${developer.name}"
+                        th:selected="${userId == developer.id}">
+                </option>
+            </select>
+            <div class="invalid-tooltip">Выберите разработчика.</div>
         </div>
         <div class="col-2">
-            <div class="form-group">
-                <label for="date">Дата разработки</label>
-                <input type="date" class="form-control" id="date"
-                       th:value="${#dates.format(#dates.createToday(), 'yyyy-MM-dd')}">
-                <div class="invalid-tooltip">Укажите дату разработки.</div>
-            </div>
+            <label for="date">Дата разработки</label>
+            <input type="date" class="form-control" id="date"
+                   th:value="${#dates.format(#dates.createToday(), 'yyyy-MM-dd')}">
+            <div class="invalid-tooltip">Укажите дату разработки.</div>
         </div>
     </div>
     <div class="form-row justify-content-center">

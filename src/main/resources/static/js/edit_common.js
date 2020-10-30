@@ -29,6 +29,10 @@ function addCommonHandlers() {
 
 function saveButtonHandler() {
     let data = getDataFromInput();
+    let isDataValid = validate(data);
+    if (!isDataValid) {
+        return;
+    }
     isUpdateModeActive ? updateEntity(data) : saveEntity(data);
 }
 
@@ -192,18 +196,35 @@ let clearInput = function () {
         id: 0,
         name: ''
     });
+    resetErrors();
     setMode(false);
     $name.focus();
+}
+
+let resetErrors = function () {
+    $name.removeClass(INVALID_INPUT_CLASS);
 }
 
 let getDataFromInput = function () {
     return {
         id: +$hiddenId.val(),
-        name: $name.val()
+        name: $name.val().trim()
     };
 }
 
 let setDataToInput = function (data) {
     $hiddenId.val(data.id);
     $name.val(data.name);
+}
+
+let validate = function (dataFromInput) {
+    if (!!dataFromInput.name) {
+        resetErrors();
+        return true;
+    }
+    $name.addClass(INVALID_INPUT_CLASS);
+    if (!isUpdateModeActive) {
+        setTimeout(resetErrors, 1000);
+    }
+    return false;
 }

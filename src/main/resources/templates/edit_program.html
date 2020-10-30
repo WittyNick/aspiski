@@ -11,87 +11,83 @@
 <th:block th:replace="fragments :: navbar('edit')"/>
 
 <div class="container">
-    <div class="row pb-4">
+    <div class="row mb-4">
         <div class="col-12 text-center">
             <h2>Редактировать программу</h2>
         </div>
     </div>
 
     <input type="hidden" id="programId" th:value="${program.id}">
-    <div class="form-row justify-content-center">
+    <div class="form-row justify-content-center mb-3">
         <div class="col-4">
-            <div class="form-group">
-                <label for="partNumber">Номер детали</label>
-                <input type="text" class="form-control" id="partNumber" spellcheck="false"
-                       th:value="${program.partNumber}">
-                <div class="invalid-tooltip">Поле должно быть заполнено.</div>
-            </div>
+            <label for="partNumber">Номер детали</label>
+            <input type="text" class="form-control" id="partNumber" spellcheck="false"
+                   th:value="${program.partNumber}">
+            <div class="invalid-tooltip">Поле должно быть заполнено.</div>
         </div>
         <div class="col-2">
-            <div class="form-group">
-                <label for="position">Установ</label>
-                <input type="number" class="form-control" id="position" min="1" th:value="${program.position}">
-                <div class="invalid-tooltip">Должно быть больше 0.</div>
-            </div>
+            <label for="position">Установ</label>
+            <input type="number" class="form-control" id="position" min="1" th:value="${program.position}">
+            <div class="invalid-tooltip">Должно быть больше 0.</div>
         </div>
     </div>
-    <div class="form-row justify-content-center">
-        <div class="form-group col-3">
+    <div class="form-row justify-content-center mb-3">
+        <div class="col-3">
             <label for="machine">Станок</label>
             <select class="form-control" id="machine">
                 <option th:each="machine : ${machines}"
                         th:with="id=${machine.id}, name=${machine.name}"
                         th:value="${id}" th:text="${name}"
-                        th:selected="${id == program.machine.id}"></option>
+                        th:selected="${id == program.machine.id}">
+                </option>
             </select>
         </div>
-        <div class="form-group col-3">
+        <div class="col-3">
             <label for="controlSystem">Система ЧПУ</label>
             <select class="form-control" id="controlSystem">
                 <option th:each="controlSystem : ${controlSystems}"
                         th:with="id=${controlSystem.id}, name=${controlSystem.name}"
                         th:value="${id}"
                         th:text="${name}"
-                        th:selected="${id == program.controlSystem.id}"></option>
+                        th:selected="${id == program.controlSystem.id}">
+                </option>
             </select>
         </div>
     </div>
 
-    <div class="form-row justify-content-center">
+    <div class="form-row justify-content-center mb-3">
         <div class="col-4">
-            <div class="form-group">
-                <label for="programNumber">Номер программы</label>
-                <input type="text" class="form-control" id="programNumber" spellcheck="false"
-                       th:value="${program.programNumber}">
-                <div class="invalid-tooltip">Поле должно быть заполнено.</div>
-            </div>
+            <label for="programNumber">Номер программы</label>
+            <input type="text" class="form-control" id="programNumber" spellcheck="false"
+                   th:value="${program.programNumber}">
+            <div class="invalid-tooltip">Поле должно быть заполнено.</div>
         </div>
-        <div class="form-group col-2">
+        <div class="col-2">
             <label for="workshop">Цех</label>
             <select class="form-control" id="workshop">
                 <option th:each="workshop : ${workshops}"
                         th:with="id=${workshop.id}, name=${workshop.name}"
                         th:value="${id}" th:text="${name}"
-                        th:selected="${id == program.workshop.id}"></option>
+                        th:selected="${id == program.workshop.id}">
+                </option>
             </select>
         </div>
     </div>
-    <div class="form-row justify-content-center">
-        <div class="form-group col-4">
+    <div class="form-row justify-content-center mb-3">
+        <div class="col-4">
             <label for="developer">Разработчик</label>
             <select class="form-control" id="developer">
                 <option th:each="developer : ${developers}"
                         th:with="id=${developer.id}, name=${developer.name}"
                         th:value="${id}" th:text="${name}"
-                        th:selected="${id == program.developer.id}"></option>
+                        th:selected="${id == program.developer.id}">
+                </option>
             </select>
         </div>
         <div class="col-2">
-            <div class="form-group">
-                <label for="date">Дата разработки</label>
-                <input type="date" class="form-control" id="date" th:value="${program.date}">
-                <div class="invalid-tooltip">Укажите дару разработки.</div>
-            </div>
+            <label for="date">Дата разработки</label>
+            <input type="date" class="form-control" id="date" th:value="${program.date}">
+            <div class="invalid-tooltip">Укажите дату разработки.</div>
         </div>
     </div>
     <div class="form-row justify-content-center">
