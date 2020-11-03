@@ -1,4 +1,3 @@
-#programsTable th:nth-child(3), #programsTable td:nth-child(3)
-{
+#programsTable th:nth-child(3), #programsTable td:nth-child(3) {
     display: none;
 }

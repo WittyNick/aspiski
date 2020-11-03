@@ -1,10 +1,10 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <th:block th:replace="fragments :: head" />
+    <th:block th:replace="fragments :: head"/>
 
     <script th:src="@{js/welcome.js}"></script>
-    <link th:rel="stylesheet" th:href="@{css/welcome.css}" />
+    <link th:rel="stylesheet" th:href="@{css/welcome.css}"/>
 </head>
 <body>
 <!--/* Modal */-->
@@ -20,7 +20,7 @@
     </div>
 </div>
 
-<th:block th:replace="fragments :: navbar(page='main')" />
+<th:block th:replace="fragments :: navbar(page='main')"/>
 
 <div class="container">
     <div class="row mb-3">
@@ -81,42 +81,44 @@
 
     <div class="row justify-content-center">
         <div class="col-12">
-            <table class="table table-bordered table-hover" id="programsTable">
-                <thead class="thead-light text-center">
-                <tr>
-                    <th scope="col">id</th>
-                    <th scope="col">Деталь</th>
-                    <th scope="col">Установ</th>
-                    <th scope="col">machineId</th>
-                    <th scope="col">Станок</th>
-                    <th scope="col">systemId</th>
-                    <th scope="col">Система ЧПУ</th>
-                    <th scope="col">Программа</th>
-                    <th scope="col">workshopId</th>
-                    <th scope="col">Цех</th>
-                    <th scope="col">Разработал</th>
-                    <th scope="col">Дата</th>
-                    <th scope="col">info</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="program : ${programs}" th:object="${program}">
-                    <td th:text="*{id}"></td>
-                    <td th:text="*{partNumber}"></td>
-                    <td th:text="*{position}"></td>
-                    <td th:text="*{machine.id}"></td>
-                    <td th:text="*{machine.name}"></td>
-                    <td th:text="*{controlSystem.id}"></td>
-                    <td th:text="*{controlSystem.name}"></td>
-                    <td th:text="*{programNumber}"></td>
-                    <td th:text="*{workshop.id}"></td>
-                    <td th:text="*{workshop.name}"></td>
-                    <td th:text="*{developer.name}"></td>
-                    <td th:text="*{getParsedDate('dd.MM.yyyy')}"></td>
-                    <td th:text="*{info}"></td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="scroll-table">
+                <table class="table table-bordered table-hover" id="programsTable">
+                    <thead class="thead-light text-center">
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">Деталь</th>
+                        <th scope="col">machineId</th>
+                        <th scope="col">Станок</th>
+                        <th scope="col">systemId</th>
+                        <th scope="col">Система ЧПУ</th>
+                        <th scope="col">Установ</th>
+                        <th scope="col">Программа</th>
+                        <th scope="col">workshopId</th>
+                        <th scope="col">Цех</th>
+                        <th scope="col">Разработал</th>
+                        <th scope="col">Дата</th>
+                        <th scope="col">info</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="program : ${programs}" th:object="${program}">
+                        <td th:text="*{id}"></td>
+                        <td th:text="*{partNumber}"></td>
+                        <td th:text="*{machine.id}"></td>
+                        <td th:text="*{machine.name}"></td>
+                        <td th:text="*{controlSystem.id}"></td>
+                        <td th:text="*{controlSystem.name}"></td>
+                        <td th:text="*{position}"></td>
+                        <td th:text="*{programNumber}"></td>
+                        <td th:text="*{workshop.id}"></td>
+                        <td th:text="*{workshop.name}"></td>
+                        <td th:text="*{developer.name}"></td>
+                        <td th:text="*{getParsedDate('dd.MM.yyyy')}"></td>
+                        <td th:text="*{info}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 

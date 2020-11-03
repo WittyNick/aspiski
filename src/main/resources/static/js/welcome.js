@@ -1,13 +1,12 @@
-let $selectedRow = null;
-
-let $programsTbody;
-let $filterCheckbox;
-let $filter;
-let $inputPart;
-let $inputMachine;
-let $inputSystem;
-let $inputProgram;
-let $inputWorkshop;
+let $selectedRow = null,
+    $programsTbody,
+    $filterCheckbox,
+    $filter,
+    $inputPart,
+    $inputMachine,
+    $inputSystem,
+    $inputProgram,
+    $inputWorkshop;
 
 $(function () {
     $programsTbody = $('#programsTable tbody');
@@ -26,7 +25,7 @@ function addActionHandlers() {
     $filterCheckbox.on('input', checkboxHandler);
     $('#info').on('click', showInfo);
     $('#edit').on('click', editCNCProgram);
-    $('#delete').on('click', deleteCNCProgram);
+    $('#delete').on('click', deleteButtonHandler);
     $programsTbody.children('tr').on('click', selectRow);
     $('#clear').on('click', clearHandler);
     $(document).on('keydown', keyPressHandler);
@@ -88,23 +87,31 @@ function showInfo() {
     $('#infoModal').modal();
 }
 
+function deleteButtonHandler() {
+    if (isNothingSelected()) {
+        return;
+    }
+    let part = $selectedRow.children(':eq(1)').html();
+    if (confirm(`Удалить "${part}"?`)) {
+        let id = getSelectedProgramId();
+        deleteProgram(id);
+    }
+}
+
 function editCNCProgram() {
     if (isNothingSelected()) {
         return;
     }
-    let id = $selectedRow.children(':first-child').html();
+    let id = getSelectedProgramId();
     $('#programId').val(id);
     $('#editProgramById').submit();
 }
 
-function deleteCNCProgram() {
-    if (isNothingSelected()) {
-        return;
-    }
+function deleteProgram(stringId) {
     $.ajax({
         type: 'POST',
         url: 'programDelete',
-        data: getSelectedProgramId(), // String
+        data: stringId, // String
         contentType: 'text/plain; charset=UTF-8',
         success: function (wasDeleted) {
             if (wasDeleted) {
@@ -178,17 +185,16 @@ function parseFilterOptions() {
 }
 
 function parseTableRowOptions($tableRow) {
+    let $columns = $tableRow.children();
     return {
-        part: $tableRow.children(':eq(1)').html().toLowerCase(),
-        machineId: +$tableRow.children(':eq(3)').html(),
-        systemId: +$tableRow.children(':eq(5)').html(),
-        program: $tableRow.children(':eq(7)').html().toLowerCase(),
-        workshopId: +$tableRow.children(':eq(8)').html()
+        part: $columns.eq(1).html().toLowerCase(),
+        machineId: +$columns.eq(2).html(),
+        systemId: +$columns.eq(4).html(),
+        program: $columns.eq(7).html().toLowerCase(),
+        workshopId: +$columns.eq(8).html()
     };
 }
 
 function checkboxHandler() {
     $inputPart.focus();
 }
-
-// ----- Form validation -----

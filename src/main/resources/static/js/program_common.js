@@ -1,13 +1,13 @@
-let $programId;
-let $partNumber;
-let $programNumber;
-let $position;
-let $workshop;
-let $developer;
-let $machine;
-let $controlSystem;
-let $date;
-let $info;
+let $programId,
+    $partNumber,
+    $programNumber,
+    $position,
+    $workshop,
+    $developer,
+    $machine,
+    $controlSystem,
+    $date,
+    $info;
 
 function initProgramCommon() {
     $programId = $('#programId');

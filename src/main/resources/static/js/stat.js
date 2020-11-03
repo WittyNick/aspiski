@@ -1,9 +1,9 @@
 const AJAX_LOAD_URL = 'loadPrograms';
 
-let $fromDate;
-let $toDate;
-let $programsTbody;
-let $total;
+let $fromDate,
+    $toDate,
+    $programsTbody,
+    $total;
 
 $(function () {
     $fromDate = $('#fromDate');

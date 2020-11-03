@@ -48,24 +48,26 @@
 
     <div class="row justify-content-center mt-3">
         <div class="col-7">
-            <table class="table table-bordered table-hover" id="mainTable">
-                <thead class="thead-light text-center">
-                <tr>
-                    <th scope="col">id</th>
-                    <th scope="col">Станок</th>
-                    <th scope="col">machineTypeId</th>
-                    <th scope="col">Тип станка</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="machine : ${machines}">
-                    <td th:text="${machine.id}"></td>
-                    <td th:text="${machine.name}"></td>
-                    <td th:text="${machine.machineType.id}"></td>
-                    <td th:text="${machine.machineType.name}"></td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="scroll-table">
+                <table class="table table-bordered table-hover" id="mainTable">
+                    <thead class="thead-light text-center">
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">Станок</th>
+                        <th scope="col">machineTypeId</th>
+                        <th scope="col">Тип станка</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="machine : ${machines}">
+                        <td th:text="${machine.id}"></td>
+                        <td th:text="${machine.name}"></td>
+                        <td th:text="${machine.machineType.id}"></td>
+                        <td th:text="${machine.machineType.name}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 

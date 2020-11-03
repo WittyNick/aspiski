@@ -1,12 +1,11 @@
-let isUpdateModeActive = false;
-let $selectedRow = null;
-
-let $name;
-let $saveBtn;
-let $editBtn;
-let $deleteBtn;
-let $mainTbody;
-let $hiddenId;
+let isUpdateModeActive = false,
+    $selectedRow = null,
+    $name,
+    $saveBtn,
+    $editBtn,
+    $deleteBtn,
+    $mainTbody,
+    $hiddenId;
 
 function initCommon() {
     $name = $('#name');
@@ -34,11 +33,6 @@ function saveButtonHandler() {
         return;
     }
     isUpdateModeActive ? updateEntity(data) : saveEntity(data);
-}
-
-function deleteButtonHandler() {
-    let id = getSelectedRowId();
-    deleteEntity(id);
 }
 
 function saveEntity(entity) {
@@ -78,14 +72,11 @@ function updateEntity(entity) {
     });
 }
 
-function deleteEntity() {
-    if (isNothingSelected()) {
-        return;
-    }
+function deleteEntity(stringId) {
     $.ajax({
         type: 'POST',
         url: AJAX_DELETE_URL,
-        data: getSelectedRowId(), // String
+        data: stringId, // String
         contentType: 'text/plain; charset=UTF-8',
         dataType: 'json',
         success: function(wasDeleted) {
@@ -158,6 +149,15 @@ function selectRow() {
 }
 
 // Default functions
+let deleteButtonHandler = function () {
+    if (isNothingSelected()) {
+        return;
+    }
+    let rowData = getSelectedRowData();
+    if (confirm(`Удалить "${rowData.name}"?`)) {
+        deleteEntity(rowData.id);
+    }
+}
 
 let getSaveErrorMsg = function (entity) {
     return `Невозможно добавить!\n"${entity.name}" уже существует.`;
@@ -185,10 +185,6 @@ let getSelectedRowData = function () {
         id: $selectedRow.children(':nth-child(1)').html(),
         name: $selectedRow.children(':nth-child(2)').html()
     };
-}
-
-let getSelectedRowId = function () {
-    return $selectedRow.children(':first-child').html();
 }
 
 let clearInput = function () {
