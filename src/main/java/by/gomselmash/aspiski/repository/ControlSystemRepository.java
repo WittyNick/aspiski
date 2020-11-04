@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ControlSystemRepository extends JpaRepository<ControlSystem, Integer> {
+public interface ControlSystemRepository extends JpaRepository<ControlSystem, Long> {
     List<ControlSystem> findAllByOrderByNameAsc();
     boolean existsByNameIgnoreCase(String name);
 }

@@ -32,7 +32,8 @@ public class AddEditProgramController {
 
     @PostMapping("/editProgram")
     public String goEditProgram(@RequestParam String programId, Model model) {
-        Optional<Program> optionalProgram = service.findProgramById(programId);
+        Long id = Long.valueOf(programId);
+        Optional<Program> optionalProgram = service.findProgramById(id);
         if (optionalProgram.isPresent()) {
             model
                     .addAllAttributes(getAttributeMap())

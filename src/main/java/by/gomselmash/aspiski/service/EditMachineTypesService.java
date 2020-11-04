@@ -36,7 +36,7 @@ public class EditMachineTypesService {
     }
 
     public Boolean updateMachineType(MachineType machineType) {
-        int id = machineType.getId();
+        Long id = machineType.getId();
         if (machineTypeRepository.existsById(id)) {
             machineTypeRepository.save(machineType);
             return true;
@@ -44,7 +44,7 @@ public class EditMachineTypesService {
         return false;
     }
 
-    public boolean deleteMachineTypeById(int id) {
+    public boolean deleteMachineTypeById(Long id) {
         boolean isExists = machineTypeRepository.existsById(id);
         if (!isExists) {
             return false;

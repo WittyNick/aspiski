@@ -45,7 +45,7 @@ public class EditMachinesController {
     @PostMapping("/machineDelete")
     @ResponseBody
     public Boolean deleteMachine(@RequestBody String stringId) {
-        int id = Integer.parseInt(stringId);
+        Long id = Long.valueOf(stringId);
         return service.deleteMachineById(id);
     }
 }

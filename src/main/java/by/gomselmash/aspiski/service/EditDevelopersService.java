@@ -36,7 +36,7 @@ public class EditDevelopersService {
     }
 
     public boolean updateDeveloper(Developer developer) {
-        int id = developer.getId();
+        Long id = developer.getId();
         if (developerRepository.existsById(id)) {
             developerRepository.save(developer);
             return true;
@@ -44,7 +44,7 @@ public class EditDevelopersService {
         return false;
     }
 
-    public boolean deleteDeveloperById(int id) {
+    public boolean deleteDeveloperById(Long id) {
         boolean isExists = developerRepository.existsById(id);
         if (!isExists) {
             return false;

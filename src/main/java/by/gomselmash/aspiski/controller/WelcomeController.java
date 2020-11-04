@@ -38,7 +38,7 @@ public class WelcomeController {
     @PostMapping("/programDelete")
     @ResponseBody
     public Boolean deleteProgram(@RequestBody String programId) {
-        int id = Integer.parseInt(programId);
+        Long id = Long.valueOf(programId);
         return service.deleteProgramById(id);
     }
 }

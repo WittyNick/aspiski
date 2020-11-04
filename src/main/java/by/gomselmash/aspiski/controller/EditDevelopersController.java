@@ -41,7 +41,7 @@ public class EditDevelopersController {
     @PostMapping("/developerDelete")
     @ResponseBody
     public Boolean deleteDeveloper(@RequestBody String stringId) {
-        int id = Integer.parseInt(stringId);
+        Long id = Long.valueOf(stringId);
         return service.deleteDeveloperById(id);
     }
 }

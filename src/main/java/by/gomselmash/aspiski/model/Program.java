@@ -10,16 +10,20 @@ public class Program {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
-    private int id;
+    private Long id;
 
-    @Column(name = "PART_NUMBER", nullable = false)
+    /*
+    In order to change the length = 1000 (VARCHAR(1000)) of the field,
+    it is necessary to recreate the database again (i.e. first delete the old one).
+     */
+    @Column(name = "PART_NUMBER", length = 1000, nullable = false)
     private String partNumber;
 
     @Column(name = "PROGRAM_NUMBER", nullable = false)
     private String programNumber;
 
-    @Column(name = "POSITION", nullable = false)
-    private String position;
+    @Column(name = "POSITION")
+    private int position;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "WORKSHOP_ID", nullable = false)
@@ -41,14 +45,14 @@ public class Program {
     @Column(name = "DATE", nullable = false)
     private LocalDate date;
 
-    @Column(name = "INFO")
+    @Column(name = "INFO", length = 1000)
     private String info;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -68,11 +72,11 @@ public class Program {
         this.programNumber = programNumber;
     }
 
-    public String getPosition() {
+    public int getPosition() {
         return position;
     }
 
-    public void setPosition(String position) {
+    public void setPosition(int position) {
         this.position = position;
     }
 
@@ -127,21 +131,5 @@ public class Program {
     public String getParsedDate(String pattern) { // pattern RU - "dd.MM.yyyy"
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
         return date.format(formatter);
-    }
-
-    @Override
-    public String toString() {
-        return "Program{" +
-                "id=" + id +
-                ", partNumber='" + partNumber + '\'' +
-                ", programNumber='" + programNumber + '\'' +
-                ", position='" + position + '\'' +
-                ", workshop=" + workshop +
-                ", developer=" + developer +
-                ", machine=" + machine +
-                ", controlSystem=" + controlSystem +
-                ", date=" + date +
-                ", info='" + info + '\'' +
-                '}';
     }
 }

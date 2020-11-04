@@ -6,6 +6,10 @@
     display: none;
 }
 
+#programsTable th:nth-child(2), #programsTable td:nth-child(2) {
+    white-space: pre-wrap;
+}
+
 #modalBodyInfo {
     white-space: pre-wrap;
 }

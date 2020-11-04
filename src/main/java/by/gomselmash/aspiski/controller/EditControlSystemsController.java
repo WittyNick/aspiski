@@ -41,7 +41,7 @@ public class EditControlSystemsController {
     @PostMapping("/controlSystemDelete")
     @ResponseBody
     public Boolean deleteControlSystem(@RequestBody String stringId) {
-        int id = Integer.parseInt(stringId);
+        Long id = Long.valueOf(stringId);
         return service.deleteControlSystemById(id);
     }
 }

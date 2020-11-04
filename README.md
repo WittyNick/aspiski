@@ -11,3 +11,5 @@
 0. Locks (select to update)
 0. Save DB dump
 0. Restore DB from dump
+0. Add serverside validation
+0. Add tests

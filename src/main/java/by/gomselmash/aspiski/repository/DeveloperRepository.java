@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface DeveloperRepository extends JpaRepository<Developer, Integer> {
+public interface DeveloperRepository extends JpaRepository<Developer, Long> {
     List<Developer> findAllByOrderByNameAsc();
     boolean existsByNameIgnoreCase(String name);
 }

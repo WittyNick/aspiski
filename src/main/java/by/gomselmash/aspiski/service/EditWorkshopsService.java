@@ -36,7 +36,7 @@ public class EditWorkshopsService {
     }
 
     public boolean updateWorkshop(Workshop workshop) {
-        int id = workshop.getId();
+        Long id = workshop.getId();
         if (workshopRepository.existsById(id)) {
             workshopRepository.save(workshop);
             return true;
@@ -44,7 +44,7 @@ public class EditWorkshopsService {
         return false;
     }
 
-    public boolean deleteWorkshopById(int id) {
+    public boolean deleteWorkshopById(Long id) {
         boolean isExists = workshopRepository.existsById(id);
         if (!isExists) {
             return false;

@@ -8,16 +8,16 @@ public class Developer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
-    private int id;
+    private Long id;
 
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -27,13 +27,5 @@ public class Developer {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "Developer{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
     }
 }

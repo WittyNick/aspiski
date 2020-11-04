@@ -2,19 +2,61 @@ const AJAX_LOAD_URL = 'loadPrograms';
 
 let $fromDate,
     $toDate,
+    $filterDeveloper,
+    $filterMachineType,
     $programsTbody,
-    $total;
+    $tableSize;
 
 $(function () {
     $fromDate = $('#fromDate');
     $toDate = $('#toDate');
+    $filterDeveloper = $('#developer');
+    $filterMachineType = $('#machineType');
     $programsTbody = $('#programsTable tbody')
-    $total = $('#total');
-    $('#loadBtn').on('click', loadData);
+    $tableSize = $('#tableSize');
+    addActionHandlers();
 });
+
+function addActionHandlers() {
+    $('#loadBtn').on('click', loadData);
+    $('#filter').on('click', filterTable);
+}
+
+function filterTable() {
+    $programsTbody.children('tr').each(function (i, row) {
+        let $row = $(row);
+        isMatches($row) ? $row.removeClass(HIDE_CLASS) : $row.addClass(HIDE_CLASS);
+    });
+}
+
+function isMatches($tableRow) {
+    let filter = parseFilterOptions();
+    let row = parseTableRowOptions($tableRow);
+    return (filter.machineTypeId === 0 || row.machineTypeId === filter.machineTypeId) &&
+        (filter.developerId === 0 || row.developerId === filter.developerId);
+}
+
+function parseFilterOptions() {
+    return {
+        machineTypeId: +$filterMachineType.val(),
+        developerId: +$filterDeveloper.val()
+    };
+}
+
+function parseTableRowOptions($tableRow) {
+    let $columns = $tableRow.children();
+    return {
+        machineTypeId: +$columns.eq(2).html(),
+        developerId: +$columns.eq(6).html()
+    };
+}
 
 function loadData() {
     let dateRage = getDateRage();
+    let isValid = validate(dateRage);
+    if (!isValid) {
+        return;
+    }
     $.ajax({
         type: 'POST',
         url: AJAX_LOAD_URL,
@@ -33,12 +75,13 @@ function getDateRage() {
 }
 
 function addToTable(programs) {
-    $total.html(programs.length);
+    $tableSize.html(programs.length);
     $programsTbody.children('tr').remove();
     $(programs).each(function (i, program) {
         let $row = getRowHtml(program);
         $programsTbody.append($row);
     });
+    filterTable();
 }
 
 function getRowHtml(program) {
@@ -55,4 +98,24 @@ function getRowHtml(program) {
             <td>${dateRu}</td>
         </tr>`
     );
+}
+
+function validate(dateRage) {
+    let isValid = true;
+    resetErrors();
+    if (!dateRage.from) {
+        $fromDate.addClass(INVALID_INPUT_CLASS);
+        isValid = false;
+    }
+    if (!dateRage.to) {
+        $toDate.addClass(INVALID_INPUT_CLASS);
+        isValid = false;
+    }
+    setTimeout(resetErrors, 2000);
+    return isValid;
+}
+
+function resetErrors() {
+    $fromDate.removeClass(INVALID_INPUT_CLASS);
+    $toDate.removeClass(INVALID_INPUT_CLASS);
 }

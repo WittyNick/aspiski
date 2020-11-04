@@ -33,7 +33,7 @@ function getProgram() {
         id: +$programId.val(),
         partNumber: $partNumber.val().trim(),
         programNumber: $programNumber.val().trim(),
-        position: $position.val(),
+        position: +$position.val(),
         workshop: {
             id: +$workshop.val()
         },

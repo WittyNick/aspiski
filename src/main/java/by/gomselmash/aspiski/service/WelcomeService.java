@@ -33,7 +33,7 @@ public class WelcomeService {
     }
 
     @Transactional
-    public boolean deleteProgramById(int id) {
+    public boolean deleteProgramById(Long id) {
         if (programRepository.existsById(id)) {
             programRepository.deleteById(id);
             return true;

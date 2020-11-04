@@ -19,10 +19,10 @@
 
     <input type="hidden" id="programId" th:value="${program.id}">
     <div class="form-row justify-content-center mb-3">
-        <div class="col-4">
+        <div class="col-6">
             <label for="partNumber">Номер детали</label>
-            <input type="text" class="form-control" id="partNumber" spellcheck="false"
-                   th:value="${program.partNumber}">
+            <input type="text" class="form-control" id="partNumber" spellcheck="false" maxlength="1000"
+                   th:value="${program.partNumber.replaceAll(',', ', ')}">
             <div class="invalid-tooltip">Поле должно быть заполнено.</div>
         </div>
         <div class="col-2">
@@ -32,7 +32,7 @@
         </div>
     </div>
     <div class="form-row justify-content-center mb-3">
-        <div class="col-3">
+        <div class="col-4">
             <label for="machine">Станок</label>
             <select class="form-control" id="machine">
                 <option th:each="machine : ${machines}"
@@ -42,7 +42,7 @@
                 </option>
             </select>
         </div>
-        <div class="col-3">
+        <div class="col-4">
             <label for="controlSystem">Система ЧПУ</label>
             <select class="form-control" id="controlSystem">
                 <option th:each="controlSystem : ${controlSystems}"
@@ -56,9 +56,9 @@
     </div>
 
     <div class="form-row justify-content-center mb-3">
-        <div class="col-4">
+        <div class="col-6">
             <label for="programNumber">Номер программы</label>
-            <input type="text" class="form-control" id="programNumber" spellcheck="false"
+            <input type="text" class="form-control" id="programNumber" spellcheck="false" maxlength="255"
                    th:value="${program.programNumber}">
             <div class="invalid-tooltip">Поле должно быть заполнено.</div>
         </div>
@@ -74,7 +74,7 @@
         </div>
     </div>
     <div class="form-row justify-content-center mb-3">
-        <div class="col-4">
+        <div class="col-6">
             <label for="developer">Разработчик</label>
             <select class="form-control" id="developer">
                 <option th:each="developer : ${developers}"
@@ -91,9 +91,9 @@
         </div>
     </div>
     <div class="form-row justify-content-center">
-        <div class="form-group col-6">
+        <div class="form-group col-8">
             <label for="info">Примечание</label>
-            <textarea class="form-control" id="info" rows="4" maxlength="255" th:text="${program.info}"></textarea>
+            <textarea class="form-control" id="info" rows="4" maxlength="1000" th:text="${program.info}"></textarea>
         </div>
     </div>
 

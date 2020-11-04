@@ -41,7 +41,7 @@ public class EditWorkshopsController {
     @PostMapping("/workshopDelete")
     @ResponseBody
     public Boolean deleteDeveloper(@RequestBody String stringId) {
-        int id = Integer.parseInt(stringId);
+        Long id = Long.valueOf(stringId);
         return service.deleteWorkshopById(id);
     }
 }

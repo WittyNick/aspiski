@@ -36,7 +36,7 @@ public class EditControlSystemsService {
     }
 
     public Boolean updateControlSystem(ControlSystem controlSystem) {
-        int id = controlSystem.getId();
+        Long id = controlSystem.getId();
         if (controlSystemRepository.existsById(id)) {
             controlSystemRepository.save(controlSystem);
             return true;
@@ -44,7 +44,7 @@ public class EditControlSystemsService {
         return false;
     }
 
-    public boolean deleteControlSystemById(int id) {
+    public boolean deleteControlSystemById(Long id) {
         boolean isExists = controlSystemRepository.existsById(id);
         if (!isExists) {
             return false;

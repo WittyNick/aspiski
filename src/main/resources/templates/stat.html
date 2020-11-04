@@ -10,27 +10,51 @@
 <th:block th:replace="fragments :: navbar('stat')"/>
 
 <div class="container">
-    <div class="row pb-4 text-center">
+    <div class="row pb-2 text-center">
         <div class="col-12">
             <h2>А-ну-ка, взлянем на статистику</h2>
         </div>
     </div>
-    Всего: <span id="total" th:text="${programs.size()}"></span>
-    <form class="mb-3">
-        <div class="form-row justify-content-center">
-            <label for="fromDate" class="col-auto col-form-label">За период с:</label>
-            <div class="col-auto">
-                <input type="date" class="form-control" id="fromDate" th:value="${dateRage.from}">
-            </div>
-            <label for="toDate" class="col-auto col-form-label ml-3">по:</label>
-            <div class="col-auto">
-                <input type="date" class="form-control" id="toDate" th:value="${dateRage.to}">
-            </div>
-            <div class="col-auto">
-                <button class="btn btn-primary" type="button" id="loadBtn">Показать</button>
-            </div>
+
+    <div class="text-secondary">
+        Всего: <span th:text="${total}"></span><br>
+        За период: <span id="tableSize" th:text="${programs.size()}"></span>
+    </div>
+
+    <div class="form-row justify-content-center mb-4">
+        <label for="fromDate" class="col-auto col-form-label">За период с:</label>
+        <div class="col-2">
+            <input type="date" class="form-control" id="fromDate" th:value="${dateRage.from}">
+            <div class="invalid-tooltip">Введите дату</div>
         </div>
-    </form>
+        <label for="toDate" class="col-auto col-form-label ml-3">по:</label>
+        <div class="col-2">
+            <input type="date" class="form-control" id="toDate" th:value="${dateRage.to}">
+            <div class="invalid-tooltip">Введите дату</div>
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-primary" type="button" id="loadBtn">Показать</button>
+        </div>
+    </div>
+
+    <div id="filter" class="form-group row">
+        <label class="col-2 col-form-label" for="developer">Разработчик</label>
+        <div class="col-4">
+            <select class="form-control" id="developer">
+                <option value="0"></option>
+                <option th:each="developer : ${developers}"
+                        th:value="${developer.id}" th:text="${developer.name}"></option>
+            </select>
+        </div>
+        <label class="col-2 col-form-label" for="machineType">Тип станка</label>
+        <div class="col-4">
+            <select class="form-control" id="machineType">
+                <option value="0"></option>
+                <option th:each="type : ${machineTypes}"
+                        th:value="${type.id}" th:text="${type.name}"></option>
+            </select>
+        </div>
+    </div>
 
     <div class="row justify-content-center">
         <div class="col-12">
@@ -40,10 +64,11 @@
                     <tr>
                         <th scope="col">Деталь</th>
                         <th scope="col">Станок</th>
-                        <th scope="col">machineType</th>
+                        <th scope="col">machineTypeId</th>
                         <th scope="col">Система ЧПУ</th>
                         <th scope="col">Программа</th>
                         <th scope="col">Цех</th>
+                        <th scope="col">developerId</th>
                         <th scope="col">Разработал</th>
                         <th scope="col">Дата</th>
                     </tr>
@@ -52,10 +77,11 @@
                     <tr th:each="program : ${programs}" th:object="${program}">
                         <td th:text="*{partNumber}"></td>
                         <td th:text="*{machine.name}"></td>
-                        <td th:text="*{machine.machineType.name}"></td>
+                        <td th:text="*{machine.machineType.id}"></td>
                         <td th:text="*{controlSystem.name}"></td>
                         <td th:text="*{programNumber}"></td>
                         <td th:text="*{workshop.name}"></td>
+                        <td th:text="*{developer.id}"></td>
                         <td th:text="*{developer.name}"></td>
                         <td th:text="*{getParsedDate('dd.MM.yyyy')}"></td>
                     </tr>
@@ -64,7 +90,6 @@
             </div>
         </div>
     </div>
-
 </div>
 </body>
 </html>

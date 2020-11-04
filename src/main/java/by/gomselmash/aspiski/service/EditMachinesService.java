@@ -46,7 +46,7 @@ public class EditMachinesService {
     }
 
     public boolean updateMachine(Machine machine) {
-        int id = machine.getId();
+        Long id = machine.getId();
         if (machineRepository.existsById(id)) {
             machineRepository.save(machine);
             return true;
@@ -54,7 +54,7 @@ public class EditMachinesService {
         return false;
     }
 
-    public boolean deleteMachineById(int id) {
+    public boolean deleteMachineById(Long id) {
         boolean isExists = machineRepository.existsById(id);
         if (!isExists) {
             return false;
