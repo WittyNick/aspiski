@@ -23,7 +23,7 @@ public class Program {
     private String programNumber;
 
     @Column(name = "POSITION")
-    private int position;
+    private String position;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "WORKSHOP_ID", nullable = false)
@@ -47,6 +47,9 @@ public class Program {
 
     @Column(name = "INFO", length = 1000)
     private String info;
+
+    public Program() {
+    }
 
     public Long getId() {
         return id;
@@ -72,11 +75,11 @@ public class Program {
         this.programNumber = programNumber;
     }
 
-    public int getPosition() {
+    public String getPosition() {
         return position;
     }
 
-    public void setPosition(int position) {
+    public void setPosition(String position) {
         this.position = position;
     }
 

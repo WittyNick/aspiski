@@ -1,4 +1,3 @@
-// TODO: add input validation before save
 const AJAX_SAVE_URL = 'developerSave';
 const AJAX_UPDATE_URL = 'developerUpdate';
 const AJAX_DELETE_URL = 'developerDelete';

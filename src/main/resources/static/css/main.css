@@ -17,7 +17,6 @@ div.scroll-table thead th {
     top: 0;
 }
 
-
 @-moz-document url-prefix() {
     select.form-control {
         padding-right: 25px;

@@ -11,3 +11,7 @@ function stringDateEnToRu(stringDate) { // yyyy-MM-dd -> dd.MM.yyyy
     let elements = stringDate.split('-');
     return `${elements[2]}.${elements[1]}.${elements[0]}`;
 }
+
+function bool(stringBoolean) {
+    return stringBoolean === 'true';
+}

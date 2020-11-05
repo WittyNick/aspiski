@@ -1,6 +1,13 @@
+let tableRowSelector = {
+    id: ':nth-child(1)',
+    name: ':nth-child(2)',
+    disabled: ':nth-child(3)'
+};
+
 let isUpdateModeActive = false,
     $selectedRow = null,
     $name,
+    $disabledCheckbox,
     $saveBtn,
     $editBtn,
     $deleteBtn,
@@ -9,6 +16,7 @@ let isUpdateModeActive = false,
 
 function initCommon() {
     $name = $('#name');
+    $disabledCheckbox = $('#disableCheckbox');
     $saveBtn = $('#saveBtn');
     $editBtn = $('#editBtn');
     $deleteBtn = $('#deleteBtn');
@@ -172,25 +180,30 @@ let getDeleteErrorMsg = function () {
 }
 
 let parseToRowHtml = function (data) {
+    let symbol = data.disabled ? '&#x2611;': '&#x2610;';
     return $(
         `<tr>
             <td>${data.id}</td>
             <td>${data.name}</td>
+            <td>${data.disabled}</td>
+            <td>${symbol}</td>
         </tr>`
     );
 }
 
 let getSelectedRowData = function () {
     return {
-        id: $selectedRow.children(':nth-child(1)').html(),
-        name: $selectedRow.children(':nth-child(2)').html()
+        id: $selectedRow.children(tableRowSelector.id).html(),
+        name: $selectedRow.children(tableRowSelector.name).html(),
+        disabled: bool($selectedRow.children(tableRowSelector.disabled).html())
     };
 }
 
 let clearInput = function () {
     setDataToInput({
         id: 0,
-        name: ''
+        name: '',
+        disabled: false
     });
     resetErrors();
     setMode(false);
@@ -204,13 +217,15 @@ let resetErrors = function () {
 let getDataFromInput = function () {
     return {
         id: +$hiddenId.val(),
-        name: $name.val().trim()
+        name: $name.val().trim(),
+        disabled: $disabledCheckbox.is(':checked')
     };
 }
 
 let setDataToInput = function (data) {
     $hiddenId.val(data.id);
     $name.val(data.name);
+    $disabledCheckbox.prop('checked', data.disabled);
 }
 
 let validate = function (dataFromInput) {

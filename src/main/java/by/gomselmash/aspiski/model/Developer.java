@@ -13,6 +13,12 @@ public class Developer {
     @Column(name = "NAME", nullable = false)
     private String name;
 
+    @Column(name = "DISABLED")
+    private boolean disabled;
+
+    public Developer() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -27,5 +33,13 @@ public class Developer {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
     }
 }

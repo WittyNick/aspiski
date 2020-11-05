@@ -33,7 +33,7 @@ function getProgram() {
         id: +$programId.val(),
         partNumber: $partNumber.val().trim(),
         programNumber: $programNumber.val().trim(),
-        position: +$position.val(),
+        position: $position.val(),
         workshop: {
             id: +$workshop.val()
         },
@@ -73,55 +73,51 @@ function saveProgram() {
     });
 }
 
+let resetErrors = function () {
+    $partNumber.removeClass(INVALID_INPUT_CLASS);
+    $programNumber.removeClass(INVALID_INPUT_CLASS);
+    $date.removeClass(INVALID_INPUT_CLASS);
+    $position.removeClass(INVALID_INPUT_CLASS);
+    $developer.removeClass(INVALID_INPUT_CLASS);
+    $machine.removeClass(INVALID_INPUT_CLASS);
+    $workshop.removeClass(INVALID_INPUT_CLASS);
+    $controlSystem.removeClass(INVALID_INPUT_CLASS);
+}
+
 let validate = function (program) {
     let isValid = true;
+    resetErrors();
     if (!program.partNumber) {
         $partNumber.addClass(INVALID_INPUT_CLASS);
         isValid = false;
-    } else {
-        $partNumber.removeClass(INVALID_INPUT_CLASS);
     }
     if (!program.programNumber) {
         $programNumber.addClass(INVALID_INPUT_CLASS);
         isValid = false;
-    } else {
-        $programNumber.removeClass(INVALID_INPUT_CLASS);
     }
     if (!program.date) {
         $date.addClass(INVALID_INPUT_CLASS);
         isValid = false;
-    } else {
-        $date.removeClass(INVALID_INPUT_CLASS);
     }
-    if (program.position < 1) {
+    if (!program.position) {
         $position.addClass(INVALID_INPUT_CLASS);
         isValid = false;
-    } else {
-        $position.removeClass(INVALID_INPUT_CLASS);
     }
     if (program.developer.id < 1) {
         $developer.addClass(INVALID_INPUT_CLASS);
         isValid = false;
-    } else {
-        $developer.removeClass(INVALID_INPUT_CLASS);
     }
     if (program.machine.id < 1) {
         $machine.addClass(INVALID_INPUT_CLASS);
         isValid = false;
-    } else {
-        $machine.removeClass(INVALID_INPUT_CLASS);
     }
     if (program.workshop.id < 1) {
         $workshop.addClass(INVALID_INPUT_CLASS);
         isValid = false;
-    } else {
-        $workshop.removeClass(INVALID_INPUT_CLASS);
     }
     if (program.controlSystem.id < 1) {
         $controlSystem.addClass(INVALID_INPUT_CLASS);
         isValid = false;
-    } else {
-        $controlSystem.removeClass(INVALID_INPUT_CLASS);
     }
     return isValid;
 }

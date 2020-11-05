@@ -1,0 +1,12 @@
+#mainTable th:nth-child(1), #mainTable td:nth-child(1),
+#mainTable th:nth-child(3), #mainTable td:nth-child(3) {
+    display: none;
+}
+
+#mainTable th:nth-child(4), #mainTable td:nth-child(4) {
+    width: 49px;
+}
+
+#mainTable td:nth-child(4) {
+    text-align: center;
+}

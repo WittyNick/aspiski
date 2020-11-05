@@ -18,7 +18,7 @@
     </div>
 
     <input type="hidden" id="hiddenId" value="0">
-    <div class="form-row justify-content-center mb-4">
+    <div class="form-row justify-content-center align-items-center">
         <div class="col-4">
             <div class="input-group">
                 <input type="text" class="form-control" id="name"
@@ -33,7 +33,7 @@
             <div class="input-group">
                 <label for="machineType" class="sr-only">Тип станка</label>
                 <select class="form-control" id="machineType">
-                    <option value="0" disabled selected>Тип станка</option>
+                    <option value="0" disabled selected>Тип станка...</option>
                     <option th:each="type : ${machineTypes}"
                             th:value="${type.id}" th:text="${type.name}">
                     </option>
@@ -42,12 +42,20 @@
             </div>
         </div>
         <div class="col-auto">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="disableCheckbox">
+                <label for="disableCheckbox" class="form-check-label">не использовать</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-row justify-content-center m-3">
+        <div class="col-auto">
             <button type="button" class="btn btn-primary" id="saveBtn">Сохранить</button>
         </div>
     </div>
 
-    <div class="row justify-content-center mt-3">
-        <div class="col-7">
+    <div class="row justify-content-center">
+        <div class="col-8">
             <div class="scroll-table">
                 <table class="table table-bordered table-hover" id="mainTable">
                     <thead class="thead-light text-center">
@@ -56,14 +64,19 @@
                         <th scope="col">Станок</th>
                         <th scope="col">machineTypeId</th>
                         <th scope="col">Тип станка</th>
+                        <th scope="col">disabled</th>
+                        <th scope="col">&#x26D4;</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="machine : ${machines}">
-                        <td th:text="${machine.id}"></td>
-                        <td th:text="${machine.name}"></td>
-                        <td th:text="${machine.machineType.id}"></td>
-                        <td th:text="${machine.machineType.name}"></td>
+                    <tr th:each="machine : ${machines}" th:object="${machine}">
+                        <td th:text="*{id}"></td>
+                        <td th:text="*{name}"></td>
+                        <td th:text="*{machineType.id}"></td>
+                        <td th:text="*{machineType.name}"></td>
+                        <td th:text="*{disabled}"></td>
+                        <td th:if="*{disabled}">&#x2611;</td>
+                        <td th:unless="*{disabled}">&#x2610;</td>
                     </tr>
                     </tbody>
                 </table>

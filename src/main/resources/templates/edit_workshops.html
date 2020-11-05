@@ -5,7 +5,7 @@
 
     <script th:src="@{js/edit_common.js}"></script>
     <script th:src="@{js/edit_workshops.js}"></script>
-    <link th:rel="stylesheet" th:href="@{css/edit_workshops.css}"/>
+    <link th:rel="stylesheet" th:href="@{css/edit_common.css}"/>
 </head>
 <body>
 <th:block th:replace="fragments :: navbar('edit_workshop')"/>
@@ -18,7 +18,7 @@
     </div>
 
     <input type="hidden" id="hiddenId" value="0">
-    <div class="form-row justify-content-center mb-4">
+    <div class="form-row justify-content-center align-items-center">
         <div class="col-4">
             <div class="input-group">
                 <input type="text" class="form-control" id="name"
@@ -29,6 +29,14 @@
                 </div>
             </div>
         </div>
+        <div class="col-auto">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="disableCheckbox">
+                <label for="disableCheckbox" class="form-check-label">не использовать</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-row justify-content-center m-3">
         <div class="col-auto">
             <button type="button" class="btn btn-primary" id="saveBtn">Сохранить</button>
         </div>
@@ -42,12 +50,17 @@
                     <tr>
                         <th scope="col">id</th>
                         <th scope="col">Название цеха</th>
+                        <th scope="col">disabled</th>
+                        <th scope="col">&#x26D4;</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="workshop : ${workshops}">
-                        <td th:text="${workshop.id}"></td>
-                        <td th:text="${workshop.name}"></td>
+                    <tr th:each="workshop : ${workshops}" th:object="${workshop}">
+                        <td th:text="*{id}"></td>
+                        <td th:text="*{name}"></td>
+                        <td th:text="*{disabled}"></td>
+                        <td th:if="*{disabled}">&#x2611;</td>
+                        <td th:unless="*{disabled}">&#x2610;</td>
                     </tr>
                     </tbody>
                 </table>

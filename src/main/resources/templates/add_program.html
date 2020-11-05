@@ -5,7 +5,6 @@
 
     <script th:src="@{js/program_common.js}"></script>
     <script th:src="@{js/add_program.js}"></script>
-    <link th:rel="stylesheet" th:href="@{css/add_edit_program.css}"/>
 </head>
 <body>
 <th:block th:replace="fragments :: navbar(page='add')"/>
@@ -27,8 +26,8 @@
         </div>
         <div class="col-2">
             <label for="position">Установ</label>
-            <input type="number" class="form-control" id="position" min="1" value="1">
-            <div class="invalid-tooltip">Должно быть больше 0.</div>
+            <input type="text" class="form-control" id="position" value="1">
+            <div class="invalid-tooltip">Должно быть заполнено.</div>
         </div>
     </div>
     <div class="form-row justify-content-center mb-3">
