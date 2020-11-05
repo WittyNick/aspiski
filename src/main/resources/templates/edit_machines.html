@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
     <th:block th:replace="fragments :: head"/>
 
@@ -19,7 +19,7 @@
 
     <input type="hidden" id="hiddenId" value="0">
     <div class="form-row justify-content-center align-items-center">
-        <div class="col-4">
+        <div class="col-3">
             <div class="input-group">
                 <input type="text" class="form-control" id="name"
                        placeholder="Станок" aria-label="Станок" spellcheck="false">
@@ -48,7 +48,7 @@
             </div>
         </div>
     </div>
-    <div class="form-row justify-content-center m-3">
+    <div class="form-row justify-content-center mt-2 mb-3">
         <div class="col-auto">
             <button type="button" class="btn btn-primary" id="saveBtn">Сохранить</button>
         </div>
@@ -57,7 +57,7 @@
     <div class="row justify-content-center">
         <div class="col-8">
             <div class="scroll-table">
-                <table class="table table-bordered table-hover" id="mainTable">
+                <table class="table table-bordered table-hover m-0" id="mainTable">
                     <thead class="thead-light text-center">
                     <tr>
                         <th scope="col">id</th>
@@ -65,7 +65,14 @@
                         <th scope="col">machineTypeId</th>
                         <th scope="col">Тип станка</th>
                         <th scope="col">disabled</th>
-                        <th scope="col">&#x26D4;</th>
+                        <th scope="col">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-slash-fill"
+                                 fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10.79 12.912l-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>
+                                <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708l-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829z"/>
+                                <path fill-rule="evenodd" d="M13.646 14.354l-12-12 .708-.708 12 12-.708.708z"/>
+                            </svg>
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -75,8 +82,11 @@
                         <td th:text="*{machineType.id}"></td>
                         <td th:text="*{machineType.name}"></td>
                         <td th:text="*{disabled}"></td>
-                        <td th:if="*{disabled}">&#x2611;</td>
-                        <td th:unless="*{disabled}">&#x2610;</td>
+                        <td>
+                            <svg th:if="*{disabled}" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                            </svg>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

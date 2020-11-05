@@ -17,58 +17,7 @@
         </div>
     </div>
 
-    <input type="hidden" id="hiddenId" value="0">
-    <div class="form-row justify-content-center align-items-center">
-        <div class="col-4">
-            <div class="input-group">
-                <input type="text" class="form-control" id="name" placeholder="Разработчик" aria-label="Разработчик"
-                       spellcheck="false">
-                <div class="invalid-tooltip">Поле должно быть заполнено.</div>
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="clearBtn">&times;</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-auto">
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="disableCheckbox">
-                <label for="disableCheckbox" class="form-check-label">не использовать</label>
-            </div>
-        </div>
-    </div>
-    <div class="form-row justify-content-center m-3">
-        <div class="col-auto">
-            <button type="button" class="btn btn-primary" id="saveBtn">Сохранить</button>
-        </div>
-    </div>
-
-    <div class="row justify-content-center">
-        <div class="col-5">
-            <div class="scroll-table">
-                <table class="table table-bordered table-hover" id="mainTable">
-                    <thead class="thead-light text-center">
-                    <tr>
-                        <th scope="col">id</th>
-                        <th scope="col">Разработчик</th>
-                        <th scope="col">disabled</th>
-                        <th scope="col">&#x26D4;</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="developer : ${developers}" th:object="${developer}">
-                        <td th:text="*{id}"></td>
-                        <td th:text="*{name}"></td>
-                        <td th:text="*{disabled}"></td>
-                        <td th:if="*{disabled}">&#x2611;</td>
-                        <td th:unless="*{disabled}">&#x2610;</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <th:block th:replace="fragments :: editButtons"/>
+    <th:block th:replace="fragments :: editCommon('Разработчик')"/>
 </div>
 </body>
 </html>

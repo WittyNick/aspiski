@@ -1,5 +1,6 @@
 #### BUGS:
 0. ~~Fix edit actions~~
+0. Check if fields exists before save/update Program
 
 #### TODO:
 0. ~~Validate data in forms~~

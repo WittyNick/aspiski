@@ -36,7 +36,7 @@ function overrideDeleteErrorMsg () {
 }
 
 function overrideParseToRowHtml(machine) {
-    let symbol = machine.disabled ? '&#x2611;': '&#x2610;';
+    let symbol = machine.disabled ? CHECK_IMG : '';
     return $(
         `<tr>
             <td>${machine.id}</td>

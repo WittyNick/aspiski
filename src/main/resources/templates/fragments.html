@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
     <th:block th:fragment="head">
         <title>spiski</title>
@@ -24,7 +24,8 @@
     <a class="navbar-brand" href="/">
         <img th:src="@{img/favicon.png}" alt="A">spiski
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -33,39 +34,40 @@
                 class="nav-item" th:classappend="${isCurrent} ? active : ''">
                 <a href="/" class="nav-link" th:classappend="${isCurrent} ? disabled : ''">главная</a>
             </li>
+            <th:block th:if="${page != 'log_in'}">
+                <li th:with="isCurrent=${page == 'add'}"
+                    class="nav-item" th:classappend="${isCurrent} ? active : ''">
+                    <a href="/addProgram" class="nav-link" th:classappend="${isCurrent} ? disabled : ''">добавить</a>
+                </li>
 
-            <li th:with="isCurrent=${page == 'add'}"
-                class="nav-item" th:classappend="${isCurrent} ? active : ''">
-                <a href="/addProgram" class="nav-link" th:classappend="${isCurrent} ? disabled : ''">добавить</a>
-            </li>
+                <li th:with="isCurrent=${page == 'stat'}"
+                    class="nav-item" th:classappend="${isCurrent} ? active : ''">
+                    <a href="/stat" class="nav-link" th:classappend="${isCurrent} ? disabled : ''">статистика</a>
+                </li>
 
-            <li th:with="isCurrent=${page == 'stat'}"
-                class="nav-item" th:classappend="${isCurrent} ? active : ''">
-                <a href="/stat" class="nav-link" th:classappend="${isCurrent} ? disabled : ''">статистика</a>
-            </li>
-
-            <li class="nav-item dropdown" th:classappend="${#strings.startsWith(page, 'edit')} ? active : ''">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    редактировать
-                </a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="/editControlSystems"
-                       th:classappend="${page == 'edit_cnc'} ? '' : 'text-muted'">системы ЧПУ</a>
-                    <a class="dropdown-item" href="/editMachineTypes"
-                       th:classappend="${page == 'edit_type'} ? '' : 'text-muted'">типы станков</a>
-                    <a class="dropdown-item" href="/editMachines"
-                       th:classappend="${page == 'edit_machine'} ? '' : 'text-muted'">модели станков</a>
-                    <a class="dropdown-item" href="/editDevelopers"
-                       th:classappend="${page == 'edit_dev'} ? '' : 'text-muted'">разработчиков</a>
-                    <a class="dropdown-item" href="/editWorkshops"
-                       th:classappend="${page == 'edit_workshop'} ? '' : 'text-muted'">цеха</a>
-                </div>
-            </li>
+                <li class="nav-item dropdown" th:classappend="${#strings.startsWith(page, 'edit')} ? active : ''">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        редактировать
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/editControlSystems"
+                           th:classappend="${page == 'edit_cnc'} ? '' : 'text-muted'">системы ЧПУ</a>
+                        <a class="dropdown-item" href="/editMachineTypes"
+                           th:classappend="${page == 'edit_type'} ? '' : 'text-muted'">типы станков</a>
+                        <a class="dropdown-item" href="/editMachines"
+                           th:classappend="${page == 'edit_machine'} ? '' : 'text-muted'">модели станков</a>
+                        <a class="dropdown-item" href="/editDevelopers"
+                           th:classappend="${page == 'edit_dev'} ? '' : 'text-muted'">разработчиков</a>
+                        <a class="dropdown-item" href="/editWorkshops"
+                           th:classappend="${page == 'edit_workshop'} ? '' : 'text-muted'">цеха</a>
+                    </div>
+                </li>
+            </th:block>
         </ul>
-        <ul class="navbar-nav ml-auto">
+        <ul th:if="${page != 'log_in'}" class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a href="#" class="nav-link" onclick="alert('Не работает пока!')">вход</a>
+                <a class="nav-link" href="/logIn">вход</a>
             </li>
         </ul>
     </div>
@@ -73,12 +75,77 @@
 
 <!-- edit pages -->
 
-<div th:fragment="editButtons" class="row justify-content-center">
-    <div class="col-auto">
-        <button type="button" class="btn btn-primary ml-2 mr-2" id="editBtn">Редактировать</button>
-        <button type="button" class="btn btn-primary ml-2 mr-2" id="deleteBtn">Удалить</button>
+<th:block th:fragment="editCommon(title)">
+    <input type="hidden" id="hiddenId" value="0">
+    <div class="form-row justify-content-center align-items-center">
+        <div class="col-3">
+            <div class="input-group">
+                <input type="text" class="form-control" id="name" th:placeholder="${title}" th:aria-label="${title}"
+                       spellcheck="false">
+                <div class="invalid-tooltip">Поле должно быть заполнено.</div>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="clearBtn">&times;</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-auto">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="disableCheckbox">
+                <label for="disableCheckbox" class="form-check-label">не использовать</label>
+            </div>
+        </div>
     </div>
-</div>
+    <div class="form-row justify-content-center mt-2 mb-3">
+        <div class="col-auto">
+            <button type="button" class="btn btn-primary" id="saveBtn">Сохранить</button>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-5">
+            <div class="scroll-table">
+                <table class="table table-bordered table-hover m-0" id="mainTable">
+                    <thead class="thead-light text-center">
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col" th:text="${title}"></th>
+                        <th scope="col">disabled</th>
+                        <th scope="col">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-slash-fill"
+                                 fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10.79 12.912l-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>
+                                <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708l-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829z"/>
+                                <path fill-rule="evenodd" d="M13.646 14.354l-12-12 .708-.708 12 12-.708.708z"/>
+                            </svg>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="entity : ${entities}" th:object="${entity}">
+                        <td th:text="*{id}"></td>
+                        <td th:text="*{name}"></td>
+                        <td th:text="*{disabled}"></td>
+                        <td>
+                            <svg th:if="*{disabled}" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2"
+                                 fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                            </svg>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div th:fragment="editButtons" class="row justify-content-center">
+        <div class="col-auto">
+            <button type="button" class="btn btn-primary m-2" id="editBtn">Редактировать</button>
+            <button type="button" class="btn btn-primary m-2" id="deleteBtn">Удалить</button>
+        </div>
+    </div>
+</th:block>
 
 </body>
 </html>
