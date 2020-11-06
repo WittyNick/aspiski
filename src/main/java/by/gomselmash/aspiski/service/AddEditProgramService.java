@@ -30,11 +30,12 @@ public class AddEditProgramService {
 
     @Transactional
     public boolean saveProgram(Program program) {
+
         String programNumber = program.getProgramNumber();
         if (programRepository.existsByProgramNumberIgnoreCase(programNumber)) {
             return false;
         }
-        rearrangeProgram(program);
+        rearrangeProgramNumber(program);
         programRepository.save(program);
         return true;
     }
@@ -43,7 +44,7 @@ public class AddEditProgramService {
     public boolean updateProgram(Program program) {
         Long id = program.getId();
         if (programRepository.existsById(id)) {
-            rearrangeProgram(program);
+            rearrangeProgramNumber(program);
             programRepository.save(program);
             return true;
         }
@@ -75,7 +76,19 @@ public class AddEditProgramService {
         return programRepository.findById(id);
     }
 
-    private void rearrangeProgram(Program program) {
+    @Transactional(readOnly = true)
+    boolean isEveryRelatedItemExists(Program program) {
+        Long controlSystemId = program.getControlSystem().getId();
+        Long developerId = program.getDeveloper().getId();
+        Long machineId = program.getMachine().getId();
+        Long workshopId = program.getWorkshop().getId();
+        return controlSystemRepository.existsById(controlSystemId) &&
+                developerRepository.existsById(developerId) &&
+                machineRepository.existsById(machineId) &&
+                workshopRepository.existsById(workshopId);
+    }
+
+    private void rearrangeProgramNumber(Program program) {
         String[] parts = program.getPartNumber().split(",");
         StringBuilder partNumber = new StringBuilder(parts[0].trim());
         for (int i = 1; i < parts.length; i++) {

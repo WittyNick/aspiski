@@ -17,8 +17,8 @@ public class Machine {
     @JoinColumn(name = "MACHINE_TYPE_ID", nullable = false)
     private MachineType machineType;
 
-    @Column(name = "DISABLED")
-    private boolean disabled;
+    @Column(name = "IS_DISABLED")
+    private boolean isDisabled;
 
     public Machine() {
     }
@@ -47,11 +47,11 @@ public class Machine {
         this.machineType = machineType;
     }
 
-    public boolean isDisabled() {
-        return disabled;
+    public boolean isIsDisabled() {
+        return isDisabled;
     }
 
-    public void setDisabled(boolean disabled) {
-        this.disabled = disabled;
+    public void setIsDisabled(boolean disabled) {
+        this.isDisabled = disabled;
     }
 }

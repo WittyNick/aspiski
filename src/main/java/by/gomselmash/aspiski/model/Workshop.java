@@ -3,7 +3,7 @@ package by.gomselmash.aspiski.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "WORKSHOP")
+@Table(name = "WORKSHOPS")
 public class Workshop {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -13,8 +13,8 @@ public class Workshop {
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    @Column(name = "DISABLED")
-    private boolean disabled;
+    @Column(name = "IS_DISABLED")
+    private boolean isDisabled;
 
     public Workshop() {
     }
@@ -35,11 +35,11 @@ public class Workshop {
         this.name = name;
     }
 
-    public boolean isDisabled() {
-        return disabled;
+    public boolean isIsDisabled() {
+        return isDisabled;
     }
 
-    public void setDisabled(boolean disabled) {
-        this.disabled = disabled;
+    public void setIsDisabled(boolean disabled) {
+        this.isDisabled = disabled;
     }
 }

@@ -13,8 +13,8 @@ public class ControlSystem {
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    @Column(name = "DISABLED")
-    private boolean disabled;
+    @Column(name = "IS_DISABLED")
+    private boolean isDisabled;
 
     public ControlSystem() {
     }
@@ -35,11 +35,11 @@ public class ControlSystem {
         this.name = name;
     }
 
-    public boolean isDisabled() {
-        return disabled;
+    public boolean isIsDisabled() {
+        return isDisabled;
     }
 
-    public void setDisabled(boolean disabled) {
-        this.disabled = disabled;
+    public void setIsDisabled(boolean disabled) {
+        this.isDisabled = disabled;
     }
 }

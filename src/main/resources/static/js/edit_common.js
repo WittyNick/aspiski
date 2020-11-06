@@ -5,13 +5,13 @@ const CHECK_IMG = `<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi b
 let tableRowSelector = {
     id: ':nth-child(1)',
     name: ':nth-child(2)',
-    disabled: ':nth-child(3)'
+    isDisabled: ':nth-child(3)'
 };
 
 let isUpdateModeActive = false,
     $selectedRow = null,
     $name,
-    $disabledCheckbox,
+    disableCheckbox,
     $saveBtn,
     $editBtn,
     $deleteBtn,
@@ -20,7 +20,7 @@ let isUpdateModeActive = false,
 
 function initCommon() {
     $name = $('#name');
-    $disabledCheckbox = $('#disableCheckbox');
+    disableCheckbox = $('#disableCheckbox');
     $saveBtn = $('#saveBtn');
     $editBtn = $('#editBtn');
     $deleteBtn = $('#deleteBtn');
@@ -184,12 +184,12 @@ let getDeleteErrorMsg = function () {
 }
 
 let parseToRowHtml = function (data) {
-    let symbol = data.disabled ? CHECK_IMG : '';
+    let symbol = data.isDisabled ? CHECK_IMG : '';
     return $(
         `<tr>
             <td>${data.id}</td>
             <td>${data.name}</td>
-            <td>${data.disabled}</td>
+            <td>${data.isDisabled}</td>
             <td>${symbol}</td>
         </tr>`
     );
@@ -199,7 +199,7 @@ let getSelectedRowData = function () {
     return {
         id: $selectedRow.children(tableRowSelector.id).html(),
         name: $selectedRow.children(tableRowSelector.name).html(),
-        disabled: bool($selectedRow.children(tableRowSelector.disabled).html())
+        isDisabled: bool($selectedRow.children(tableRowSelector.isDisabled).html())
     };
 }
 
@@ -207,7 +207,7 @@ let clearInput = function () {
     setDataToInput({
         id: 0,
         name: '',
-        disabled: false
+        isDisabled: false
     });
     resetErrors();
     setMode(false);
@@ -222,14 +222,14 @@ let getDataFromInput = function () {
     return {
         id: +$hiddenId.val(),
         name: $name.val().trim(),
-        disabled: $disabledCheckbox.is(':checked')
+        isDisabled: disableCheckbox.is(':checked')
     };
 }
 
 let setDataToInput = function (data) {
     $hiddenId.val(data.id);
     $name.val(data.name);
-    $disabledCheckbox.prop('checked', data.disabled);
+    disableCheckbox.prop('checked', data.isDisabled);
 }
 
 let validate = function (dataFromInput) {

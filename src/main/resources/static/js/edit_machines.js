@@ -27,7 +27,7 @@ function setTableRowSelector() {
         id: ':nth-child(1)',
         name: ':nth-child(2)',
         typeId: ':nth-child(3)',
-        disabled: ':nth-child(4)'
+        isDisabled: ':nth-child(4)'
     }
 }
 
@@ -36,14 +36,14 @@ function overrideDeleteErrorMsg () {
 }
 
 function overrideParseToRowHtml(machine) {
-    let symbol = machine.disabled ? CHECK_IMG : '';
+    let symbol = machine.isDisabled ? CHECK_IMG : '';
     return $(
         `<tr>
             <td>${machine.id}</td>
             <td>${machine.name}</td>
             <td>${machine.machineType.id}</td>
             <td>${machine.machineType.name}</td>
-            <td>${machine.disabled}</td>
+            <td>${machine.isDisabled}</td>
             <td>${symbol}</td>
         </tr>`
     );
@@ -53,7 +53,7 @@ function overrideGetSelectedRowData() {
     return {
         id: $selectedRow.children(tableRowSelector.id).html(),
         name: $selectedRow.children(tableRowSelector.name).html(),
-        disabled: bool($selectedRow.children(tableRowSelector.disabled).html()),
+        isDisabled: bool($selectedRow.children(tableRowSelector.isDisabled).html()),
         typeId: $selectedRow.children(tableRowSelector.typeId).html()
     };
 }
@@ -61,7 +61,7 @@ function overrideGetSelectedRowData() {
 function overrideClearInput() {
     $hiddenId.val(0);
     $name.val('');
-    $disabledCheckbox.prop('checked', false)
+    disableCheckbox.prop('checked', false)
     $machineType.children('option:first').prop('selected', true);
     resetErrors();
     setMode(false);
@@ -72,7 +72,7 @@ function overrideGetDataFromInput() {
     return {
         id: +$hiddenId.val(),
         name: $name.val().trim(),
-        disabled: $disabledCheckbox.is(':checked'),
+        isDisabled: disableCheckbox.is(':checked'),
         machineType: {
             id: +$machineType.val(),
             name: $machineType.children('option:selected').html() // use this field when set to table

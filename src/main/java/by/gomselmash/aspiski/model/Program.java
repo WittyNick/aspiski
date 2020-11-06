@@ -38,7 +38,7 @@ public class Program {
     private Machine machine;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "CONTROL_SYSTEM", nullable = false)
+    @JoinColumn(name = "CONTROL_SYSTEM_ID", nullable = false)
     private ControlSystem controlSystem;
 
 //    @JsonFormat(pattern = "yyyy-MM-dd")

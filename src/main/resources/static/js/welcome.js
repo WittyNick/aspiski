@@ -21,7 +21,7 @@ $(function () {
 });
 
 function addActionHandlers() {
-    $filter.on('input', filterTable);
+    $filter.on('input', delay(filterTable, 500));
     $filterCheckbox.on('input', checkboxHandler);
     $('#info').on('click', showInfo);
     $('#edit').on('click', editCNCProgram);
@@ -152,6 +152,19 @@ function isNothingSelected() {
 }
 
 // ----- Search filter -----
+
+// $filter.on('input', delay(filterTable, 500));
+function delay(callback, ms) {
+    let timer = 0;
+    return function () {
+        let context = this,
+            args = arguments;
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+            callback.apply(context, args);
+        }, ms || 0);
+    };
+}
 
 function filterTable() {
     unselectRow();
