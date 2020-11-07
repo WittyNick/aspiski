@@ -54,4 +54,14 @@ public class Machine {
     public void setIsDisabled(boolean disabled) {
         this.isDisabled = disabled;
     }
+
+    @Override
+    public String toString() {
+        return "Machine{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", machineType=" + machineType +
+                ", isDisabled=" + isDisabled +
+                '}';
+    }
 }

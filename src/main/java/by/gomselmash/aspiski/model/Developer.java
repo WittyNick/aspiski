@@ -42,4 +42,13 @@ public class Developer {
     public void setIsDisabled(boolean disabled) {
         this.isDisabled = disabled;
     }
+
+    @Override
+    public String toString() {
+        return "Developer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", isDisabled=" + isDisabled +
+                '}';
+    }
 }

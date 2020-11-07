@@ -135,4 +135,20 @@ public class Program {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
         return date.format(formatter);
     }
+
+    @Override
+    public String toString() {
+        return "Program{" +
+                "id=" + id +
+                ", partNumber='" + partNumber + '\'' +
+                ", programNumber='" + programNumber + '\'' +
+                ", position='" + position + '\'' +
+                ", workshop=" + workshop +
+                ", developer=" + developer +
+                ", machine=" + machine +
+                ", controlSystem=" + controlSystem +
+                ", date=" + date +
+                ", info='" + info + '\'' +
+                '}';
+    }
 }

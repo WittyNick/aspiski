@@ -42,4 +42,13 @@ public class ControlSystem {
     public void setIsDisabled(boolean disabled) {
         this.isDisabled = disabled;
     }
+
+    @Override
+    public String toString() {
+        return "ControlSystem{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", isDisabled=" + isDisabled +
+                '}';
+    }
 }

@@ -30,9 +30,11 @@ public class AddEditProgramService {
 
     @Transactional
     public boolean saveProgram(Program program) {
-
         String programNumber = program.getProgramNumber();
         if (programRepository.existsByProgramNumberIgnoreCase(programNumber)) {
+            return false;
+        }
+        if (hasInvalidFields(program)) {
             return false;
         }
         rearrangeProgramNumber(program);
@@ -43,12 +45,15 @@ public class AddEditProgramService {
     @Transactional
     public boolean updateProgram(Program program) {
         Long id = program.getId();
-        if (programRepository.existsById(id)) {
-            rearrangeProgramNumber(program);
-            programRepository.save(program);
-            return true;
+        if (!programRepository.existsById(id)) {
+            return false;
         }
-        return false;
+        if (hasInvalidFields(program)) {
+            return false;
+        }
+        rearrangeProgramNumber(program);
+        programRepository.save(program);
+        return true;
     }
 
     @Transactional(readOnly = true)
@@ -77,15 +82,15 @@ public class AddEditProgramService {
     }
 
     @Transactional(readOnly = true)
-    boolean isEveryRelatedItemExists(Program program) {
+    boolean hasInvalidFields(Program program) {
         Long controlSystemId = program.getControlSystem().getId();
         Long developerId = program.getDeveloper().getId();
         Long machineId = program.getMachine().getId();
         Long workshopId = program.getWorkshop().getId();
-        return controlSystemRepository.existsById(controlSystemId) &&
-                developerRepository.existsById(developerId) &&
-                machineRepository.existsById(machineId) &&
-                workshopRepository.existsById(workshopId);
+        return !controlSystemRepository.existsById(controlSystemId) ||
+                !developerRepository.existsById(developerId) ||
+                !machineRepository.existsById(machineId) ||
+                !workshopRepository.existsById(workshopId);
     }
 
     private void rearrangeProgramNumber(Program program) {

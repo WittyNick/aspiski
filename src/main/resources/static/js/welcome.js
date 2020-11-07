@@ -1,3 +1,5 @@
+const SEARCH_DELAY_TIME = 500; // ms
+
 let $selectedRow = null,
     $programsTbody,
     $filterCheckbox,
@@ -21,20 +23,25 @@ $(function () {
 });
 
 function addActionHandlers() {
-    $filter.on('input', delay(filterTable, 500));
+    $inputPart.on('input', delay(filterTable, SEARCH_DELAY_TIME));
+    $inputProgram.on('input', delay(filterTable, SEARCH_DELAY_TIME));
+    $filterCheckbox.on('input', delay(filterTable, SEARCH_DELAY_TIME));
+    $inputMachine.on('input', delay(filterTable));
+    $inputSystem.on('input', delay(filterTable));
+    $inputWorkshop.on('input', delay(filterTable));
+    $('#clear').on('click', delay(clearHandler));
     $filterCheckbox.on('input', checkboxHandler);
     $('#info').on('click', showInfo);
     $('#edit').on('click', editCNCProgram);
     $('#delete').on('click', deleteButtonHandler);
     $programsTbody.children('tr').on('click', selectRow);
-    $('#clear').on('click', clearHandler);
     $(document).on('keydown', keyPressHandler);
 }
 
 function clearHandler() {
     $filter.trigger('reset');
-    filterTable();
     $inputPart.focus();
+    $programsTbody.children('tr').removeClass(HIDE_CLASS);
 }
 
 function keyPressHandler(event) {
@@ -153,16 +160,11 @@ function isNothingSelected() {
 
 // ----- Search filter -----
 
-// $filter.on('input', delay(filterTable, 500));
 function delay(callback, ms) {
-    let timer = 0;
+    let timerId = 0;
     return function () {
-        let context = this,
-            args = arguments;
-        clearTimeout(timer);
-        timer = setTimeout(function () {
-            callback.apply(context, args);
-        }, ms || 0);
+        clearTimeout(timerId);
+        timerId = setTimeout(callback, ms || 0);
     };
 }
 

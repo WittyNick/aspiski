@@ -42,4 +42,13 @@ public class Workshop {
     public void setIsDisabled(boolean disabled) {
         this.isDisabled = disabled;
     }
+
+    @Override
+    public String toString() {
+        return "Workshop{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", isDisabled=" + isDisabled +
+                '}';
+    }
 }
