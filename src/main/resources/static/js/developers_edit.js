@@ -1,12 +1,12 @@
-const AJAX_SAVE_URL = 'developerSave';
-const AJAX_UPDATE_URL = 'developerUpdate';
-const AJAX_DELETE_URL = 'developerDelete';
+const AJAX_SAVE_URL = 'saveDeveloper';
+const AJAX_UPDATE_URL = 'updateDeveloper';
+const AJAX_DELETE_URL = 'deleteDeveloper';
 
 $(function () {
     getDeleteErrorMsg = overrideDeleteErrorMsg;
     initCommon();
 });
 
-function overrideDeleteErrorMsg () {
+function overrideDeleteErrorMsg() {
     return 'Не удалось удалить, т.к. данный разразобчик используется.';
 }

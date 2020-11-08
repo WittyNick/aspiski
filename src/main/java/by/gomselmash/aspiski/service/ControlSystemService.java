@@ -10,14 +10,12 @@ import java.util.List;
 
 @Service
 @Transactional
-public class EditControlSystemsService {
+public class ControlSystemService {
     private final ControlSystemRepository controlSystemRepository;
     private final ProgramRepository programRepository;
 
-    public EditControlSystemsService(
-            ControlSystemRepository controlSystemRepository,
-            ProgramRepository programRepository
-    ) {
+    public ControlSystemService(ControlSystemRepository controlSystemRepository,
+                                ProgramRepository programRepository) {
         this.controlSystemRepository = controlSystemRepository;
         this.programRepository = programRepository;
     }

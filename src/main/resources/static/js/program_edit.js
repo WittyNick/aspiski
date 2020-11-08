@@ -1,4 +1,4 @@
-const AJAX_URL = 'programUpdate';
+const AJAX_URL = 'updateProgram';
 
 $(function () {
     resetErrors = overrideResetErrors;

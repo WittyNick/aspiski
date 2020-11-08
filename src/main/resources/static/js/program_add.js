@@ -1,4 +1,4 @@
-const AJAX_URL = 'programSave';
+const AJAX_URL = 'saveProgram';
 
 $(initProgramCommon);
 

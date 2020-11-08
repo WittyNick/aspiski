@@ -10,14 +10,12 @@ import java.util.List;
 
 @Service
 @Transactional
-public class EditWorkshopsService {
+public class WorkshopService {
     private final WorkshopRepository workshopRepository;
     private final ProgramRepository programRepository;
 
-    public EditWorkshopsService(
-            WorkshopRepository workshopRepository,
-            ProgramRepository programRepository
-    ) {
+    public WorkshopService(WorkshopRepository workshopRepository,
+                           ProgramRepository programRepository) {
         this.workshopRepository = workshopRepository;
         this.programRepository = programRepository;
     }

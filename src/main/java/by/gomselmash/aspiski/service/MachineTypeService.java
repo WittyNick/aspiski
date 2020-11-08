@@ -10,11 +10,11 @@ import java.util.List;
 
 @Service
 @Transactional
-public class EditMachineTypesService {
+public class MachineTypeService {
     private final MachineTypeRepository machineTypeRepository;
     private final MachineRepository machineRepository;
 
-    public EditMachineTypesService(
+    public MachineTypeService(
             MachineTypeRepository machineTypeRepository,
             MachineRepository machineRepository
     ) {

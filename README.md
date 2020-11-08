@@ -9,7 +9,7 @@
 0. ~~Check if the item exists in the database before adding~~
 0. ~~Scrolled tables~~
 0. ~~Confirm before delete from DB~~
-0. Locks (select to update)
+0. ~~Locks (select to update)~~
 0. Save DB dump
 0. Restore DB from dump
 0. Add serverside validation

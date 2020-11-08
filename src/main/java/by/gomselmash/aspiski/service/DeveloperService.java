@@ -10,14 +10,12 @@ import java.util.List;
 
 @Service
 @Transactional
-public class EditDevelopersService {
+public class DeveloperService {
     private final DeveloperRepository developerRepository;
     private final ProgramRepository programRepository;
 
-    public EditDevelopersService(
-            DeveloperRepository developerRepository,
-            ProgramRepository programRepository
-    ) {
+    public DeveloperService(DeveloperRepository developerRepository,
+                            ProgramRepository programRepository) {
         this.developerRepository = developerRepository;
         this.programRepository = programRepository;
     }

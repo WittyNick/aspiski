@@ -41,10 +41,9 @@ function addCommonHandlers() {
 function saveButtonHandler() {
     let data = getDataFromInput();
     let isDataValid = validate(data);
-    if (!isDataValid) {
-        return;
+    if (isDataValid === true) {
+        isUpdateModeActive ? updateEntity(data) : saveEntity(data);
     }
-    isUpdateModeActive ? updateEntity(data) : saveEntity(data);
 }
 
 function saveEntity(entity) {
@@ -56,7 +55,7 @@ function saveEntity(entity) {
         dataType: 'json',
         success: function (savedEntity) {
             let wasNotSaved = savedEntity.id === 0;
-            if (wasNotSaved) {
+            if (wasNotSaved === true) {
                 alert(getSaveErrorMsg(entity));
                 return;
             }
@@ -73,13 +72,13 @@ function updateEntity(entity) {
         contentType: 'application/json; charset=UTF-8',
         dataType: 'json',
         success: function (wasUpdated) {
-            if (!wasUpdated) {
+            if (wasUpdated === true) {
+                removeSelectedRow();
+                addRowToTable(entity);
+                setMode(false);
+            } else {
                 alert(getUpdateErrorMsg(entity));
-                return;
             }
-            removeSelectedRow();
-            addRowToTable(entity);
-            setMode(false);
         }
     });
 }
@@ -92,7 +91,7 @@ function deleteEntity(stringId) {
         contentType: 'text/plain; charset=UTF-8',
         dataType: 'json',
         success: function (wasDeleted) {
-            if (wasDeleted) {
+            if (wasDeleted === true) {
                 removeSelectedRow();
             } else {
                 alert(getDeleteErrorMsg());

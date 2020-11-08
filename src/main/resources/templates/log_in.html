@@ -7,12 +7,35 @@
 <th:block th:replace="fragments :: navbar('log_in')"/>
 
 <div class="container">
-    <div class="row mb-4 text-center">
-        <div class="col-12">
-            <h2>Войди уже как следует</h2>
-        </div>
-    </div>
+    <div class="d-flex justify-content-center align-items-center">
 
+        <div class="card">
+            <div class="card-body">
+                <form action="/logIn/checkUser" autocomplete="off" method="post">
+                    <fieldset>
+                        <legend>Вход</legend>
+                        <label class="sr-only" for="user">Имя пользователя</label>
+                        <div class="form-group input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">@</div>
+                            </div>
+                            <input id="user" name="user" placeholder="логин" type="text">
+                        </div>
+
+                        <label class="sr-only" for="password">Проль</label>
+                        <div class="form-group input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">@</div>
+                            </div>
+                            <input id="password" name="password" placeholder="пароль" type="password">
+                        </div>
+                        <input class="btn btn-primary" type="submit" value="Войти">
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+
+    </div>
 </div>
 </body>
 </html>

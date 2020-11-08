@@ -14,7 +14,7 @@ public class SameSiteCookieTomcatContextCustomizer implements TomcatContextCusto
     @Override
     public void customize(final Context context) {
         Rfc6265CookieProcessor cookieProcessor = new Rfc6265CookieProcessor();
-        cookieProcessor.setSameSiteCookies("Lax");
+        cookieProcessor.setSameSiteCookies("strict");
         context.setCookieProcessor(cookieProcessor);
     }
 }

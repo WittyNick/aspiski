@@ -1,7 +1,7 @@
 package by.gomselmash.aspiski.controller;
 
 import by.gomselmash.aspiski.model.Developer;
-import by.gomselmash.aspiski.service.EditDevelopersService;
+import by.gomselmash.aspiski.service.DeveloperService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,33 +12,33 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
-public class EditDevelopersController {
-    private final EditDevelopersService service;
+public class DevelopersEditController {
+    private final DeveloperService service;
 
-    public EditDevelopersController(EditDevelopersService service) {
+    public DevelopersEditController(DeveloperService service) {
         this.service = service;
     }
 
-    @GetMapping("/editDevelopers")
-    public String goEditDevelopers(Model model) {
+    @GetMapping("/developersEdit")
+    public String goDevelopersEdit(Model model) {
         List<Developer> developers = service.findAllDevelopers();
         model.addAttribute("entities", developers);
-        return "edit_developers";
+        return "developers_edit";
     }
 
-    @PostMapping("/developerSave")
+    @PostMapping("/saveDeveloper")
     @ResponseBody
     public Developer saveDeveloper(@RequestBody Developer developer) {
         return service.saveDeveloper(developer);
     }
 
-    @PostMapping("/developerUpdate")
+    @PostMapping("/updateDeveloper")
     @ResponseBody
     public Boolean updateDeveloper(@RequestBody Developer developer) {
         return service.updateDeveloper(developer);
     }
 
-    @PostMapping("/developerDelete")
+    @PostMapping("/deleteDeveloper")
     @ResponseBody
     public Boolean deleteDeveloper(@RequestBody String stringId) {
         Long id = Long.valueOf(stringId);

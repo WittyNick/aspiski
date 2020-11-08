@@ -38,9 +38,9 @@ public class StatController {
         return "stat";
     }
 
-    @PostMapping("/loadPrograms")
+    @PostMapping("/getProgramsBetweenDates")
     @ResponseBody
-    public List<Program> loadPrograms(@RequestBody DateRageDto dateRageDto) {
+    public List<Program> getProgramsBetweenDates(@RequestBody DateRageDto dateRageDto) {
         return service.getProgramsBetweenDates(dateRageDto);
     }
 }

@@ -12,16 +12,14 @@ import java.util.List;
 
 @Service
 @Transactional
-public class EditMachinesService {
+public class MachineService {
     private final MachineRepository machineRepository;
     private final MachineTypeRepository machineTypeRepository;
     private final ProgramRepository programRepository;
 
-    public EditMachinesService(
-            MachineRepository machineRepository,
-            MachineTypeRepository machineTypeRepository,
-            ProgramRepository programRepository
-    ) {
+    public MachineService(MachineRepository machineRepository,
+                          MachineTypeRepository machineTypeRepository,
+                          ProgramRepository programRepository) {
         this.machineRepository = machineRepository;
         this.machineTypeRepository = machineTypeRepository;
         this.programRepository = programRepository;

@@ -64,7 +64,7 @@ function saveProgram() {
         contentType: 'application/json; charset=UTF-8',
         dataType: 'json',
         success: function (isDone) {
-            if (isDone) {
+            if (isDone === true) {
                 goWelcomePage();
             } else {
                 alert(getErrorMessage());

@@ -1,7 +1,7 @@
 package by.gomselmash.aspiski.controller;
 
 import by.gomselmash.aspiski.model.Workshop;
-import by.gomselmash.aspiski.service.EditWorkshopsService;
+import by.gomselmash.aspiski.service.WorkshopService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,35 +12,35 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
-public class EditWorkshopsController {
-    private final EditWorkshopsService service;
+public class WorkshopsEditController {
+    private final WorkshopService service;
 
-    public EditWorkshopsController(EditWorkshopsService service) {
+    public WorkshopsEditController(WorkshopService service) {
         this.service = service;
     }
 
-    @GetMapping("/editWorkshops")
-    public String goEditWorkshops(Model model) {
+    @GetMapping("/workshopsEdit")
+    public String goWorkshopsEdit(Model model) {
         List<Workshop> workshops = service.findAllWorkshops();
         model.addAttribute("entities", workshops);
-        return "edit_workshops";
+        return "workshops_edit";
     }
 
-    @PostMapping("/workshopSave")
+    @PostMapping("/saveWorkshop")
     @ResponseBody
     public Workshop saveWorkshop(@RequestBody Workshop workshop) {
         return service.saveWorkshop(workshop);
     }
 
-    @PostMapping("/workshopUpdate")
+    @PostMapping("/updateWorkshop")
     @ResponseBody
     public Boolean updateWorkshop(@RequestBody Workshop workshop) {
         return service.updateWorkshop(workshop);
     }
 
-    @PostMapping("/workshopDelete")
+    @PostMapping("/deleteWorkshop")
     @ResponseBody
-    public Boolean deleteDeveloper(@RequestBody String stringId) {
+    public Boolean deleteWorkshop(@RequestBody String stringId) {
         Long id = Long.valueOf(stringId);
         return service.deleteWorkshopById(id);
     }

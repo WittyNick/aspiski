@@ -1,12 +1,12 @@
-const AJAX_SAVE_URL = 'controlSystemSave';
-const AJAX_UPDATE_URL = 'controlSystemUpdate';
-const AJAX_DELETE_URL = 'controlSystemDelete';
+const AJAX_SAVE_URL = 'saveControlSystem';
+const AJAX_UPDATE_URL = 'updateControlSystem';
+const AJAX_DELETE_URL = 'deleteControlSystem';
 
 $(function () {
     getDeleteErrorMsg = overrideDeleteErrorMsg;
     initCommon();
 });
 
-function overrideDeleteErrorMsg () {
+function overrideDeleteErrorMsg() {
     return 'Не удалось удалить, т.к. данная система ЧПУ используется.';
 }

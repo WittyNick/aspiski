@@ -1,7 +1,7 @@
 package by.gomselmash.aspiski.controller;
 
 import by.gomselmash.aspiski.model.MachineType;
-import by.gomselmash.aspiski.service.EditMachineTypesService;
+import by.gomselmash.aspiski.service.MachineTypeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,35 +12,35 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
-public class EditMachineTypesController {
-    private final EditMachineTypesService service;
+public class MachineTypesEditController {
+    private final MachineTypeService service;
 
-    public EditMachineTypesController(EditMachineTypesService service) {
+    public MachineTypesEditController(MachineTypeService service) {
         this.service = service;
     }
 
-    @GetMapping("/editMachineTypes")
-    public String goEditControlSystems(Model model) {
+    @GetMapping("/machineTypesEdit")
+    public String goMachineTypesEdit(Model model) {
         List<MachineType> machineTypes = service.findAllMachineTypes();
         model.addAttribute("entities", machineTypes);
-        return "edit_machine_types";
+        return "machine_types_edit";
     }
 
-    @PostMapping("/machineTypeSave")
+    @PostMapping("/saveMachineType")
     @ResponseBody
     public MachineType saveMachineType(@RequestBody MachineType machineType) {
         return service.saveMachineType(machineType);
     }
 
-    @PostMapping("/machineTypeUpdate")
+    @PostMapping("/updateMachineType")
     @ResponseBody
     public Boolean updateMachineType(@RequestBody MachineType machineType) {
         return service.updateMachineType(machineType);
     }
 
-    @PostMapping("/machineTypeDelete")
+    @PostMapping("/deleteMachineType")
     @ResponseBody
-    public Boolean deleteControlSystem(@RequestBody String stringId) {
+    public Boolean deleteMachineType(@RequestBody String stringId) {
         Long id = Long.valueOf(stringId);
         return service.deleteMachineTypeById(id);
     }

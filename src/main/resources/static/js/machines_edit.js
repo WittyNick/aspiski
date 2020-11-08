@@ -1,6 +1,6 @@
-const AJAX_SAVE_URL = 'machineSave';
-const AJAX_UPDATE_URL = 'machineUpdate';
-const AJAX_DELETE_URL = 'machineDelete';
+const AJAX_SAVE_URL = 'saveMachine';
+const AJAX_UPDATE_URL = 'updateMachine';
+const AJAX_DELETE_URL = 'deleteMachine';
 
 let $machineType;
 

@@ -1,4 +1,4 @@
-const AJAX_LOAD_URL = 'loadPrograms';
+const AJAX_LOAD_URL = 'getProgramsBetweenDates';
 
 let $fromDate,
     $toDate,

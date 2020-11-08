@@ -37,7 +37,7 @@
             <th:block th:if="${page != 'log_in'}">
                 <li th:with="isCurrent=${page == 'add'}"
                     class="nav-item" th:classappend="${isCurrent} ? active : ''">
-                    <a href="/addProgram" class="nav-link" th:classappend="${isCurrent} ? disabled : ''">добавить</a>
+                    <a class="nav-link" href="/programAdd" th:classappend="${isCurrent} ? disabled : ''">добавить</a>
                 </li>
 
                 <li th:with="isCurrent=${page == 'stat'}"
@@ -51,15 +51,15 @@
                         редактировать
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/editControlSystems"
+                        <a class="dropdown-item" href="/controlSystemsEdit"
                            th:classappend="${page == 'edit_cnc'} ? '' : 'text-muted'">системы ЧПУ</a>
-                        <a class="dropdown-item" href="/editMachineTypes"
+                        <a class="dropdown-item" href="/machineTypesEdit"
                            th:classappend="${page == 'edit_type'} ? '' : 'text-muted'">типы станков</a>
-                        <a class="dropdown-item" href="/editMachines"
+                        <a class="dropdown-item" href="/machinesEdit"
                            th:classappend="${page == 'edit_machine'} ? '' : 'text-muted'">модели станков</a>
-                        <a class="dropdown-item" href="/editDevelopers"
+                        <a class="dropdown-item" href="/developersEdit"
                            th:classappend="${page == 'edit_dev'} ? '' : 'text-muted'">разработчиков</a>
-                        <a class="dropdown-item" href="/editWorkshops"
+                        <a class="dropdown-item" href="/workshopsEdit"
                            th:classappend="${page == 'edit_workshop'} ? '' : 'text-muted'">цеха</a>
                     </div>
                 </li>

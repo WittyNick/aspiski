@@ -25,7 +25,7 @@ $(function () {
 function addActionHandlers() {
     $inputPart.on('input', delay(filterTable, SEARCH_DELAY_TIME));
     $inputProgram.on('input', delay(filterTable, SEARCH_DELAY_TIME));
-    $filterCheckbox.on('input', delay(filterTable, SEARCH_DELAY_TIME));
+    $filterCheckbox.on('input', delay(filterTable));
     $inputMachine.on('input', delay(filterTable));
     $inputSystem.on('input', delay(filterTable));
     $inputWorkshop.on('input', delay(filterTable));
@@ -117,11 +117,11 @@ function editCNCProgram() {
 function deleteProgram(stringId) {
     $.ajax({
         type: 'POST',
-        url: 'programDelete',
+        url: 'deleteProgram',
         data: stringId, // String
         contentType: 'text/plain; charset=UTF-8',
         success: function (wasDeleted) {
-            if (wasDeleted) {
+            if (wasDeleted === true) {
                 removeSelectedRow();
             } else {
                 alert('Не удалось удалить!\nКто-то её уже успел удалить до тебя.');

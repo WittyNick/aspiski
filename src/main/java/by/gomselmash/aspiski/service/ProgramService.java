@@ -5,22 +5,24 @@ import by.gomselmash.aspiski.repository.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
-public class AddEditProgramService {
+public class ProgramService {
     private final ProgramRepository programRepository;
     private final MachineRepository machineRepository;
     private final ControlSystemRepository controlSystemRepository;
     private final WorkshopRepository workshopRepository;
     private final DeveloperRepository developerRepository;
 
-    public AddEditProgramService(ProgramRepository programRepository,
-                                 MachineRepository machineRepository,
-                                 ControlSystemRepository controlSystemRepository,
-                                 WorkshopRepository workshopRepository,
-                                 DeveloperRepository developerRepository) {
+    public ProgramService(ProgramRepository programRepository,
+                          MachineRepository machineRepository,
+                          ControlSystemRepository controlSystemRepository,
+                          WorkshopRepository workshopRepository,
+                          DeveloperRepository developerRepository) {
         this.programRepository = programRepository;
         this.machineRepository = machineRepository;
         this.controlSystemRepository = controlSystemRepository;
@@ -57,26 +59,6 @@ public class AddEditProgramService {
     }
 
     @Transactional(readOnly = true)
-    public List<Machine> findAllMachines() {
-        return machineRepository.findAllByOrderByNameAsc();
-    }
-
-    @Transactional(readOnly = true)
-    public List<ControlSystem> findAllControlSystems() {
-        return controlSystemRepository.findAllByOrderByNameAsc();
-    }
-
-    @Transactional(readOnly = true)
-    public List<Workshop> findAllWorkshops() {
-        return workshopRepository.findAllByOrderByNameAsc();
-    }
-
-    @Transactional(readOnly = true)
-    public List<Developer> findAllDevelopers() {
-        return developerRepository.findAllByOrderByNameAsc();
-    }
-
-    @Transactional(readOnly = true)
     public Optional<Program> findProgramById(Long id) {
         return programRepository.findById(id);
     }
@@ -93,6 +75,20 @@ public class AddEditProgramService {
                 !workshopRepository.existsById(workshopId);
     }
 
+    @Transactional(readOnly = true)
+    public Map<String, Object> getEntityMap() {
+        List<Machine> machines = machineRepository.findAllByOrderByNameAsc();
+        List<ControlSystem> controlSystems = controlSystemRepository.findAllByOrderByNameAsc();
+        List<Workshop> workshops = workshopRepository.findAllByOrderByNameAsc();
+        List<Developer> developers = developerRepository.findAllByOrderByNameAsc();
+        Map<String, Object> map = new HashMap<>();
+        map.put("machines", machines);
+        map.put("controlSystems", controlSystems);
+        map.put("workshops", workshops);
+        map.put("developers", developers);
+        return map;
+    }
+
     private void rearrangeProgramNumber(Program program) {
         String[] parts = program.getPartNumber().split(",");
         StringBuilder partNumber = new StringBuilder(parts[0].trim());
@@ -101,4 +97,6 @@ public class AddEditProgramService {
         }
         program.setPartNumber(partNumber.toString());
     }
+
+
 }
