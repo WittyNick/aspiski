@@ -27,7 +27,7 @@ function setTableRowSelector() {
         id: ':nth-child(1)',
         name: ':nth-child(2)',
         typeId: ':nth-child(3)',
-        isDisabled: ':nth-child(4)'
+        isDisabled: ':nth-child(5)'
     }
 }
 
@@ -61,7 +61,7 @@ function overrideGetSelectedRowData() {
 function overrideClearInput() {
     $hiddenId.val(0);
     $name.val('');
-    disableCheckbox.prop('checked', false)
+    $disableCheckbox.prop('checked', false)
     $machineType.children('option:first').prop('selected', true);
     resetErrors();
     setMode(false);
@@ -72,7 +72,7 @@ function overrideGetDataFromInput() {
     return {
         id: +$hiddenId.val(),
         name: $name.val().trim(),
-        isDisabled: disableCheckbox.is(':checked'),
+        isDisabled: $disableCheckbox.is(':checked'),
         machineType: {
             id: +$machineType.val(),
             name: $machineType.children('option:selected').html() // use this field when set to table
@@ -84,6 +84,7 @@ function overrideSetDataToInput(machine) {
     $hiddenId.val(machine.id);
     $name.val(machine.name);
     $(`#machineType option[value=${machine.typeId}]`).prop('selected', true);
+    $disableCheckbox.prop('checked', machine.isDisabled);
 }
 
 function overrideResetErrors() {

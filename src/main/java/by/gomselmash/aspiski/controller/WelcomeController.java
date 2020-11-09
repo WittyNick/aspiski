@@ -58,6 +58,9 @@ public class WelcomeController {
 
     private boolean isUserAdmin(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
+        if (cookies == null) {
+            return false;
+        }
         for (Cookie cookie : cookies) {
             if ("userRole".equals(cookie.getName()) && "ROLE_ADMIN".equals(cookie.getValue())) {
                 return true;

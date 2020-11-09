@@ -13,6 +13,8 @@ public interface WorkshopRepository extends JpaRepository<Workshop, Long> {
 
     List<Workshop> findAllByOrderByNameAsc();
 
+    List<Workshop> findAllByIsDisabledFalseOrderByNameAsc();
+
     @Lock(LockModeType.PESSIMISTIC_READ)
     boolean existsByNameIgnoreCase(String name);
 

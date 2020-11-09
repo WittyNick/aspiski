@@ -13,6 +13,8 @@ public interface DeveloperRepository extends JpaRepository<Developer, Long> {
 
     List<Developer> findAllByOrderByNameAsc();
 
+    List<Developer> findAllByIsDisabledFalseOrderByNameAsc();
+
     @Lock(LockModeType.PESSIMISTIC_READ)
     boolean existsByNameIgnoreCase(String name);
 

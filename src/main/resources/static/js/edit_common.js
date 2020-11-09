@@ -11,7 +11,7 @@ let tableRowSelector = {
 let isUpdateModeActive = false,
     $selectedRow = null,
     $name,
-    disableCheckbox,
+    $disableCheckbox,
     $saveBtn,
     $editBtn,
     $deleteBtn,
@@ -20,7 +20,7 @@ let isUpdateModeActive = false,
 
 function initCommon() {
     $name = $('#name');
-    disableCheckbox = $('#disableCheckbox');
+    $disableCheckbox = $('#disableCheckbox');
     $saveBtn = $('#saveBtn');
     $editBtn = $('#editBtn');
     $deleteBtn = $('#deleteBtn');
@@ -221,14 +221,14 @@ let getDataFromInput = function () {
     return {
         id: +$hiddenId.val(),
         name: $name.val().trim(),
-        isDisabled: disableCheckbox.is(':checked')
+        isDisabled: $disableCheckbox.is(':checked')
     };
 }
 
 let setDataToInput = function (data) {
     $hiddenId.val(data.id);
     $name.val(data.name);
-    disableCheckbox.prop('checked', data.isDisabled);
+    $disableCheckbox.prop('checked', data.isDisabled);
 }
 
 let validate = function (dataFromInput) {

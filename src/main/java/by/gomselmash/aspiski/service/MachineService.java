@@ -37,6 +37,7 @@ public class MachineService {
         return machineTypeRepository.findAllByOrderByNameAsc();
     }
 
+    @Transactional
     public Machine saveMachine(Machine machine) {
         String name = machine.getName();
         if (machineRepository.existsByNameIgnoreCase(name)) {
