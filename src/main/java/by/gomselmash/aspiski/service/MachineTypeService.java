@@ -9,17 +9,15 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
 public class MachineTypeService {
     private final MachineTypeRepository machineTypeRepository;
     private final MachineRepository machineRepository;
+    private final LogInService logInService;
 
-    public MachineTypeService(
-            MachineTypeRepository machineTypeRepository,
-            MachineRepository machineRepository
-    ) {
+    public MachineTypeService(MachineTypeRepository machineTypeRepository, MachineRepository machineRepository, LogInService logInService) {
         this.machineTypeRepository = machineTypeRepository;
         this.machineRepository = machineRepository;
+        this.logInService = logInService;
     }
 
     @Transactional(readOnly = true)
@@ -35,6 +33,7 @@ public class MachineTypeService {
         return machineTypeRepository.save(machineType);
     }
 
+    @Transactional
     public Boolean updateMachineType(MachineType machineType) {
         Long id = machineType.getId();
         if (machineTypeRepository.existsById(id)) {
@@ -44,6 +43,7 @@ public class MachineTypeService {
         return false;
     }
 
+    @Transactional
     public boolean deleteMachineTypeById(Long id) {
         boolean isExists = machineTypeRepository.existsById(id);
         if (!isExists) {
@@ -55,5 +55,13 @@ public class MachineTypeService {
         }
         machineTypeRepository.deleteById(id);
         return true;
+    }
+
+    public String getAuthority() {
+        String authority = "ROLE_ADMIN";
+        if (logInService.isAuthorizationDisabled()) {
+            authority = "DISABLED";
+        }
+        return authority;
     }
 }

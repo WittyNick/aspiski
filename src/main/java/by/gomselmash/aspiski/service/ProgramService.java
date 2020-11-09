@@ -17,17 +17,20 @@ public class ProgramService {
     private final ControlSystemRepository controlSystemRepository;
     private final WorkshopRepository workshopRepository;
     private final DeveloperRepository developerRepository;
+    private final LogInService logInService;
 
     public ProgramService(ProgramRepository programRepository,
                           MachineRepository machineRepository,
                           ControlSystemRepository controlSystemRepository,
                           WorkshopRepository workshopRepository,
-                          DeveloperRepository developerRepository) {
+                          DeveloperRepository developerRepository,
+                          LogInService logInService) {
         this.programRepository = programRepository;
         this.machineRepository = machineRepository;
         this.controlSystemRepository = controlSystemRepository;
         this.workshopRepository = workshopRepository;
         this.developerRepository = developerRepository;
+        this.logInService = logInService;
     }
 
     @Transactional
@@ -98,5 +101,11 @@ public class ProgramService {
         program.setPartNumber(partNumber.toString());
     }
 
-
+    public String getAuthority() {
+        String authority = "ROLE_ADMIN";
+        if (logInService.isAuthorizationDisabled()) {
+            authority = "DISABLED";
+        }
+        return authority;
+    }
 }

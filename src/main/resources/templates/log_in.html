@@ -5,32 +5,40 @@
     <script th:src="@{js/log_in.js}"></script>
 </head>
 <body>
-<th:block th:replace="fragments :: navbar('log_in')"/>
+<th:block th:replace="fragments :: navbar('log_in', 'ROLE_USER')"/>
 
 <div class="container">
     <div class="row justify-content-center">
-
-        <span class="border border-primary"></span>
         <div class="col-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Введите пароль</h5>
-                <label class="sr-only" for="password">Пароль</label>
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-fill"
-                                 fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                      d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                            </svg>
+            <div class="container">
+                <div class="border border-light rounded p-3 mt-5">
+                    <div class="row">
+                        <div class="col-12">
+                            <h6>Введите пароль</h6>
+                            <label class="sr-only" for="password">Пароль</label>
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-fill"
+                                             fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                  d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <input id="password" class="form-control" placeholder="пароль" type="password"
+                                       autofocus>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-auto">
+                                    <button id="cancelBtn" class="btn btn-primary mr-2" type="button">Отмена</button>
+                                    <button id="enterBtn" class="btn btn-primary ml-2" type="button">Войти</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <input id="password" class="form-control" placeholder="пароль" type="password">
                 </div>
-                <button id="enterBtn" class="btn btn-primary" type="button">Войти</button>
             </div>
-        </div>
         </div>
     </div>
 </div>

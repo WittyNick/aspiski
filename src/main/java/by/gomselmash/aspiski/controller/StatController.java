@@ -29,12 +29,14 @@ public class StatController {
         List<Developer> developers = service.findAllDevelopers();
         List<MachineType> machineTypes = service.findAllMachineTypes();
         long total = service.countAllPrograms();
+        String authority = service.getAuthority();
         model
                 .addAttribute("programs", programs)
                 .addAttribute("dateRage", dateRageNow)
                 .addAttribute("developers", developers)
                 .addAttribute("machineTypes", machineTypes)
-                .addAttribute("total", total);
+                .addAttribute("total", total)
+                .addAttribute("authority", authority);
         return "stat";
     }
 

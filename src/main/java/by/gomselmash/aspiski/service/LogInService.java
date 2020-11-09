@@ -10,6 +10,10 @@ public class LogInService {
     private String password;
 
     public boolean isPasswordValid(String formPassword) {
-        return password.isEmpty() || password.equals(formPassword);
+        return isAuthorizationDisabled() || password.equals(formPassword);
+    }
+
+    public boolean isAuthorizationDisabled() {
+        return password.isEmpty();
     }
 }

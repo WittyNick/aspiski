@@ -26,9 +26,12 @@ public class ProgramEditController {
         Optional<Program> optionalProgram = service.findProgramById(id);
         if (optionalProgram.isPresent()) {
             Map<String, Object> dropdownMap = service.getEntityMap();
+            Program program = optionalProgram.get();
+            String authority = service.getAuthority();
             model
                     .addAllAttributes(dropdownMap)
-                    .addAttribute("program", optionalProgram.get());
+                    .addAttribute("program", program)
+                    .addAttribute("authority", authority);
             return "program_edit";
         }
         return "redirect:/";

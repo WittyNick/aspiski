@@ -8,7 +8,7 @@
     <link th:href="@{css/machines_edit.css}" th:rel="stylesheet"/>
 </head>
 <body>
-<th:block th:replace="fragments :: navbar('edit_machine')"/>
+<th:block th:replace="fragments :: navbar('edit_machine', ${authority})"/>
 
 <div class="container">
     <div class="row pb-4 text-center">

@@ -24,10 +24,6 @@ function initProgramCommon() {
     $('#saveBtn').on('click', saveProgram);
 }
 
-function goWelcomePage() {
-    $(location).prop('href', '/');
-}
-
 function getProgram() {
     return {
         id: +$programId.val(),

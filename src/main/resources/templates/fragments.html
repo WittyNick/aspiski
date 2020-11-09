@@ -20,7 +20,7 @@
 
 </head>
 <body>
-<nav th:fragment="navbar(page)" class="navbar navbar-expand-lg navbar-light bg-light">
+<nav th:fragment="navbar(page, authority)" class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="/">
         <img th:src="@{img/favicon.png}" alt="A">spiski
     </a>
@@ -28,54 +28,56 @@
             aria-controls="navbarNavDropdown" aria-expanded="false">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
+    <div th:if="${page != 'lob_in'}" class="collapse navbar-collapse" id="navbarNavDropdown">
+
+        <ul th:if="${authority != 'ROLE_USER'}" class="navbar-nav">
             <li th:with="isCurrent=${page == 'main'}"
                 class="nav-item" th:classappend="${isCurrent} ? active : ''">
                 <a href="/" class="nav-link" th:classappend="${isCurrent} ? disabled : ''">главная</a>
             </li>
-            <th:block th:if="${page != 'log_in'}">
-                <li th:with="isCurrent=${page == 'add'}"
-                    class="nav-item" th:classappend="${isCurrent} ? active : ''">
-                    <a class="nav-link" href="/programAdd" th:classappend="${isCurrent} ? disabled : ''">добавить</a>
-                </li>
 
-                <li th:with="isCurrent=${page == 'stat'}"
-                    class="nav-item" th:classappend="${isCurrent} ? active : ''">
-                    <a href="/stat" class="nav-link" th:classappend="${isCurrent} ? disabled : ''">статистика</a>
-                </li>
 
-                <li class="nav-item dropdown" th:classappend="${#strings.startsWith(page, 'edit')} ? active : ''">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        редактировать
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/controlSystemsEdit"
-                           th:classappend="${page == 'edit_cnc'} ? '' : 'text-muted'">системы ЧПУ</a>
-                        <a class="dropdown-item" href="/machineTypesEdit"
-                           th:classappend="${page == 'edit_type'} ? '' : 'text-muted'">типы станков</a>
-                        <a class="dropdown-item" href="/machinesEdit"
-                           th:classappend="${page == 'edit_machine'} ? '' : 'text-muted'">модели станков</a>
-                        <a class="dropdown-item" href="/developersEdit"
-                           th:classappend="${page == 'edit_dev'} ? '' : 'text-muted'">разработчиков</a>
-                        <a class="dropdown-item" href="/workshopsEdit"
-                           th:classappend="${page == 'edit_workshop'} ? '' : 'text-muted'">цеха</a>
-                    </div>
-                </li>
-            </th:block>
-        </ul>
-        <ul th:if="${page != 'log_in'}" class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a th:if="${page == 'main'}" class="nav-link" href="/logIn">вход</a>
-                <a th:unless="${page == 'main'}" class="nav-link" href="/logOut">выход</a>
+            <li th:with="isCurrent=${page == 'add'}"
+                class="nav-item" th:classappend="${isCurrent} ? active : ''">
+                <a class="nav-link" href="/programAdd" th:classappend="${isCurrent} ? disabled : ''">добавить</a>
+            </li>
+
+            <li th:with="isCurrent=${page == 'stat'}"
+                class="nav-item" th:classappend="${isCurrent} ? active : ''">
+                <a href="/stat" class="nav-link" th:classappend="${isCurrent} ? disabled : ''">статистика</a>
+            </li>
+
+            <li class="nav-item dropdown" th:classappend="${#strings.startsWith(page, 'edit')} ? active : ''">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    редактировать
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/controlSystemsEdit"
+                       th:classappend="${page == 'edit_cnc'} ? '' : 'text-muted'">системы ЧПУ</a>
+                    <a class="dropdown-item" href="/machineTypesEdit"
+                       th:classappend="${page == 'edit_type'} ? '' : 'text-muted'">типы станков</a>
+                    <a class="dropdown-item" href="/machinesEdit"
+                       th:classappend="${page == 'edit_machine'} ? '' : 'text-muted'">модели станков</a>
+                    <a class="dropdown-item" href="/developersEdit"
+                       th:classappend="${page == 'edit_dev'} ? '' : 'text-muted'">разработчиков</a>
+                    <a class="dropdown-item" href="/workshopsEdit"
+                       th:classappend="${page == 'edit_workshop'} ? '' : 'text-muted'">цеха</a>
+                </div>
             </li>
         </ul>
+        <ul th:if="${authority != 'DISABLED'}" class="navbar-nav ml-auto">
 
+            <li th:if="${page == 'main'}" class="nav-item">
+                <a th:if="${authority == 'ROLE_USER'}" class="nav-link" href="/logIn">вход</a>
+                <a th:if="${authority == 'ROLE_ADMIN'}" class="nav-link" href="/logOut">выход</a>
+            </li>
 
+            <li th:if="${page != 'main'}" class="nav-item">
+                <a class="nav-link" href="/logOut">выход</a>
+            </li>
 
-
-
+        </ul>
     </div>
 </nav>
 

@@ -22,9 +22,11 @@ public class ProgramAddController {
     public String goProgramAdd(@CookieValue(value = "userId", defaultValue = "0") String userId, Model model) {
         Integer id = Integer.valueOf(userId);
         Map<String, Object> dropdownMap = service.getEntityMap();
+        String authority = service.getAuthority();
         model
                 .addAllAttributes(dropdownMap)
-                .addAttribute("userId", id);
+                .addAttribute("userId", id)
+                .addAttribute("authority", authority);
         return "program_add";
     }
 

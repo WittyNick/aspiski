@@ -22,7 +22,10 @@ public class ControlSystemsEditController {
     @GetMapping("/controlSystemsEdit")
     public String goControlSystemsEdit(Model model) {
         List<ControlSystem> controlSystems = service.findAllControlSystems();
-        model.addAttribute("entities", controlSystems);
+        String authority = service.getAuthority();
+        model
+                .addAttribute("entities", controlSystems)
+                .addAttribute("authority", authority);
         return "control_systems_edit";
     }
 

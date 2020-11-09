@@ -5,6 +5,7 @@ let $password;
 $(function () {
     $password = $('#password');
     $('#enterBtn').on('click', logIn);
+    $('#cancelBtn').on('click', goWelcomePage);
 });
 
 function logIn() {

@@ -15,3 +15,7 @@ function stringDateEnToRu(stringDate) { // yyyy-MM-dd -> dd.MM.yyyy
 function bool(stringBoolean) {
     return stringBoolean === 'true';
 }
+
+function goWelcomePage() {
+    $(location).prop('href', '/');
+}

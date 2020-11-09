@@ -22,7 +22,10 @@ public class DevelopersEditController {
     @GetMapping("/developersEdit")
     public String goDevelopersEdit(Model model) {
         List<Developer> developers = service.findAllDevelopers();
-        model.addAttribute("entities", developers);
+        String authority = service.getAuthority();
+        model
+                .addAttribute("entities", developers)
+                .addAttribute("authority", authority);
         return "developers_edit";
     }
 

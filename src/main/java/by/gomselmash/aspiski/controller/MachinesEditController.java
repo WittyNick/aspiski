@@ -24,9 +24,11 @@ public class MachinesEditController {
     public String goMachinesEdit(Model model) {
         List<Machine> machines = service.findAllMachines();
         List<MachineType> machineTypes = service.findAllMachineTypesSorted();
+        String authority = service.getAuthority();
         model
                 .addAttribute("machines", machines)
-                .addAttribute("machineTypes", machineTypes);
+                .addAttribute("machineTypes", machineTypes)
+                .addAttribute("authority", authority);
         return "machines_edit";
     }
 

@@ -22,7 +22,10 @@ public class WorkshopsEditController {
     @GetMapping("/workshopsEdit")
     public String goWorkshopsEdit(Model model) {
         List<Workshop> workshops = service.findAllWorkshops();
-        model.addAttribute("entities", workshops);
+        String authority = service.getAuthority();
+        model
+                .addAttribute("entities", workshops)
+                .addAttribute("authority", authority);
         return "workshops_edit";
     }
 

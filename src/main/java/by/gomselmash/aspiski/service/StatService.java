@@ -18,15 +18,16 @@ public class StatService {
     private final ProgramRepository programRepository;
     private final DeveloperRepository developerRepository;
     private final MachineTypeRepository machineTypeRepository;
+    private final LogInService logInService;
 
-    public StatService(
-            ProgramRepository programRepository,
-            DeveloperRepository developerRepository,
-            MachineTypeRepository machineTypeRepository
-    ) {
+    public StatService(ProgramRepository programRepository,
+                       DeveloperRepository developerRepository,
+                       MachineTypeRepository machineTypeRepository,
+                       LogInService logInService) {
         this.programRepository = programRepository;
         this.developerRepository = developerRepository;
         this.machineTypeRepository = machineTypeRepository;
+        this.logInService = logInService;
     }
 
     @Transactional(readOnly = true)
@@ -55,5 +56,13 @@ public class StatService {
         LocalDate to = LocalDate.now();
         LocalDate from = LocalDate.of(to.getYear(), to.getMonth(), 1);
         return new DateRageDto(from, to);
+    }
+
+    public String getAuthority() {
+        String authority = "ROLE_ADMIN";
+        if (logInService.isAuthorizationDisabled()) {
+            authority = "DISABLED";
+        }
+        return authority;
     }
 }

@@ -9,15 +9,17 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
 public class WorkshopService {
     private final WorkshopRepository workshopRepository;
     private final ProgramRepository programRepository;
+    private final LogInService logInService;
 
     public WorkshopService(WorkshopRepository workshopRepository,
-                           ProgramRepository programRepository) {
+                           ProgramRepository programRepository,
+                           LogInService logInService) {
         this.workshopRepository = workshopRepository;
         this.programRepository = programRepository;
+        this.logInService = logInService;
     }
 
     @Transactional(readOnly = true)
@@ -33,6 +35,7 @@ public class WorkshopService {
         return workshopRepository.save(workshop);
     }
 
+    @Transactional
     public boolean updateWorkshop(Workshop workshop) {
         Long id = workshop.getId();
         if (workshopRepository.existsById(id)) {
@@ -42,6 +45,7 @@ public class WorkshopService {
         return false;
     }
 
+    @Transactional
     public boolean deleteWorkshopById(Long id) {
         boolean isExists = workshopRepository.existsById(id);
         if (!isExists) {
@@ -53,5 +57,13 @@ public class WorkshopService {
         }
         workshopRepository.deleteById(id);
         return true;
+    }
+
+    public String getAuthority() {
+        String authority = "ROLE_ADMIN";
+        if (logInService.isAuthorizationDisabled()) {
+            authority = "DISABLED";
+        }
+        return authority;
     }
 }

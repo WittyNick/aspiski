@@ -9,15 +9,17 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
 public class ControlSystemService {
     private final ControlSystemRepository controlSystemRepository;
     private final ProgramRepository programRepository;
+    private final LogInService logInService;
 
     public ControlSystemService(ControlSystemRepository controlSystemRepository,
-                                ProgramRepository programRepository) {
+                                ProgramRepository programRepository,
+                                LogInService logInService) {
         this.controlSystemRepository = controlSystemRepository;
         this.programRepository = programRepository;
+        this.logInService = logInService;
     }
 
     @Transactional(readOnly = true)
@@ -25,6 +27,7 @@ public class ControlSystemService {
         return controlSystemRepository.findAllByOrderByNameAsc(); // when nothing was found returns empty List
     }
 
+    @Transactional
     public ControlSystem saveControlSystem(ControlSystem controlSystem) {
         String name = controlSystem.getName();
         if (controlSystemRepository.existsByNameIgnoreCase(name)) {
@@ -33,6 +36,7 @@ public class ControlSystemService {
         return controlSystemRepository.save(controlSystem);
     }
 
+    @Transactional
     public Boolean updateControlSystem(ControlSystem controlSystem) {
         Long id = controlSystem.getId();
         if (controlSystemRepository.existsById(id)) {
@@ -42,6 +46,7 @@ public class ControlSystemService {
         return false;
     }
 
+    @Transactional
     public boolean deleteControlSystemById(Long id) {
         boolean isExists = controlSystemRepository.existsById(id);
         if (!isExists) {
@@ -53,5 +58,13 @@ public class ControlSystemService {
         }
         controlSystemRepository.deleteById(id);
         return true;
+    }
+
+    public String getAuthority() {
+        String authority = "ROLE_ADMIN";
+        if (logInService.isAuthorizationDisabled()) {
+            authority = "DISABLED";
+        }
+        return authority;
     }
 }
