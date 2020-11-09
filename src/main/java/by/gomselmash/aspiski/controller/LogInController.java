@@ -1,37 +1,56 @@
 package by.gomselmash.aspiski.controller;
 
-import org.springframework.beans.factory.annotation.Value;
+import by.gomselmash.aspiski.service.LogInService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
-@RequestMapping("/logIn")
 public class LogInController {
+    private final LogInService service;
 
-    @Value("${security.auth.enabled:false}") // :false - is default value
-    private boolean isAuthenticationEnabled;
+    public LogInController(LogInService service) {
+        this.service = service;
+    }
 
-    @Value("${security.login:}") // :"" - (empty string) is default
-    private String login;
-
-    @Value("${security.pass:}")
-    private String pass;
-
-    @GetMapping
-    public String goLogIn() {
+    @GetMapping("/logIn")
+    public String goLogIn(Model model) {
+        model.addAttribute("hasError", Boolean.FALSE);
         return "log_in";
     }
 
     @PostMapping("/checkUser")
-    public String checkUser(@RequestParam(name = "user") String formUser,
-                            @RequestParam(name = "password") String formPassword) {
-
-
-        return "redirect:/";
+    @ResponseBody
+    public Boolean checkUser(@RequestBody String formPassword, HttpServletResponse response) {
+        if (service.isPasswordValid(formPassword)) {
+            Cookie cookie = new Cookie("userRole", "ROLE_ADMIN");
+            cookie.setMaxAge(7 * 24 * 60 * 60); // 7 days
+            cookie.setHttpOnly(true);
+            response.addCookie(cookie);
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
     }
 
-
+    @GetMapping("/logOut")
+    public String logOut(HttpServletRequest request, HttpServletResponse response) {
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            String cookieName = cookie.getName();
+            if ("userRole".equals(cookieName) || "userId".equals(cookieName)) {
+                cookie.setValue(null);
+                cookie.setMaxAge(0);
+                response.addCookie(cookie);
+            }
+        }
+        request.getSession().invalidate();
+        return "redirect:/";
+    }
 }

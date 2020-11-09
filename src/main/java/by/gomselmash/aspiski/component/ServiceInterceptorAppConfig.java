@@ -18,7 +18,7 @@ public class ServiceInterceptorAppConfig implements WebMvcConfigurer {
                 .addPathPatterns("/*")
                 .excludePathPatterns(
                         "/css/**", "/js/**", "/img/**",
-                        "/", "/logIn/*"
+                        "/", "/logIn", "/logOut", "/checkUser", "/logInError"
                 );
     }
 }

@@ -67,9 +67,15 @@
         </ul>
         <ul th:if="${page != 'log_in'}" class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/logIn">вход</a>
+                <a th:if="${page == 'main'}" class="nav-link" href="/logIn">вход</a>
+                <a th:unless="${page == 'main'}" class="nav-link" href="/logOut">выход</a>
             </li>
         </ul>
+
+
+
+
+
     </div>
 </nav>
 
