@@ -13,6 +13,8 @@ public interface ControlSystemRepository extends JpaRepository<ControlSystem, Lo
 
     List<ControlSystem> findAllByOrderByNameAsc();
 
+    List<ControlSystem> findAllByIsDisabledFalseOrderByNameAsc();
+
     @Lock(LockModeType.PESSIMISTIC_READ)
     boolean existsByNameIgnoreCase(String name);
 

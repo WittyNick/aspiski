@@ -28,7 +28,7 @@
             aria-controls="navbarNavDropdown" aria-expanded="false">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div th:if="${page != 'lob_in'}" class="collapse navbar-collapse" id="navbarNavDropdown">
+    <div th:if="${page != 'log_in'}" class="collapse navbar-collapse" id="navbarNavDropdown">
 
         <ul th:if="${authority != 'ROLE_USER'}" class="navbar-nav">
             <li th:with="isCurrent=${page == 'main'}"
@@ -67,16 +67,13 @@
             </li>
         </ul>
         <ul th:if="${authority != 'DISABLED'}" class="navbar-nav ml-auto">
-
             <li th:if="${page == 'main'}" class="nav-item">
                 <a th:if="${authority == 'ROLE_USER'}" class="nav-link" href="/logIn">вход</a>
                 <a th:if="${authority == 'ROLE_ADMIN'}" class="nav-link" href="/logOut">выход</a>
             </li>
-
             <li th:if="${page != 'main'}" class="nav-item">
                 <a class="nav-link" href="/logOut">выход</a>
             </li>
-
         </ul>
     </div>
 </nav>
@@ -150,7 +147,7 @@
     <div th:fragment="editButtons" class="row justify-content-center">
         <div class="col-auto">
             <button type="button" class="btn btn-primary m-2" id="editBtn">Редактировать</button>
-            <button type="button" class="btn btn-primary m-2" id="deleteBtn">Удалить</button>
+            <button type="button" class="btn btn-danger m-2" id="deleteBtn">Удалить</button>
         </div>
     </div>
 </th:block>

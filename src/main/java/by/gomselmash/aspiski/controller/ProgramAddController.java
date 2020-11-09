@@ -1,7 +1,7 @@
 package by.gomselmash.aspiski.controller;
 
 import by.gomselmash.aspiski.model.Program;
-import by.gomselmash.aspiski.service.ProgramService;
+import by.gomselmash.aspiski.service.ProgramAddService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +12,9 @@ import java.util.Map;
 
 @Controller
 public class ProgramAddController {
-    private final ProgramService service;
+    private final ProgramAddService service;
 
-    public ProgramAddController(ProgramService service) {
+    public ProgramAddController(ProgramAddService service) {
         this.service = service;
     }
 

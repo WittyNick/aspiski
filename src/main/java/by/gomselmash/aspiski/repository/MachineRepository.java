@@ -13,6 +13,8 @@ public interface MachineRepository extends JpaRepository<Machine, Long> {
 
     List<Machine> findAllByOrderByNameAsc();
 
+    List<Machine> findAllByIsDisabledFalseAndMachineType_IsDisabledFalseOrderByNameAsc();
+
     @Lock(LockModeType.PESSIMISTIC_READ)
     boolean existsByNameIgnoreCase(String name);
 

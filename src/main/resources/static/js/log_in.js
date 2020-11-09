@@ -1,16 +1,26 @@
 const AJAX_CHECK_USER_URL = 'checkUser';
 
-let $password;
+let $password,
+    $enterBtn;
 
 $(function () {
     $password = $('#password');
-    $('#enterBtn').on('click', logIn);
+    $enterBtn = $('#enterBtn');
+    $enterBtn.on('click', logIn);
     $('#cancelBtn').on('click', goWelcomePage);
+    $(document).on('keydown', keyPressHandler);
 });
+
+function keyPressHandler(event) {
+    if (event.keyCode === 13) {
+        $enterBtn.click();
+    }
+}
 
 function logIn() {
     let password = $password.val();
     if (!password) {
+        $password.focus();
         return;
     }
     $.ajax({
@@ -23,9 +33,8 @@ function logIn() {
             if (isValid === true) {
                 location.href = '/';
             } else {
-                $password.val('');
-                $password.focus();
                 $password.addClass('is-invalid');
+                $password.select();
             }
         }
     });

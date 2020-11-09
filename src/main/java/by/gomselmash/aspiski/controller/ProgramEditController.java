@@ -1,7 +1,7 @@
 package by.gomselmash.aspiski.controller;
 
 import by.gomselmash.aspiski.model.Program;
-import by.gomselmash.aspiski.service.ProgramService;
+import by.gomselmash.aspiski.service.ProgramEditService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,9 +14,9 @@ import java.util.Optional;
 
 @Controller
 public class ProgramEditController {
-    private final ProgramService service;
+    private final ProgramEditService service;
 
-    public ProgramEditController(ProgramService service) {
+    public ProgramEditController(ProgramEditService service) {
         this.service = service;
     }
 
