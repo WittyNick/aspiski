@@ -27,6 +27,7 @@ public class DeveloperService {
         return developerRepository.findAllByOrderByNameAsc();
     }
 
+    @Transactional
     public Developer saveDeveloper(Developer developer) {
         String name = developer.getName();
         if (developerRepository.existsByNameIgnoreCase(name)) {

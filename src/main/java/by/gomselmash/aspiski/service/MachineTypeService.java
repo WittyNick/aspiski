@@ -14,7 +14,9 @@ public class MachineTypeService {
     private final MachineRepository machineRepository;
     private final LogInService logInService;
 
-    public MachineTypeService(MachineTypeRepository machineTypeRepository, MachineRepository machineRepository, LogInService logInService) {
+    public MachineTypeService(MachineTypeRepository machineTypeRepository,
+                              MachineRepository machineRepository,
+                              LogInService logInService) {
         this.machineTypeRepository = machineTypeRepository;
         this.machineRepository = machineRepository;
         this.logInService = logInService;
@@ -25,6 +27,7 @@ public class MachineTypeService {
         return machineTypeRepository.findAllByOrderByNameAsc();
     }
 
+    @Transactional
     public MachineType saveMachineType(MachineType machineType) {
         String name = machineType.getName();
         if (machineTypeRepository.existsByNameIgnoreCase(name)) {
