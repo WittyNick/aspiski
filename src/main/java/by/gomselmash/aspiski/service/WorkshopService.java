@@ -27,6 +27,7 @@ public class WorkshopService {
         return workshopRepository.findAllByOrderByNameAsc();
     }
 
+    @Transactional
     public Workshop saveWorkshop(Workshop workshop) {
         String name = workshop.getName();
         if (workshopRepository.existsByNameIgnoreCase(name)) {
