@@ -35,7 +35,7 @@
                 <select class="form-control" id="machineType">
                     <option value="0" disabled selected>Тип станка...</option>
                     <option th:each="type : ${machineTypes}"
-                            th:value="${type.id}" th:text="${'x ' + type.name}">
+                            th:value="${type.id}" th:text="${type.name}">
                     </option>
                 </select>
                 <div class="invalid-tooltip">Тип станка должен быть указан.</div>
