@@ -27,7 +27,7 @@ function setTableRowSelector() {
         id: ':nth-child(1)',
         name: ':nth-child(2)',
         typeId: ':nth-child(3)',
-        isDisabled: ':nth-child(4)'
+        isDisabled: ':nth-child(5)'
     }
 }
 
