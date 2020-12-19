@@ -90,10 +90,11 @@ function getRowHtml(program) {
         `<tr>
             <td>${program.partNumber}</td>
             <td>${program.machine.name}</td>
-            <td>${program.machine.machineType.name}</td>
+            <td>${program.machine.machineType.id}</td>
             <td>${program.controlSystem.name}</td>
             <td>${program.programNumber}</td>
             <td>${program.workshop.name}</td>
+            <td>${program.developer.id}</td>
             <td>${program.developer.name}</td>
             <td>${dateRu}</td>
         </tr>`
